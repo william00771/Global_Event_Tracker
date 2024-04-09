@@ -19,6 +19,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <NavbarTop 
         setPage={(page) => setPage(page)}
+        page={page}
       />
       <main className="page-container">
         <TimePicker 
@@ -42,6 +43,7 @@ function App() {
       </main>
       <NavBarBottom 
         setPage={(page) => setPage(page)}
+        page={page}
       />
     </QueryClientProvider>
   )

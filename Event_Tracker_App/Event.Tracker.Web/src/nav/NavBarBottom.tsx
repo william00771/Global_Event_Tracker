@@ -2,10 +2,11 @@ import { MouseEventHandler } from 'react'
 import './NavBarBottom.css'
 
 type Props = {
+    page: string,
     setPage: (page: string) => void
 }
 
-export const NavBarBottom = ({ setPage }: Props) => {
+export const NavBarBottom = ({ setPage, page }: Props) => {
     return(
         <>
             <nav className='navbar-bottom'>
