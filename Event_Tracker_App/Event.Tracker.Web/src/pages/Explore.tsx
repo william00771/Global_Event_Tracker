@@ -1,3 +1,4 @@
+import './Explore.css'
 import { useQuery } from "react-query"
 import { fetchEvents } from "../util/http"
 import { EventModel } from "../types/types";

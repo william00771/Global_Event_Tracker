@@ -25,4 +25,5 @@ html{
   
   background-color: #252525;
   background-image: url('./resources/Placeholders/Map.png');
+  background-size: cover;
 }
