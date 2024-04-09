@@ -20,7 +20,6 @@ function Explore({ className }: Props) {
         {/* {isLoading && <h1>Loading...</h1>}
         {isError && <h1>Error</h1>}
         {data && <h1>{data.name}</h1>} */}
-        <h1>Explore</h1>
       </section>
     )
 }
