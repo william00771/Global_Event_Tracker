@@ -20,48 +20,20 @@
 .createevent-container{
   display: none;
   opacity: 0;
-  
-  animation: easeOut .35s ease-in-out;
 }
-
 
 .timepicker-container.active,
 .account-container.active,
 .explore-container.active,
 .listevents-container.active,
-.savedevents-container.active,
 .createevent-container.active{
   display: block;
   opacity: 1;
-  
-  animation: easeIn .35s ease-in-out;
 }
 
-
-@keyframes easeIn{
-  0%{
-    opacity: 0;
-  }
-  50%{
-    display: block;
-    opacity: 0;
-  }
-  100%{
-    opacity: 1;
-  }
-}
-
-@keyframes easeOut{
-  0%{
-    opacity: 1;
-  }
-  50%{
-    opacity: 0;
-    display: none;
-  }
-  100%{
-    opacity: 0;
-  }
+.savedevents-container.active{
+  display: grid;
+  opacity: 1;
 }
 
 
