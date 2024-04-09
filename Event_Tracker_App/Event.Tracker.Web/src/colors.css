@@ -1,0 +1,31 @@
+:root{
+    --black: #161616;
+    --building: #4A4A4A;
+    --path: #4E5859;
+    --road: #404040;
+    --water: #212733;
+    --base: #212733;
+    --base-dark: #0E131F;
+    --gray: #202325;
+    --gray-dark: #151617;
+    --text-base: #FFFFFF;
+    --text-fade1: #E7E7E7;
+    --text-fade2: #E1E1E1;
+    --text-fade3: #C6C6C6;
+    --text-fade4: #A9A9A9;
+    --menu-green: #A9F8A9;
+    --menu-violet: #A676F3;
+    --menu-pink: #EF549A;
+    --menu-red: #F37676;
+    --yellow: #E17D1A;
+    --red: #DB4E42;
+    --pinkred: #D7126E;
+    --pink: #A81F89;
+    --violet: #9344A7;
+    --blue: #546E9F;
+    --cyan: #4AABE7;
+    --green: #4F9503;
+    --red: #E53835;
+}
+
+/* @import url('./colors.css'); */
