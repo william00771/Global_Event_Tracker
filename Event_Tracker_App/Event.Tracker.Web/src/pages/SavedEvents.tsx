@@ -19,7 +19,7 @@ export const SavedEvents = ({ className }: Props) => {
                     </svg>
                     <h1 className='savedevents-container__header-title'>Saved Events</h1>
                 </header>
-                <article className='savedevents-item'>
+                <article className='event-container__item'>
                     <h2 className='event-container__title'>Tomorrowland</h2>
                     <div className='event-container__article-item'>
                         <svg width="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,7 +41,7 @@ export const SavedEvents = ({ className }: Props) => {
                 </article>
             </section>
             <section className='savedevents-container__right-container'>
-                <article className='savedevents-item'>  
+                <article className='event-container__item'>  
                     <h2 className='event-container__title'>Tomorrowland</h2>
                     <div className='event-container__article-item'>
                         <svg width="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -61,6 +61,7 @@ export const SavedEvents = ({ className }: Props) => {
                     </div>
                     <img className='savedevents-container__article-bgimage' src="https://i.pinimg.com/564x/91/ef/f3/91eff36aa5b830a0e83cce8535133f43.jpg" alt="" />
                 </article>
+
             </section>
         </section>
     )
