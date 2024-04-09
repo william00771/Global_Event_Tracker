@@ -1,4 +1,4 @@
-# Personal HackWeek Project at &lt;/salt&gt;
+# Personal HackDays Project at &lt;/salt&gt;
 
 ## A solution that bundles all types of events into an interactive map.
 
@@ -10,7 +10,7 @@ That's the idea behind this app. A curated selection of events personalized for 
 
 ## Timeline
 
-2 days of planning. 3 days of coding. 
+2 days of planning. 2 days of coding. 
 There will be a need to cut down drastically on features the app will deliver because of the time constraints
 
 ### Basic Prototyping
