@@ -1,9 +1,13 @@
 import './TimePicker.css'
 
-export const TimePicker = () => {
+type Props = {
+    className: string
+}
+
+export const TimePicker = ({ className }: Props) => {
     return(
-        <>
+        <section className={className}>
             <h1>TimePicker</h1>
-        </>
+        </section>
     )
 }
