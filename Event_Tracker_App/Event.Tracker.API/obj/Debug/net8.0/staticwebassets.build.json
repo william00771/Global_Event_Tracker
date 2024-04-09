@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "zX5L33mTH8jF7j9rBUKWfReVK6FKzG2gOhvx7jkebzY=",
+  "Source": "Event.Tracker.API",
+  "BasePath": "_content/Event.Tracker.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
