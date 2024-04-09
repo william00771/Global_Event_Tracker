@@ -17,7 +17,7 @@
     flex-wrap: wrap;
     
 
-    background-color: var(--base);
+    background-color: #212733ba;
     
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);

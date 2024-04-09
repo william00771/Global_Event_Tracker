@@ -12,7 +12,15 @@
   overflow: auto;
 }
 
-.timepicker-container,
+/*Fixes overflow gitch when TimePicker slides down*/
+.explore-container.active, .page-container{
+  overflow: hidden;
+}
+.timepicker-container.active, .page-container{
+  overflow: hidden;
+}
+
+
 .account-container,
 .explore-container,
 .listevents-container,
@@ -22,7 +30,7 @@
   opacity: 0;
 }
 
-.timepicker-container.active,
+
 .account-container.active,
 .explore-container.active,
 .listevents-container.active,
@@ -35,6 +43,25 @@
   display: grid;
   opacity: 1;
 }
+
+
+
+.timepicker-container{
+  transform: translateY(-40%);
+  /* display: none;
+  opacity: 0; */
+  filter: blur(4px);
+  
+  transition: all 1000ms cubic-bezier(0.45,0.01,0,1.03);
+}
+  .timepicker-container.active{
+    transform: translateY(-0%);
+    /* display: block;
+    opacity: 1; */
+    filter: blur(0px);
+    
+    transition: all 1000ms cubic-bezier(0.45,0.01,0,1.03)
+  }
 
 
 
