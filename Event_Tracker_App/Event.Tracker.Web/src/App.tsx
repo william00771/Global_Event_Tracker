@@ -24,12 +24,14 @@ function App() {
       <main className="page-container">
         <TimePicker 
           className={"timepicker-container " + (page == "TimePicker" && "active")}
+          setPage={(page) => setPage(page)}
         />
         <Account 
           className={"account-container " + (page == "Account" && "active")}
+          setPage={(page) => setPage(page)}
         />
         <Explore 
-          className={"explore-container " + (page == "Explore" && "active")}
+          className={"explore-container " + (page == "Explore" && " active ") + (page == "TimePicker"  && " active ")}
         />
         <ListEvents 
           className={"listevents-container " + (page == "ListEvents" && "active")}
@@ -39,6 +41,7 @@ function App() {
         />
         <CreateEvent 
           className={"createevent-container " + (page == "CreateEvent" && "active")}
+          setPage={(page) => setPage(page)}
         />
       </main>
       <NavBarBottom 

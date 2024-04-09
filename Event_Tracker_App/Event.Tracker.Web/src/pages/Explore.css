@@ -1,1 +1,16 @@
 @import url('../colors.css');
+
+.explore-container{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: fit-content;
+    min-height: 100%;
+    z-index: 10;
+    padding: 1rem;
+    padding-top: 12vh;
+
+    background-image: url('../resources/Placeholders/Map.png');
+    background-size: cover;
+}
