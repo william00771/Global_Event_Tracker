@@ -19,9 +19,8 @@ html{
 }
 
 #root {
+  width: 100vw;
   height: 100vh;
-  max-width: 414px;
-  min-width: 320px;
   margin: 0 auto;
   
   background-color: #252525;
