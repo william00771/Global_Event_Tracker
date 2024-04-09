@@ -18,12 +18,12 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <NavbarTop />
       <main className="page-container">
-        <TimePicker className=""/>
-        <Account className=""/>
-        <Explore className=""/>
-        <ListEvents className=""/>
-        <SavedEvents className=""/>
-        <CreateEvent className=""/>
+        <TimePicker className={"timepicker-container " + (page == "TimePicker" && "active")}/>
+        <Account className={"account-container " + (page == "Account" && "active")}/>
+        <Explore className={"explore-container " + (page == "Explore" && "active")}/>
+        <ListEvents className={"listevents-container " + (page == "ListEvents" && "active")}/>
+        <SavedEvents className={"savedevents-container " + (page == "SavedEvents" && "active")}/>
+        <CreateEvent className={"createevent-container " + (page == "CreateEvent" && "active")}/>
       </main>
       <NavBarBottom />
     </QueryClientProvider>
