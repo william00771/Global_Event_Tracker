@@ -1,1 +1,37 @@
 @import url('../colors.css');
+
+.timepicker__container{
+    position: absolute;
+    width: 100%;
+    height: 100vh;
+    z-index: 15;
+}
+
+.form_container{
+    height: 40%;
+    display: flex;
+    gap: 5%;
+    flex-wrap: wrap;
+    padding: 14vh 2%;
+
+    background-color: var(--base);
+    
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+    .form_container .MuiFormControl-root{
+        /* width: 40%; */
+        flex: 45%;
+    }
+    .form_container .btn{
+        margin: 10% auto;
+        width: 200px;
+        height: 50px;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+
+    

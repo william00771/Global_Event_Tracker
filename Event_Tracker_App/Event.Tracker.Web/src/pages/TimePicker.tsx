@@ -7,7 +7,9 @@ type Props = {
 export const TimePicker = ({ className }: Props) => {
     return(
         <section className={className}>
-            <h1>TimePicker</h1>
+            <form className='form_container'>
+                <button type='submit' className='btn-primary--gradient-outlinethin btn'>Confirm</button>
+            </form>
         </section>
     )
 }
