@@ -19,10 +19,10 @@
 .listevents-container,
 .savedevents-container,
 .createevent-container{
-  visibility: hidden;
+  display: none;
   opacity: 0;
   
-  transition: all .25s ease-in-out;
+  animation: easeOut .35s ease-in-out;
 }
 
 
@@ -32,8 +32,35 @@
 .listevents-container.active,
 .savedevents-container.active,
 .createevent-container.active{
-  visibility: visible;
+  display: block;
   opacity: 1;
   
-  transition: all .25s ease-in-out;
+  animation: easeIn .35s ease-in-out;
+}
+
+
+@keyframes easeIn{
+  0%{
+    opacity: 0;
+  }
+  50%{
+    display: block;
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+}
+
+@keyframes easeOut{
+  0%{
+    opacity: 1;
+  }
+  50%{
+    opacity: 0;
+    display: none;
+  }
+  100%{
+    opacity: 0;
+  }
 }
