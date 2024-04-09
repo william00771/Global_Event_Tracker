@@ -16,6 +16,8 @@ html{
   justify-content: center;
   align-items: center;
   margin: 0;
+
+  overflow-y: hidden;
 }
 
 #root {
