@@ -1,13 +1,18 @@
+import { MouseEventHandler } from 'react'
 import './NavBarBottom.css'
 
-export const NavBarBottom = () => {
+type Props = {
+    setPage: (page: string) => void
+}
+
+export const NavBarBottom = ({ setPage }: Props) => {
     return(
         <>
             <nav className='navbar-bottom'>
-                <a href="#">Explore</a>
-                <a href="#">List Events</a>
-                <a href="#">Saved Events</a>
-                <a href="#">Create Event</a>
+                <a onClick={() => setPage('Explore')} href="#">Explore</a>
+                <a onClick={() => setPage('ListEvents')} href="#">List Events</a>
+                <a onClick={() => setPage('SavedEvents')} href="#">Saved Events</a>
+                <a onClick={() => setPage('CreateEvent')} href="#">Create Event</a>
             </nav>
         </>
     )

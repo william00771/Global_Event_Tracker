@@ -1,11 +1,16 @@
+import { MouseEventHandler } from 'react'
 import './NavbarTop.css'
 
-export const NavbarTop = () => {
+type Props = {
+    setPage: (page: string) => void
+}
+
+export const NavbarTop = ({ setPage }: Props) => {
     return(
         <>
             <nav className='navbar-top'>
-                <a href="#">TimePicker</a>
-                <a href="#">Account</a>
+                <a onClick={() => setPage('TimePicker')} href="#">TimePicker</a>
+                <a onClick={() => setPage('Account')} href="#">Account</a>
             </nav>
         </>
     )

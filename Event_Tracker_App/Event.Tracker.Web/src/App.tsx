@@ -17,16 +17,32 @@ function App() {
 
   return(
     <QueryClientProvider client={queryClient}>
-      <NavbarTop />
+      <NavbarTop 
+        setPage={(page) => setPage(page)}
+      />
       <main className="page-container">
-        <TimePicker className={"timepicker-container " + (page == "TimePicker" && "active")}/>
-        <Account className={"account-container " + (page == "Account" && "active")}/>
-        <Explore className={"explore-container " + (page == "Explore" && "active")}/>
-        <ListEvents className={"listevents-container " + (page == "ListEvents" && "active")}/>
-        <SavedEvents className={"savedevents-container " + (page == "SavedEvents" && "active")}/>
-        <CreateEvent className={"createevent-container " + (page == "CreateEvent" && "active")}/>
+        <TimePicker 
+          className={"timepicker-container " + (page == "TimePicker" && "active")}
+        />
+        <Account 
+          className={"account-container " + (page == "Account" && "active")}
+        />
+        <Explore 
+          className={"explore-container " + (page == "Explore" && "active")}
+        />
+        <ListEvents 
+          className={"listevents-container " + (page == "ListEvents" && "active")}
+        />
+        <SavedEvents 
+          className={"savedevents-container " + (page == "SavedEvents" && "active")}
+        />
+        <CreateEvent 
+          className={"createevent-container " + (page == "CreateEvent" && "active")}
+        />
       </main>
-      <NavBarBottom />
+      <NavBarBottom 
+        setPage={(page) => setPage(page)}
+      />
     </QueryClientProvider>
   )
 

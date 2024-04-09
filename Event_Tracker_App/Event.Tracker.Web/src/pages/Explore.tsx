@@ -9,17 +9,18 @@ type Props = {
 
 function Explore({ className }: Props) {
 
-    const { data, isLoading, isError } = useQuery<EventModel>({
-      queryKey: ['fetchevents'],
-      queryFn: () => fetchEvents()
-    });
+    // const { data, isLoading, isError } = useQuery<EventModel>({
+    //   queryKey: ['fetchevents'],
+    //   queryFn: () => fetchEvents()
+    // });
 
 
     return(
       <section className={className}>
-        {isLoading && <h1>Loading...</h1>}
+        {/* {isLoading && <h1>Loading...</h1>}
         {isError && <h1>Error</h1>}
-        {data && <h1>{data.name}</h1>}
+        {data && <h1>{data.name}</h1>} */}
+        <h1>Explore</h1>
       </section>
     )
 }
