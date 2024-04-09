@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="../build/Event.Tracker.API.props" />
+</Project>
