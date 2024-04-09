@@ -10,6 +10,8 @@
     height: 100%;
     padding: 1rem;
     padding-top: 12vh;
+
+    background-color: var(--base);
 }
     .listevents-container__header{
         height: 75px;

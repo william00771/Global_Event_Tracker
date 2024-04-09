@@ -50,8 +50,114 @@
   height: 100%;
 }
 
-/* Individual pages */
 
-.listevents-container{
-  background-color: var(--base);
+
+
+/* GLOBAL COMPONENT STYLES */
+
+/* inputs */
+.input-primary{
+  padding: 5% 5%;
+
+  background-color: transparent;
+  border: #c6c6c682 solid 1px;
+  border-radius: 5rem;
+}
+  .input--primary:focus{
+      background-color: #ffffff0c;
+      outline: none;
+      border: 1.5px solid rgba(255, 255, 255, 0.552);
+  }
+
+.input-primary--outline-gradient1{
+  padding: 5% 5%;
+
+  background-color: transparent;
+  border: #c6c6c682 solid 1px;
+  border-radius: 5rem;
+}
+  .input-primary--outline-gradient1:focus{
+      background-color: #ffffff0a;
+      outline: none;
+      border: 1.5px solid transparent;
+      background: 
+      linear-gradient(#212733, #212733) padding-box,
+      linear-gradient(90deg, rgba(37,232,232,1) 0%, rgba(26,134,233,1) 18%, rgba(68,25,247,1) 37%, rgba(152,34,230,1) 58%, rgba(205,95,190,1) 77%, rgba(227,158,185,1) 100%) border-box; 
+  }
+
+/* Selects & Options */
+  .select-primary--outline-gradient1{
+      padding: 5% 5%;
+
+      background-color: transparent;
+      border: #c6c6c682 solid 1px;
+      border-radius: 5rem;
+      color: #6c6c6c;
+  }
+      .select-primary--outline-gradient1:focus{
+          background-color: #ffffff0a;
+          outline: none;
+          border: 1.5px solid transparent;
+          background: 
+          linear-gradient(#212733, #212733) padding-box,
+          linear-gradient(90deg, rgba(37,232,232,1) 0%, rgba(26,134,233,1) 18%, rgba(68,25,247,1) 37%, rgba(152,34,230,1) 58%, rgba(205,95,190,1) 77%, rgba(227,158,185,1) 100%) border-box; 
+      }
+      option, optgroup {
+          -webkit-appearance: none; 
+          appearance: none;
+          outline: none;
+          background-color: #212733;
+          border-radius: 5rem;
+      }
+  
+
+/* buttons */
+.btn-primary--naked{
+  cursor: pointer;
+  color: #a9a9a9;
+  background-color: transparent;
+  border: none;
+  margin: -10px;
+
+  font-size: .8rem;
+}
+
+.btn-primary--gradient{
+  padding: 5% 5%;
+  cursor: pointer;
+
+  background: linear-gradient(90deg, rgba(37,232,232,1) 0%, rgba(26,134,233,1) 18%, rgba(68,25,247,1) 37%, rgba(152,34,230,1) 58%, rgba(205,95,190,1) 77%, rgba(227,158,185,1) 100%);
+  border: transparent;
+  border-radius: 5rem;
+  color: #fff;
+}
+
+.btn-primary--gradient-outline{
+  padding: 5% 5%;
+  cursor: pointer;
+
+  background-color: transparent;
+  border: #c6c6c682 solid 1px;
+  border-radius: 5rem;
+  color: #fff;
+
+  border: 3px solid transparent;
+  background: 
+  linear-gradient(#212733, #212733) padding-box,
+  linear-gradient(90deg, rgba(37,232,232,1) 0%, rgba(26,134,233,1) 18%, rgba(68,25,247,1) 37%, rgba(152,34,230,1) 58%, rgba(205,95,190,1) 77%, rgba(227,158,185,1) 100%) border-box; 
+}
+
+.btn-primary--gradient-outlinethin{
+  padding: 5% 5%;
+  cursor: pointer;
+
+  background-color: transparent;
+  border: #c6c6c682 solid 1px;
+  border-radius: 5rem;
+  color: #fff;
+
+  border: 1px solid transparent;
+  background: 
+  linear-gradient(#212733, #212733) padding-box,
+  linear-gradient(90deg, rgba(37,232,232,1) 0%, rgba(26,134,233,1) 18%, rgba(68,25,247,1) 37%, rgba(152,34,230,1) 58%, rgba(205,95,190,1) 77%, rgba(227,158,185,1) 100%) border-box; 
 }

@@ -15,7 +15,7 @@
     grid-template-columns: 1fr 1fr;
     grid-gap: 1rem;
 
-    background-color: #212733;
+    background-color: var(--base);
 }
     .savedevents-container__header{
         height: 75px;
