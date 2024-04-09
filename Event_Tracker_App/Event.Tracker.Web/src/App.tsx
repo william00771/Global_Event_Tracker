@@ -13,7 +13,7 @@ import { CreateEvent } from "./pages/CreateEvent";
 const queryClient = new QueryClient();
 
 function App() {
-  const [page, setPage] = useState('ListEvents');
+  const [page, setPage] = useState('TimePicker');
 
   return(
     <QueryClientProvider client={queryClient}>
@@ -24,6 +24,7 @@ function App() {
       <main className="page-container">
         <TimePicker 
           className={"timepicker-container " + (page == "TimePicker" && "active")}
+          setPage={(page) => setPage(page)}
         />
         <Account 
           className={"account-container " + (page == "Account" && "active")}
@@ -35,9 +36,9 @@ function App() {
         <ListEvents 
           className={"listevents-container " + (page == "ListEvents" && "active")}
         />
-        <SavedEvents 
+        {/* <SavedEvents 
           className={"savedevents-container " + (page == "SavedEvents" && "active")}
-        />
+        /> */}
         <CreateEvent 
           className={"createevent-container " + (page == "CreateEvent" && "active")}
         />
