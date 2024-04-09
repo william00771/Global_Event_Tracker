@@ -13,7 +13,7 @@ import { CreateEvent } from "./pages/CreateEvent";
 const queryClient = new QueryClient();
 
 function App() {
-  const [page, setPage] = useState('Explore');
+  const [page, setPage] = useState('ListEvents');
 
   return(
     <QueryClientProvider client={queryClient}>

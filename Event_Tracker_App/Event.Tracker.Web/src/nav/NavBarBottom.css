@@ -1,12 +1,5 @@
 @import url('../colors.css');
 
-:root{
-    --color1: rgb(166, 118, 243);
-    --color2: rgb(169, 248, 169);
-    --color3: rgb(239, 84, 154);
-    --color4: rgb(169, 248, 169);
-}
-
 .navbottom-container{
     position: absolute;
     bottom: 0;
