@@ -1,3 +1,4 @@
+import './App.css'
 import { QueryClient, QueryClientProvider } from "react-query";
 import Explore from "./pages/Explore"
 import { useState } from "react";
