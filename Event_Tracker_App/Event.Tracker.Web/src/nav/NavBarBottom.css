@@ -1,0 +1,110 @@
+@import url('../colors.css');
+
+:root{
+    --color1: rgb(166, 118, 243);
+    --color2: rgb(169, 248, 169);
+    --color3: rgb(239, 84, 154);
+    --color4: rgb(169, 248, 169);
+}
+
+.navbottom-container{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 10vh;
+    z-index: 1500;
+
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+
+    background-color: #171717ca;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+}
+    .navbottom__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    .navbottom__icon{
+        width: 1.8rem;
+        opacity: .9;
+        
+        transition: all .25s ease-in-out;
+    }
+        .navbottom__icon--colorfill{
+            fill: #b1b1b1;
+            transition: all .25s ease-in-out;
+        }
+        .navbottom__icon--colorstroke{
+            stroke: #b1b1b1;;
+            transition: all .25s ease-in-out;
+        }
+    .navbottom__title{
+        margin-top: .4rem;
+        font-size: .6rem;
+
+        color: #e1e1e1bb;
+        transition: all .25s ease-in-out;
+    }
+    
+
+/* active state */
+.navbottom__icon.active{
+    transform: scale(1.2);
+    transition: all .25s ease-in-out;
+}
+
+.navbottom__title.active{
+    transform: scale(1.05);
+    transform: translateY(1px);
+
+    transition: all .25s ease-in-out;
+}
+.explore__title.active{
+    color: var(--menu-violet);
+}
+.listevents__title.active{
+    color: var(--menu-blue);
+}
+.savedevents__title.active{
+    color: var(--menu-pink);
+}
+.createevent__title.active{
+    color: var(--menu-green);
+}
+
+.navbottom__icon.active,
+.navbottom__icon.active .navbottom__icon--colorfill,
+.navbottom__icon.active .navbottom__icon--colorstroke{
+    transition: all .25s ease-in-out;
+}
+
+/* svg stroke */
+.explore__icon.active .navbottom__icon--colorstroke{
+    stroke: var(--menu-violet);
+}
+.listevents__icon.active .navbottom__icon--colorstroke{
+    stroke: var(--menu-blue);
+}
+.savedevents__icon.active .navbottom__icon--colorstroke{
+    stroke: var(--menu-pink);
+}
+.createvent__icon.active .navbottom__icon--colorstroke{
+    stroke: var(--menu-green);
+}
+
+/* svg fill */
+.exploreevents__icon.active .navbottom__icon--colorfill{
+    fill: var(--menu-violet);
+}
+.listevents__icon.active .navbottom__icon--colorfill{
+    fill: var(--menu-blue);
+}
+.savedevents__icon.active .navbottom__icon--colorfill{
+    fill: var(--menu-pink);
+}
+.createvent__icon.active .navbottom__icon--colorfill{
+    fill: var(--menu-green);
+}

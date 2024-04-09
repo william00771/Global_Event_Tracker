@@ -1,24 +1,28 @@
+import './Explore.css'
 import { useQuery } from "react-query"
 import { fetchEvents } from "../util/http"
 import { EventModel } from "../types/types";
 
-function Explore() {
+type Props = {
+  className: string
+}
 
-    const { data, isLoading, isError } = useQuery<EventModel>({
-      queryKey: ['fetchevents'],
-      queryFn: () => fetchEvents()
-    });
+function Explore({ className }: Props) {
 
-    if(isLoading) return <h1>Loading...</h1>;
+    // const { data, isLoading, isError } = useQuery<EventModel>({
+    //   queryKey: ['fetchevents'],
+    //   queryFn: () => fetchEvents()
+    // });
 
-    if(isError) return <h1>Error</h1>;
 
-    if(data){
-      return(
-        <h1>{data.name}</h1>
-      )
-    }
-
+    return(
+      <section className={className}>
+        {/* {isLoading && <h1>Loading...</h1>}
+        {isError && <h1>Error</h1>}
+        {data && <h1>{data.name}</h1>} */}
+        <h1>Explore</h1>
+      </section>
+    )
 }
 
 export default Explore

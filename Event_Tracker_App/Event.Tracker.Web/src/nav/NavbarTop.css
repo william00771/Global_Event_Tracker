@@ -1,0 +1,75 @@
+@import url('../colors.css');
+
+.navtop-container{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 10vh;
+    padding: 0% 5%;
+    z-index: 1000;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background-color: #171717ca;
+
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+}
+    .navtop__item{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+        .navtop-icon{
+            width: 1.8rem;
+            opacity: .9;
+            
+            transition: all .25s ease-in-out;
+        }
+            .navtop-icon--colorfill{
+                fill: #b1b1b1;
+                transition: all .25s ease-in-out;
+            }
+            .navtop-icon--colorstroke{
+                stroke: #171717;
+                transition: all .25s ease-in-out;
+            }
+        .navtop__title{
+            margin-top: .4rem;
+            font-size: .6rem;
+
+            color: #e1e1e1bb;
+            transition: all .25s ease-in-out;
+        }
+        
+
+
+/* active state */
+.navtop-icon.active{
+    transform: scale(1.2);
+    transition: all .25s ease-in-out;
+}
+
+.timepicker-title.active{
+    color: var(--menu-violet);
+    transform: scale(1.05);
+    transform: translateY(1px);
+}
+.account-title.active{
+    color: var(--menu-red);
+    transform: scale(1.05);
+    transform: translateY(1px);
+}
+
+
+.timepicker-icon.active{
+    fill: var(--menu-violet);
+    transition: all .25s ease-in-out;
+}
+
+.account-icon.active .navtop-icon--colorfill{
+    fill: var(--menu-red);
+    transition: all .25s ease-in-out;
+}
