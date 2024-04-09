@@ -27,6 +27,7 @@ function App() {
         />
         <Account 
           className={"account-container " + (page == "Account" && "active")}
+          setPage={(page) => setPage(page)}
         />
         <Explore 
           className={"explore-container " + (page == "Explore" && "active")}
