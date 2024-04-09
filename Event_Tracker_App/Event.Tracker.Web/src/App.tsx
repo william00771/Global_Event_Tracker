@@ -1,10 +1,15 @@
-function App() {
+import { QueryClient, QueryClientProvider } from "react-query";
+import Explore from "./pages/Explore"
 
-  return (
-    <>
-      
-    </>
+const queryClient = new QueryClient();
+
+function App() {
+  return(
+    <QueryClientProvider client={queryClient}>
+      <Explore />
+    </QueryClientProvider>
   )
+
 }
 
 export default App

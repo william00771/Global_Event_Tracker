@@ -1,3 +1,4 @@
+using Event.Tracker.API.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Event.Tracker.API.Controllers;
@@ -8,9 +9,14 @@ public class EventController : ControllerBase
 {
 
     [HttpGet]
-    public async Task<ActionResult<string>> GetWeatherForecast()
+    public async Task<ActionResult<EventModel>> GetWeatherForecast()
     {
-        return Ok("TestHeader");
+        var ev = new EventModel{
+            Id = 1,
+            Name = "Tomorrowland"
+        };
+        
+        return Ok(ev);
     }
 
     [HttpPost]
