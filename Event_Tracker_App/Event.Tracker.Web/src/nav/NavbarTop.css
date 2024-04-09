@@ -37,7 +37,7 @@
                 transition: all .25s ease-in-out;
             }
         .navtop__title{
-            margin-top: .2rem;
+            margin-top: .4rem;
             font-size: .6rem;
 
             color: #e1e1e1bb;
@@ -54,11 +54,13 @@
 
 .timepicker-title.active{
     color: var(--menu-violet);
-    transform: translateY(4px);
+    transform: scale(1.05);
+    transform: translateY(1px);
 }
 .account-title.active{
     color: var(--menu-red);
-    transform: translateY(4px);
+    transform: scale(1.05);
+    transform: translateY(1px);
 }
 
 

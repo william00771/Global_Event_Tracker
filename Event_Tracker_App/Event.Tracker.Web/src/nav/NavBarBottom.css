@@ -59,56 +59,52 @@
 .navbottom__title.active{
     transform: scale(1.05);
     transform: translateY(1px);
+
+    transition: all .25s ease-in-out;
 }
 .explore__title.active{
     color: var(--menu-violet);
-    transition: all .25s ease-in-out;
 }
 .listevents__title.active{
     color: var(--menu-blue);
-    transition: all .25s ease-in-out;
 }
 .savedevents__title.active{
     color: var(--menu-pink);
-    transition: all .25s ease-in-out;
 }
 .createevent__title.active{
     color: var(--menu-green);
+}
+
+.navbottom__icon.active,
+.navbottom__icon.active .navbottom__icon--colorfill,
+.navbottom__icon.active .navbottom__icon--colorstroke{
     transition: all .25s ease-in-out;
 }
-    
+
 /* svg stroke */
 .explore__icon.active .navbottom__icon--colorstroke{
     stroke: var(--menu-violet);
-    transition: all .25s ease-in-out;
 }
 .listevents__icon.active .navbottom__icon--colorstroke{
     stroke: var(--menu-blue);
-    transition: all .25s ease-in-out;
 }
 .savedevents__icon.active .navbottom__icon--colorstroke{
     stroke: var(--menu-pink);
-    transition: all .25s ease-in-out;
 }
 .createvent__icon.active .navbottom__icon--colorstroke{
     stroke: var(--menu-green);
-    transition: all .25s ease-in-out;
 }
 
 /* svg fill */
 .exploreevents__icon.active .navbottom__icon--colorfill{
     fill: var(--menu-violet);
-    transition: all .25s ease-in-out;
 }
 .listevents__icon.active .navbottom__icon--colorfill{
     fill: var(--menu-blue);
-    transition: all .25s ease-in-out;
 }
 .savedevents__icon.active .navbottom__icon--colorfill{
     fill: var(--menu-pink);
-    transition: all .25s ease-in-out;
 }
 .createvent__icon.active .navbottom__icon--colorfill{
     fill: var(--menu-green);
-    transition: all .25s ease-in-out;
 }
