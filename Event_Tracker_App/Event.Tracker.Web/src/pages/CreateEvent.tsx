@@ -4,6 +4,7 @@ import './CreateEvent.css'
 import dayjs from 'dayjs'
 import { ThemeProvider } from '@emotion/react'
 import { createTheme } from '@mui/material'
+import placeholder from '../resources/Placeholders/event.jpg'
 
 type Props = {
     className: string
@@ -48,7 +49,7 @@ export const CreateEvent = ({ className }: Props) => {
                     <p className='createevent-container__header-paragraph'>Add Cover</p>
                 </div> 
                 </section>
-                <img className='createevent-container__header-bgimage' src={'https://i.pinimg.com/564x/91/ef/f3/91eff36aa5b830a0e83cce8535133f43.jpg'} alt="" />
+                <img className='createevent-container__header-bgimage' src={placeholder} alt="" />
             </header>
             <section className='createevent-container__main'>
                 <form id="myForm" onSubmit={e => { e.preventDefault(); }} className='createevent-container__form'>

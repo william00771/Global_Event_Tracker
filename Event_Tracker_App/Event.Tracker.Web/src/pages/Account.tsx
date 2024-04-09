@@ -1,4 +1,5 @@
 import './Account.css'
+import placeholder from '../resources/Placeholders/event.jpg'
 
 type Props = {
     className: string,
@@ -24,7 +25,7 @@ export const Account = ({ className, setPage }: Props) => {
                 <section className='loginpage-container__header-bottom'>
                 <h1 className='loginpage-container__header-title'>Account Login</h1>
                 </section>
-                <img className='loginpage-container__header-bgimage' src="https://i.pinimg.com/564x/91/ef/f3/91eff36aa5b830a0e83cce8535133f43.jpg" alt="" />
+                <img className='loginpage-container__header-bgimage' src={placeholder} alt="" />
             </header>
             <section className='loginpage-container__main'>
                 <form className='loginpage-container__form' action="">

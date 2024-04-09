@@ -1,4 +1,5 @@
 import './SavedEvents.css'
+import placeholder from '../resources/Placeholders/event.jpg'
 
 type Props = {
     className: string
@@ -37,7 +38,7 @@ export const SavedEvents = ({ className }: Props) => {
                         </svg>
                         <p className='event-container__article-paragraph'>4pm - 12pm</p>
                     </div>
-                    <img className='savedevents-container__article-bgimage' src="https://i.pinimg.com/564x/91/ef/f3/91eff36aa5b830a0e83cce8535133f43.jpg" alt="" />
+                    <img className='savedevents-container__article-bgimage' src={placeholder} alt="" />
                 </article>
             </section>
             <section className='savedevents-container__right-container'>
@@ -59,7 +60,7 @@ export const SavedEvents = ({ className }: Props) => {
                         </svg>
                         <p className='event-container__article-paragraph'>4pm - 12pm</p>
                     </div>
-                    <img className='savedevents-container__article-bgimage' src="https://i.pinimg.com/564x/91/ef/f3/91eff36aa5b830a0e83cce8535133f43.jpg" alt="" />
+                    <img className='savedevents-container__article-bgimage' src={placeholder} alt="" />
                 </article>
 
             </section>
