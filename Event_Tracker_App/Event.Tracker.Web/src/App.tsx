@@ -13,7 +13,7 @@ import { CreateEvent } from "./pages/CreateEvent";
 const queryClient = new QueryClient();
 
 function App() {
-  const [page, setPage] = useState('TimePicker');
+  const [page, setPage] = useState('Explore');
 
   return(
     <QueryClientProvider client={queryClient}>
@@ -41,6 +41,7 @@ function App() {
         />
         <CreateEvent 
           className={"createevent-container " + (page == "CreateEvent" && "active")}
+          setPage={(page) => setPage(page)}
         />
       </main>
       <NavBarBottom 

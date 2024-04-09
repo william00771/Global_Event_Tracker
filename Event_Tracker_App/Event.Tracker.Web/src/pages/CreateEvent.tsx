@@ -8,6 +8,7 @@ import placeholder from '../resources/Placeholders/event.jpg'
 
 type Props = {
     className: string
+    setPage: (page: string) => void
 }
 
 const darkTheme = createTheme({
@@ -16,12 +17,12 @@ const darkTheme = createTheme({
     }
 });
 
-export const CreateEvent = ({ className }: Props) => {
+export const CreateEvent = ({ className, setPage }: Props) => {
     return(
         <section className={className}>
             <header className='createevent-container__header'>
                 <section className='createevent-container__header-top'>
-                    <a className='createevent-container__header-item' href="#">
+                    <a onClick={() => setPage('Explore')} className='createevent-container__header-item' href="#">
                         <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" fill="#000000">
                             <g id="SVGRepo_bgCarrier" stroke-width="0"/>
                             <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
