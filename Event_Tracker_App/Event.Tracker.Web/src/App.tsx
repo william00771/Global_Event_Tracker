@@ -31,7 +31,7 @@ function App() {
           setPage={(page) => setPage(page)}
         />
         <Explore 
-          className={"explore-container " + (page == "Explore" && "active")}
+          className={"explore-container " + (page == "Explore" && " active ") + (page == "TimePicker"  && " active ")}
         />
         <ListEvents 
           className={"listevents-container " + (page == "ListEvents" && "active")}

@@ -3,15 +3,19 @@
 .timepicker-container{
     position: absolute;
     width: 100%;
-    z-index: 10;
+    z-index: 15;
 }
 
 .form_container{
+    position: absolute;
+    top: 0;
+    padding: 15vh 2%;
+
     height: 35%;
     display: flex;
     gap: 5%;
     flex-wrap: wrap;
-    padding: 5vh 2%;
+    
 
     background-color: var(--base);
     
