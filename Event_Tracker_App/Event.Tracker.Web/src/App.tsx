@@ -36,9 +36,9 @@ function App() {
         <ListEvents 
           className={"listevents-container " + (page == "ListEvents" && "active")}
         />
-        {/* <SavedEvents 
+        <SavedEvents 
           className={"savedevents-container " + (page == "SavedEvents" && "active")}
-        /> */}
+        />
         <CreateEvent 
           className={"createevent-container " + (page == "CreateEvent" && "active")}
         />
