@@ -18,4 +18,5 @@ There will be a need to cut down drastically on features the app will deliver be
 ![image](https://github.com/william00771/Global_Event_Tracker/assets/117780994/d05f8ccf-df1c-4071-895a-869bf4fb0225)
 ![image](https://github.com/william00771/Global_Event_Tracker/assets/117780994/413074db-31e7-43ac-b59b-508671590246)
 
-### Speclist is located in the Planning folder along with color palette and reference material
+### Specifications List is located in the Planning folder along with color palette and reference material
+### Backlog is attatched to the project
