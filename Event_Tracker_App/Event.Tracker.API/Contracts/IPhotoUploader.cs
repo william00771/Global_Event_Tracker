@@ -8,6 +8,6 @@ namespace Event.Tracker.API.Contracts
 {
     public interface IPhotoUploader
     {
-        Task<PhotoUploadResult> AddPhoto(IFormFile file);
+        Task<PhotoUploadResult> Addphoto(IFormFile file);
     }
 }
