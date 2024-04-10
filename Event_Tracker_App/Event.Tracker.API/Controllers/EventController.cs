@@ -35,25 +35,8 @@ public class EventController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var newEvent = new EventModel{
-           Name = eventModelRequestDto.Name,
-           Location = eventModelRequestDto.Location,
-           Description = eventModelRequestDto.Description,
-           Duration = eventModelRequestDto.Duration,
-           WebsiteUrl = eventModelRequestDto.WebsiteUrl,
-           NumberOfPeople = eventModelRequestDto.NumberOfPeople,
-           Keywords = eventModelRequestDto.Keywords,
-        };
-
-        await _eventRepository.PostEventAsync(newEvent);
+        var newEventModel = await _eventRepository.PostEventAsync(eventModelRequestDto);
         
-        return CreatedAtAction(nameof(GetEvent), newEvent);
-    }
-
-    [HttpPost("postPhoto")]
-    public async Task<ActionResult> postPhotoTESTING(IFormFile postEventDto)
-    {
-        var resultupload = await _photoUploader.Addphoto(postEventDto);
-        return Ok(resultupload);
+        return CreatedAtAction(nameof(GetEvent), new {Id = newEventModel.Id}, newEventModel);
     }
 }
