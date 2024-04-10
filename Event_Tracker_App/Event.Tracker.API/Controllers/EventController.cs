@@ -12,10 +12,12 @@ namespace Event.Tracker.API.Controllers;
 public class EventController : ControllerBase
 {
     private readonly IEventsRepository _eventRepository;
+    private readonly IPhotoUploader _photoUploader;
 
-    public EventController(IEventsRepository eventRepository)
+    public EventController(IEventsRepository eventRepository, IPhotoUploader photoUploader)
     {
         _eventRepository = eventRepository;
+        _photoUploader = photoUploader;
     }
 
     [HttpGet]
@@ -33,18 +35,9 @@ public class EventController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var newEvent = new EventModel{
-           Name = eventModelRequestDto.Name,
-           Location = eventModelRequestDto.Location,
-           Description = eventModelRequestDto.Description,
-           Duration = eventModelRequestDto.Duration,
-           WebsiteUrl = eventModelRequestDto.WebsiteUrl,
-           NumberOfPeople = eventModelRequestDto.NumberOfPeople,
-           Keywords = eventModelRequestDto.Keywords,
-        };
-
-        await _eventRepository.PostEventAsync(newEvent);
+        var newEventModel = await _eventRepository.PostEventAsync(eventModelRequestDto, eventModelRequestDto.Image);
         
-        return CreatedAtAction(nameof(GetEvent), newEvent);
+        return CreatedAtAction(nameof(GetEvent), new {Id = newEventModel.Id}, newEventModel);
+        
     }
 }

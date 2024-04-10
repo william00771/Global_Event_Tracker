@@ -16,5 +16,15 @@ namespace Event.Tracker.API.Data
         }
 
         public DbSet<EventModel> Events { get; set; }
+
+        public DbSet<Coordinates> Coordinates { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<EventModel>()
+                .HasOne(e => e.Location)
+                .WithOne()
+                .HasForeignKey<EventModel>(e => e.CoordinatesId);
+        }
     }
 }

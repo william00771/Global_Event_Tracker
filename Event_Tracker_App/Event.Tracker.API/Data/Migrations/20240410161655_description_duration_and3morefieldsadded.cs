@@ -5,7 +5,7 @@
 namespace Event.Tracker.API.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class addkeywordsnames_fields : Migration
+    public partial class description_duration_and3morefieldsadded : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -32,18 +32,10 @@ namespace Event.Tracker.API.Data.Migrations
                 defaultValue: "[]");
 
             migrationBuilder.AddColumn<int>(
-                name: "LocationId",
-                table: "Events",
-                type: "int",
-                nullable: false,
-                defaultValue: 0);
-
-            migrationBuilder.AddColumn<int>(
                 name: "NumberOfPeople",
                 table: "Events",
                 type: "int",
-                nullable: false,
-                defaultValue: 0);
+                nullable: true);
 
             migrationBuilder.AddColumn<string>(
                 name: "WebsiteUrl",
@@ -51,49 +43,11 @@ namespace Event.Tracker.API.Data.Migrations
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "");
-
-            migrationBuilder.CreateTable(
-                name: "Location",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    lat = table.Column<double>(type: "float", nullable: false),
-                    lng = table.Column<double>(type: "float", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Location", x => x.Id);
-                });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Events_LocationId",
-                table: "Events",
-                column: "LocationId");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_Events_Location_LocationId",
-                table: "Events",
-                column: "LocationId",
-                principalTable: "Location",
-                principalColumn: "Id",
-                onDelete: ReferentialAction.Cascade);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropForeignKey(
-                name: "FK_Events_Location_LocationId",
-                table: "Events");
-
-            migrationBuilder.DropTable(
-                name: "Location");
-
-            migrationBuilder.DropIndex(
-                name: "IX_Events_LocationId",
-                table: "Events");
-
             migrationBuilder.DropColumn(
                 name: "Description",
                 table: "Events");
@@ -104,10 +58,6 @@ namespace Event.Tracker.API.Data.Migrations
 
             migrationBuilder.DropColumn(
                 name: "Keywords",
-                table: "Events");
-
-            migrationBuilder.DropColumn(
-                name: "LocationId",
                 table: "Events");
 
             migrationBuilder.DropColumn(
