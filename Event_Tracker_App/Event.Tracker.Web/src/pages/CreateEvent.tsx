@@ -27,6 +27,10 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
     const inputElement = useRef<HTMLInputElement>(null!);
     const [keywords, setKeywords] = useState<Array<string>>([]);
     const [selectedImage, setSelectedImage] = useState('');
+    const [selectedImageBlob, setSelectedImageBlob] = useState<Blob | null>(null);
+    const [timeValue, setTimeValue] = useState(dayjs());
+    const [dateStartValue, setDateStartValue] = useState(dayjs());
+    const [dateEndValue, setdateEndValue] = useState(dayjs());
 
     const [adress, setAdress] = useState<Coordinates>({lat: 0, lng: 0, formattedAddress: ''});
     const [invalidAdress, setInvalidAdress] = useState(false);
@@ -37,17 +41,23 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
         const fd = new FormData(target);
         const data = Object.fromEntries(fd.entries());
 
+        const imageBlob = selectedImageBlob;
+
         const eventRequestDto: EventModelRequestDto = {
             name: data.name as string,
             location: adress,
             description: data.description as string,
+            time: new Date(timeValue.toString()),
+            date: new Date(dateStartValue.toString()),
+            dateTo: new Date(dateEndValue.toString()),
             duration: parseInt(data.duration.toString()),
-            websiteurl: data.url as string,
-            numberofpeople: parseInt(data.people.toString()),
+            websiteUrl: data.url as string,
+            numberOfPeople: parseInt(data.people.toString()),
             keywords: keywords,
+            // image: imageBlob
         };
 
-        postEvent(eventRequestDto);
+        postEvent(eventRequestDto, imageBlob);
     };
 
     const addressChangeHandler = (e: FormEvent<HTMLFormElement>): void => {
@@ -90,6 +100,7 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
         const reader = new FileReader();
         reader.onloadend = () => {
             setSelectedImage(reader.result);
+            setSelectedImageBlob(file);
         };
         if (file) {
             reader.readAsDataURL(file);
@@ -159,19 +170,21 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                                 name='time'
                                 label="Time"
                                 defaultValue={dayjs()}
+                                onChange={(newValue: any) => setTimeValue(newValue)}
                             />
                             <DatePicker 
                                 sx={{ '& input': { color: '#a9a9a9', fontSize: '.8rem', marginLeft: '2%' } }}
                                 name='datefrom'
                                 label="Date From"
                                 defaultValue={dayjs()}
-                                
+                                onChange={(date: any) => {setDateStartValue(date); setdateEndValue(date)}}
                             />
                             <DatePicker 
                                 sx={{ '& input': { color: '#a9a9a9', fontSize: '.8rem', marginLeft: '2%' } }}
                                 name='dateto'
                                 label="Date To"
                                 defaultValue={dayjs()}
+                                onChange={(date: any) => setdateEndValue(date)}
                             />
                         </LocalizationProvider>
                     </ThemeProvider>
@@ -179,7 +192,6 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                         className='textbox-primary--outline-gradient1 form-input'
                         name='description'
                         placeholder='Description'
-                        onChange={(e) => setDescription(e.target.value)}
                         onInput={(e) => adjustTextareaHeight(e.target)}
                     />
                     <select 

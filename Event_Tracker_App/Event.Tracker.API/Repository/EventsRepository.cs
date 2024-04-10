@@ -22,23 +22,33 @@ namespace Event.Tracker.API.Repository
         }
         public async Task<List<EventModel>> GetAllEventsAsync()
         {
-            var events = await _eventContext.Events.ToListAsync();
+            var events = await _eventContext.Events.Include(ev => ev.Location).ToListAsync();
             return events;
         }
 
-        public async Task<EventModel> PostEventAsync(EventModelRequestDto eventModelRequestDto)
+        // IFormFile imageFileRequest
+        public async Task<EventModel> PostEventAsync(EventModelRequestDto eventModelRequestDto, IFormFile imageFileRequest)
         {
-            var imageUploadResponseObject = await _photoUploader.Addphoto(eventModelRequestDto.Image);
+            var imageUploadResponseObject = await _photoUploader.Addphoto(imageFileRequest);
 
-            var newEventModel = new EventModel{
+            var newCoordinates = new Coordinates{
+                Lat = eventModelRequestDto.CoordinatesRequest.Lat,
+                Lng = eventModelRequestDto.CoordinatesRequest.Lng,
+                FormattedAddress = eventModelRequestDto.CoordinatesRequest.FormattedAddress,
+            };
+
+            EventModel newEventModel = new EventModel{
                 Name = eventModelRequestDto.Name,
-                Location = eventModelRequestDto.Location,
+                Location = newCoordinates,
                 Description = eventModelRequestDto.Description,
+                Time = eventModelRequestDto.Time,
+                Date = eventModelRequestDto.Date,
+                DateTo = eventModelRequestDto.DateTo,
                 Duration = eventModelRequestDto.Duration,
                 WebsiteUrl = eventModelRequestDto.WebsiteUrl,
                 NumberOfPeople = eventModelRequestDto.NumberOfPeople,
                 Keywords = eventModelRequestDto.Keywords,
-                Image = imageUploadResponseObject.Url,
+                Image = imageUploadResponseObject.Url
             };
 
             await _eventContext.Events.AddAsync(newEventModel);

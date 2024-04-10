@@ -65,7 +65,7 @@ function App() {
             <CreateEvent 
               className={"createevent-container " + (page == "CreateEvent" && "active")}
               setPage={(page) => setPage(page)}
-              postEvent={(eventRequestDto) => postMutation.mutate(eventRequestDto)}
+              postEvent={(eventRequestDto: EventModelRequestDto) => postMutation.mutate(eventRequestDto)}
             />
           </main>
         }

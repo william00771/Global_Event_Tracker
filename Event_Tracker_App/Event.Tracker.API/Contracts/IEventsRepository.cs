@@ -10,6 +10,7 @@ namespace Event.Tracker.API.Contracts
     public interface IEventsRepository
     {
         Task<List<EventModel>> GetAllEventsAsync();
-        Task<EventModel> PostEventAsync(EventModelRequestDto eventModel);
+        Task<EventModel> PostEventAsync(EventModelRequestDto eventModel, IFormFile imageFileRequest); 
+        // IFormFile imageFileRequest
     }
 }

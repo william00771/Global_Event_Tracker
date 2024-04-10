@@ -13,7 +13,7 @@ export const fetchEvents = async (): Promise<Array<EventModel>> => {
     return await response.json()
 }
 
-export const postEvent = async (eventRequestDto : EventModelRequestDto ) => {
+export const postEvent = async (eventRequestDto : EventModelRequestDto) => {
     const response = await fetch(`http://localhost:5200/api/Event`, {
         method: 'POST',
         headers: {

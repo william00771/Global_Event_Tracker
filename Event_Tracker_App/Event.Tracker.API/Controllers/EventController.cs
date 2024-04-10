@@ -35,8 +35,9 @@ public class EventController : ControllerBase
             return BadRequest(ModelState);
         }
 
-        var newEventModel = await _eventRepository.PostEventAsync(eventModelRequestDto);
+        var newEventModel = await _eventRepository.PostEventAsync(eventModelRequestDto, eventModelRequestDto.Image);
         
         return CreatedAtAction(nameof(GetEvent), new {Id = newEventModel.Id}, newEventModel);
+        
     }
 }
