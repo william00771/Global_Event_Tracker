@@ -1,6 +1,6 @@
 import './Explore.css'
-import { EventModel } from "../types/types";
-import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import { BoundingBox, EventModel } from "../types/types";
+import { MapContainer, Marker, TileLayer, useMapEvent } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import { renderToString } from 'react-dom/server';
 import { Point, divIcon } from 'leaflet';
@@ -10,16 +10,24 @@ import dj from '../resources/event_type_icons/dj.svg'
 import placeholder from '../resources/Placeholders/event.jpg'
 import { formatDateAndDurationToHours, formatDateToStartDateEndDate } from '@/util/dateTools';
 import { EventDetails } from './EventDetails';
+import { calculateLongitudeLatitudeBoundingBox, isCoordinateWithinBoundingBox } from '@/util/mapcalculation';
 
 type Props = {
   className: string,
   data: Array<EventModel>
 }
 
-function Explore({ className, data }: Props) {
+function Explore({className, data }: Props) {
     const [showMarkerDetails, setShowMarkerDetails] = useState<string>('');
     const [showEventDetails, setShowEventDetails] = useState<string>('');
     const [currentEventInfo, setCurrentEventInfo] = useState<EventModel>();
+    const [mapCenter, setMapCenter] = useState({
+      lat: 59.3369170,
+      long: 18.0119609
+    });
+    const [boundingbox, setBoundingBox] = useState<BoundingBox>(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 9));
+    const [zoomLevel, setZoomLevel] = useState<number>(13);
+    const [maxAllowedMarkerRenders, setMaxAllowedMarkerRenders] = useState<number>(300);
 
     useEffect(() => {
       const handleMoreInfoClick = (event: any) => {
@@ -35,6 +43,51 @@ function Explore({ className, data }: Props) {
           document.removeEventListener('click', handleMoreInfoClick);
       };
     }, []);
+
+    useEffect(() => {
+        
+    }, [zoomLevel])
+
+    const UpdateMapCenter = () => {
+        const map = useMapEvent('move', () => {
+          const newCenter = map.getCenter();
+          setMapCenter({lat: newCenter.lat, long: newCenter.lng});
+          console.log(mapCenter);
+
+          zoomLevel == 7 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 150));
+          zoomLevel == 8 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 150));
+          zoomLevel == 9 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 150));
+          zoomLevel == 10 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 75));
+          zoomLevel == 11 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 50));
+          zoomLevel == 12 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 15));
+          zoomLevel == 13 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 9));
+          zoomLevel == 14 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 3.5));
+          
+        });
+        return null;
+      };
+
+      const UpdateMarkerRenders = () => {
+        const map = useMapEvent('zoom', () => {
+          setZoomLevel(getCurrentZoomLevel(map));
+          console.log(zoomLevel);
+
+          zoomLevel == 7 && setMaxAllowedMarkerRenders(40)
+          zoomLevel == 8 && setMaxAllowedMarkerRenders(50)
+          zoomLevel == 9 && setMaxAllowedMarkerRenders(60)
+          zoomLevel == 10 && setMaxAllowedMarkerRenders(100)
+          zoomLevel == 11 && setMaxAllowedMarkerRenders(200)
+          zoomLevel == 13 && setMaxAllowedMarkerRenders(500)
+        });
+        return null;
+      };
+
+    const getCurrentZoomLevel = (map: any) => {
+        if (map) {
+            const zoomLevel = map.getZoom();
+            return zoomLevel;
+        }
+    };
 
     type Props = {
       id: number
@@ -122,36 +175,42 @@ function Explore({ className, data }: Props) {
                     //url="https://api.mapbox.com/styles/v1/william00771/cltvk24s1017c01pkhsjd4774/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoid2lsbGlhbTAwNzcxIiwiYSI6ImNsdHZqeWd2cTFsYzIycW9iNGlhdHFodHAifQ.eX-yYLKA0P4QCL58IgovpA"
                 />
 
-            {MOCKDATA.map((event) => (
-                    <Marker 
-                      eventHandlers={{
-                            click: () => {
-                                if(showMarkerDetails === event.location.lat.toString())
-                                {
-                                    setShowMarkerDetails('');
-                                }
-                                else{
-                                    setShowMarkerDetails(event.location.lat.toString());
-                                    setCurrentEventInfo(event);
-                                }
-                                
-                            },
-                        }} 
-                      position={[event.location.lat, event.location.lng]} 
-                      icon={
-                        customIcon(
-                          {
-                            width: 40,
-                            id: event.location.lat, 
-                            eventData: event, 
-                            showMarkerDetails: showMarkerDetails,
-                            svgIcon: dj
+                {boundingbox && MOCKDATA.slice(0, maxAllowedMarkerRenders).map((event) => {
+                      if(isCoordinateWithinBoundingBox({latitude: event.location.lat, longitude: event.location.lng}, boundingbox) && zoomLevel >= 7){
+                          return <Marker 
+                          eventHandlers={{
+                                click: () => {
+                                    if(showMarkerDetails === event.location.lat.toString())
+                                    {
+                                        setShowMarkerDetails('');
+                                    }
+                                    else{
+                                        setShowMarkerDetails(event.location.lat.toString());
+                                        setCurrentEventInfo(event);
+                                    }
+                                    
+                                },
+                            }} 
+                          position={[event.location.lat, event.location.lng]} 
+                          icon={
+                            customIcon(
+                              {
+                                width: 40,
+                                id: event.location.lat, 
+                                eventData: event, 
+                                showMarkerDetails: showMarkerDetails,
+                                svgIcon: dj
+                              }
+                            )
                           }
-                        )
+                        />
                       }
-                    />
-              ))}
-
+                      else{
+                          return '';
+                      }
+                  })}
+              <UpdateMapCenter />
+              <UpdateMarkerRenders />
             </MapContainer>
         </section>
         <EventDetails 
