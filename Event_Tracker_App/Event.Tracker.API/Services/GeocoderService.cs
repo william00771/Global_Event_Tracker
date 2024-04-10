@@ -17,7 +17,7 @@ namespace Event.Tracker.API.Services
             _httpClient = new HttpClient();
             _geocoderApiKey = config.GetValue<string>("Geocoder:ApiKey");
         }
-        public async Task<GeocoderApiResponse> GetCoordinatesFromAddressAsync(string address)
+        public async Task<Coordinates> GetCoordinatesFromAddressAsync(string address)
         {
             try
             {
@@ -30,8 +30,16 @@ namespace Event.Tracker.API.Services
                 }
 
                 var jsonResponse = await response.Content.ReadFromJsonAsync<GeocoderApiResponse>();
+                var jsonFirstResult = jsonResponse.Results[0];
+
+                    var coordinates = new Coordinates
+                    {
+                        Lat = jsonFirstResult.geometry.location.lat,
+                        Lng = jsonFirstResult.geometry.location.lng,
+                        FormattedAddress = jsonFirstResult.formatted_address
+                    };
                 
-                return jsonResponse;
+                return coordinates;
             }
             catch (HttpRequestException ex)
             {

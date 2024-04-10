@@ -21,7 +21,7 @@ namespace Event.Tracker.API.Controllers
         }
 
         [HttpGet("getCoordinatesFromAddress")]
-        public async Task<ActionResult<GeocoderApiResponse>> getCoordinatesFromAddress(string Address)
+        public async Task<ActionResult<Coordinates>> getCoordinatesFromAddress(string Address)
         {
             var coordinates = await _geocoderService.GetCoordinatesFromAddressAsync(Address);
             return Ok(coordinates);

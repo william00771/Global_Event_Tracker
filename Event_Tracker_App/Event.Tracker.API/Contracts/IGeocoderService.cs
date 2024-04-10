@@ -9,6 +9,6 @@ namespace Event.Tracker.API.Contracts
 {
     public interface IGeocoderService
     {
-        Task<GeocoderApiResponse> GetCoordinatesFromAddressAsync(string address);
+        Task<Coordinates> GetCoordinatesFromAddressAsync(string address);
     }
 }
