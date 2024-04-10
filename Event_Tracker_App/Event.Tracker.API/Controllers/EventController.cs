@@ -1,4 +1,5 @@
 using Event.Tracker.API.Data;
+using Event.Tracker.API.Dtos;
 using Event.Tracker.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -17,15 +18,26 @@ public class EventController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<EventModel>> GetWeatherForecast()
+    public async Task<ActionResult<EventModel>> GetEvent()
     {
         var events = await _eventContext.Events.ToListAsync();
         return Ok(events);
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostEvent()
+    public async Task<IActionResult> PostEvent(EventModelRequestDto eventModelRequestDto)
     {
-        return Ok();
+        if(!ModelState.IsValid)
+        {
+            return BadRequest(ModelState);
+        }
+
+        var newEvent = new EventModel{
+            Name = eventModelRequestDto.name
+        };
+        
+        var eventAdded = await _eventContext.Events.AddAsync(newEvent);
+
+        return CreatedAtAction(nameof(GetEvent), eventAdded);
     }
 }
