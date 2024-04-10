@@ -4,17 +4,20 @@ import { fetchEvents } from "../util/http"
 import { EventModel } from "../types/types";
 
 type Props = {
-  className: string
+  className: string,
+  data: Array<EventModel>
 }
 
-function Explore({ className }: Props) {
+function Explore({ className, data }: Props) {
 
     
 
 
     return(
       <section className={className}>
-        
+        {data.map(event => (
+          <p>{event.name}</p>
+        ))}
       </section>
     )
 }

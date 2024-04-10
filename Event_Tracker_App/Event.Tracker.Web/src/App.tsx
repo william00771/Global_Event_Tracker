@@ -45,6 +45,7 @@ function App() {
             />
             <Explore 
               className={"explore-container " + (page == "Explore" && " active ") + (page == "TimePicker"  && " active ")}
+              data={data}
             />
             <ListEvents 
               className={"listevents-container " + (page == "ListEvents" && "active")}
