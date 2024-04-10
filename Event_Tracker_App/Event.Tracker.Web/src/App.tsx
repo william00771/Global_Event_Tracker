@@ -34,10 +34,10 @@ function App() {
       <>
         {isLoading && <h1>Loading...</h1>}
         {isError && <h1>Error</h1>}
-        <NavbarTop 
+        {/* <NavbarTop 
           setPage={(page) => setPage(page)}
           page={page}
-        />
+        /> */}
         {data &&
           <>
             <Explore 
@@ -70,10 +70,10 @@ function App() {
           </main> */}
           </>
         }
-        <NavBarBottom 
+        {/* <NavBarBottom 
           setPage={(page) => setPage(page)}
           page={page}
-        />
+        /> */}
       </>
   )
 
