@@ -1,11 +1,17 @@
+using System.Text.Json.Serialization;
+using Event.Tracker.API.Contracts;
 using Event.Tracker.API.Data;
+using Event.Tracker.API.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddControllers()
+    .AddJsonOptions(options => {
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -14,6 +20,8 @@ builder.Services.AddDbContext<EventDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("EventDbConnectionString"));
 });
+
+builder.Services.AddScoped<IEventsRepository, EventsRepository>();
 
 builder.Services.AddCors(options =>
 {

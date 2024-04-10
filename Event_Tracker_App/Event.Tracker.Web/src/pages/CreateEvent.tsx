@@ -5,10 +5,13 @@ import dayjs from 'dayjs'
 import { ThemeProvider } from '@emotion/react'
 import { createTheme } from '@mui/material'
 import placeholder from '../resources/Placeholders/event.jpg'
+import { FormEvent, useRef, useState } from 'react'
+import { EventModel, EventModelRequestDto } from '@/types/types'
 
 type Props = {
     className: string
     setPage: (page: string) => void
+    postEvent: (eventRequestDto: EventModelRequestDto) => void
 }
 
 const darkTheme = createTheme({
@@ -17,7 +20,22 @@ const darkTheme = createTheme({
     }
 });
 
-export const CreateEvent = ({ className, setPage }: Props) => {
+export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
+
+    const submitHandler = (e: FormEvent<HTMLFormElement>): void => {
+        e.preventDefault();
+        const target = document.getElementById('myForm') as HTMLFormElement;
+        const fd = new FormData(target);
+        const data = Object.fromEntries(fd.entries());
+
+        const eventRequestDto: EventModelRequestDto = {
+            name: data.name as string,
+        };
+
+        postEvent(eventRequestDto);
+    };
+
+
     return(
         <section className={className}>
             <header className='createevent-container__header'>
@@ -84,7 +102,7 @@ export const CreateEvent = ({ className, setPage }: Props) => {
                     <input className='input-primary--outline-gradient1 form-input' type="text" name='url' placeholder='Website url' />
                     <input className='input-primary--outline-gradient1 form-input' type='number' name='people' placeholder='Number of people'/>
                     <input className='input-primary--outline-gradient1 form-input' type="text" name='type' placeholder='Type of Event' />
-                    <button type='button' className='btn-primary--gradient-outline form-input__buttonlogin'>Add Event</button>
+                    <button onClick={submitHandler} type='button' className='btn-primary--gradient-outline form-input__buttonlogin'>Add Event</button>
                 </form>
             </section>
         </section>
