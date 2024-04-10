@@ -1,7 +1,15 @@
 import './Explore.css'
-import { useQuery } from "react-query"
-import { fetchEvents } from "../util/http"
 import { EventModel } from "../types/types";
+import { MapContainer, Marker, TileLayer } from 'react-leaflet';
+import "leaflet/dist/leaflet.css";
+import { renderToString } from 'react-dom/server';
+import { Point, divIcon } from 'leaflet';
+import { useEffect, useState } from 'react';
+import { MOCKDATA } from '@/Data/MockData';
+import dj from '../resources/event_type_icons/dj.svg'
+import placeholder from '../resources/Placeholders/event.jpg'
+import { formatDateAndDurationToHours, formatDateToStartDateEndDate } from '@/util/dateTools';
+import { EventDetails } from './EventDetails';
 
 type Props = {
   className: string,
@@ -9,15 +17,151 @@ type Props = {
 }
 
 function Explore({ className, data }: Props) {
+    const [showMarkerDetails, setShowMarkerDetails] = useState<string>('');
+    const [showEventDetails, setShowEventDetails] = useState<string>('');
+    const [currentEventInfo, setCurrentEventInfo] = useState<EventModel>();
 
-    
+    useEffect(() => {
+      const handleMoreInfoClick = (event: any) => {
+          event.preventDefault()
+          if (event.target.classList.contains('moreinfobtn')) {
+              setShowEventDetails(event.target.value);
+          }
+      };
+
+      document.addEventListener('click', handleMoreInfoClick);
+
+      return () => {
+          document.removeEventListener('click', handleMoreInfoClick);
+      };
+    }, []);
+
+    type Props = {
+      id: number
+      showMarkerDetails: string,
+      eventData: EventModel,
+      svgIcon: string,
+      width: number
+    }
+
+    const ExampleIcon = ({id, showMarkerDetails, eventData, svgIcon, width} : Props) => {
+      return (
+        <>
+          <header style={{width: `${width}px`, height: `${width}px`}} className='marker-container'>
+              <div className="marker-container__icon" style={{backgroundImage: `linear-gradient(#eb01a538, #d1363136), url(${svgIcon})`}}></div>
+          </header>
+          <section className={"marker-container__section " + (showMarkerDetails === id.toString() ? "active" : "inactive")}>
+              <header className='marker__header'>
+                  <section className='marker__header-top'>
+                      <a className='marker__header-item' href="#">
+                          <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                              <g id="SVGRepo_iconCarrier"> <path d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z" fill="#ffffff"/> </g>
+                          </svg>
+                      </a>
+                  </section>
+                  <section className='marker__header-bottom'>
+                      <h1 className='marker__header-title'>{eventData.name}</h1>
+                      <div className='marker__header-item'>
+                          <svg width="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                              <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                              <g id="SVGRepo_iconCarrier"> <path d="M20 10V7C20 5.89543 19.1046 5 18 5H6C4.89543 5 4 5.89543 4 7V10M20 10V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V10M20 10H4M8 3V7M16 3V7" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/> <rect x="6" y="12" width="3" height="3" rx="0.5" fill="#ffffff"/> <rect x="10.5" y="12" width="3" height="3" rx="0.5" fill="#ffffff"/> <rect x="15" y="12" width="3" height="3" rx="0.5" fill="#ffffff"/> </g>
+                          </svg>
+                          <p className='marker__header-paragraph'>{formatDateToStartDateEndDate(eventData.date)}</p>
+                      </div> 
+                      <div className='marker__header-item'>
+                          <svg width="40px" height="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
+                              <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+                              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+                              <g id="SVGRepo_iconCarrier"> <path d="M12 21C16.9706 21 21 16.9706 21 12C21 7.02944 16.9706 3 12 3C7.02944 3 3 7.02944 3 12C3 16.9706 7.02944 21 12 21Z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M12 6V12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> <path d="M16.24 16.24L12 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/> </g>
+                          </svg>
+                          <p className='marker__header-paragraph'>{formatDateAndDurationToHours(eventData.date, eventData.duration)}</p>
+                      </div>
+                  </section>
+                  <img className='marker__header-bgimage' src={ placeholder || eventData.image} alt="" />
+              </header>
+              <article className='marker__main'>
+                  <p className='marker__main-paragraph'>{eventData.name}
+                  </p>
+                  <button className='moreinfobtn btn-primary--gradient marker__main-btn' value={id}>More Info</button>
+              </article>
+          </section>
+          </>
+      );
+    }
+
+    const customIcon = ({width, id, showMarkerDetails, eventData, svgIcon} : Props) => {
+      return divIcon({
+        html: renderToString(
+          <ExampleIcon 
+            width={width}
+            id={id} 
+            showMarkerDetails={showMarkerDetails} 
+            eventData={eventData} 
+            svgIcon={svgIcon}
+          />
+        ),
+        className: "",
+        iconSize: new Point(4, 4),
+      });
+    }
 
     return(
-      <section className={className}>
-        {data.map(event => (
-          <p>{event.name}</p>
-        ))}
-      </section>
+      <>
+        <section className='explore__container'>
+            <MapContainer 
+            className='leaflet_map' 
+            center={[59.3369170, 18.0119609]} 
+            zoom={13}
+            scrollWheelZoom={true}>
+                <TileLayer 
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    //url="https://api.mapbox.com/styles/v1/william00771/cltvk24s1017c01pkhsjd4774/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoid2lsbGlhbTAwNzcxIiwiYSI6ImNsdHZqeWd2cTFsYzIycW9iNGlhdHFodHAifQ.eX-yYLKA0P4QCL58IgovpA"
+                />
+
+            {MOCKDATA.map((event) => (
+                    <Marker 
+                      eventHandlers={{
+                            click: () => {
+                                if(showMarkerDetails === event.location.lat.toString())
+                                {
+                                    setShowMarkerDetails('');
+                                }
+                                else{
+                                    setShowMarkerDetails(event.location.lat.toString());
+                                    setCurrentEventInfo(event);
+                                }
+                                
+                            },
+                        }} 
+                      position={[event.location.lat, event.location.lng]} 
+                      icon={
+                        customIcon(
+                          {
+                            width: 40,
+                            id: event.location.lat, 
+                            eventData: event, 
+                            showMarkerDetails: showMarkerDetails,
+                            svgIcon: dj
+                          }
+                        )
+                      }
+                    />
+              ))}
+
+            </MapContainer>
+        </section>
+        <EventDetails 
+          className={'event-container'} 
+          visible={showEventDetails ? true : false} 
+          setShowEventDetails={(value: string) => setShowEventDetails(value)}
+          eventData={currentEventInfo}
+        />
+
+    </>
     )
 }
 

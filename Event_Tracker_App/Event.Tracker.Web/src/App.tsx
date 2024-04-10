@@ -15,7 +15,7 @@ import { EventModel, EventModelRequestDto } from './types/types';
 
 
 function App() {
-  const [page, setPage] = useState('SavedEvents');
+  const [page, setPage] = useState('Explore');
 
 
   const { data, isLoading, isError, refetch } = useQuery<Array<EventModel>>({
@@ -34,13 +34,17 @@ function App() {
       <>
         {isLoading && <h1>Loading...</h1>}
         {isError && <h1>Error</h1>}
-        
         <NavbarTop 
           setPage={(page) => setPage(page)}
           page={page}
         />
         {data &&
-          <main className="page-container">
+          <>
+            <Explore 
+            className={"explore-container " + (page == "Explore" && " active ") + (page == "TimePicker"  && " active ")}
+            data={data}
+          />
+          {/* <main className="page-container">
             
             <TimePicker 
               className={"timepicker-container " + (page == "TimePicker" && "active")}
@@ -49,10 +53,6 @@ function App() {
             <Account 
               className={"account-container " + (page == "Account" && "active")}
               setPage={(page) => setPage(page)}
-            />
-            <Explore 
-              className={"explore-container " + (page == "Explore" && " active ") + (page == "TimePicker"  && " active ")}
-              data={data}
             />
             <ListEvents 
               className={"listevents-container " + (page == "ListEvents" && "active")}
@@ -67,7 +67,8 @@ function App() {
               setPage={(page) => setPage(page)}
               postEvent={(eventRequestDto: EventModelRequestDto) => postMutation.mutate(eventRequestDto)}
             />
-          </main>
+          </main> */}
+          </>
         }
         <NavBarBottom 
           setPage={(page) => setPage(page)}
