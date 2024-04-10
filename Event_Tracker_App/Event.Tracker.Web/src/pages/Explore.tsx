@@ -6,11 +6,12 @@ import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import { renderToString } from 'react-dom/server';
 import { Point, divIcon } from 'leaflet';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { MOCKDATA } from '@/Data/MockData';
 import dj from '../resources/event_type_icons/dj.svg'
 import placeholder from '../resources/Placeholders/event.jpg'
 import { formatDateAndDurationToHours, formatDateToStartDateEndDate } from '@/types/dateTools';
+import { EventDetails } from './EventDetails';
 
 type Props = {
   className: string,
@@ -19,6 +20,23 @@ type Props = {
 
 function Explore({ className, data }: Props) {
     const [showMarkerDetails, setShowMarkerDetails] = useState<string>('');
+    const [showEventDetails, setShowEventDetails] = useState<string>('');
+    const [currentEventInfo, setCurrentEventInfo] = useState<EventModel>();
+
+    useEffect(() => {
+      const handleMoreInfoClick = (event: any) => {
+          event.preventDefault()
+          if (event.target.classList.contains('moreinfobtn')) {
+              setShowEventDetails(event.target.value);
+          }
+      };
+
+      document.addEventListener('click', handleMoreInfoClick);
+
+      return () => {
+          document.removeEventListener('click', handleMoreInfoClick);
+      };
+    }, []);
 
     type Props = {
       id: number
@@ -106,6 +124,7 @@ function Explore({ className, data }: Props) {
                                 }
                                 else{
                                     setShowMarkerDetails(event.location.lat.toString());
+                                    setCurrentEventInfo(event);
                                 }
                                 
                             },
@@ -117,6 +136,13 @@ function Explore({ className, data }: Props) {
 
             </MapContainer>
         </section>
+        <EventDetails 
+          className={'event-container'} 
+          visible={showEventDetails ? true : false} 
+          setShowEventDetails={(value: string) => setShowEventDetails(value)}
+          eventData={currentEventInfo}
+        />
+
     </>
     )
 }
