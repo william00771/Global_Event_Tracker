@@ -10,5 +10,11 @@ export type EventModel = {
 }
 
 export type EventModelRequestDto = {
-    name: string
+    name: string,
+    location: Coordinates,
+    description: string,
+    duration: number,
+    websiteurl: string,
+    numberofpeople: number | null,
+    keywords: Array<String>,
 }

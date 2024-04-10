@@ -9,6 +9,7 @@ import { FormEvent, useRef, useState } from 'react'
 import { Coordinates, EventModelRequestDto } from '@/types/types'
 import { GeocoderApiResponse } from '@/types/geocoder_types'
 import { fetchCoordinatesFromAddress } from '@/util/http'
+import TagsInput from '@/components/TagsInput/TagsInput'
 
 type Props = {
     className: string
@@ -24,7 +25,9 @@ const darkTheme = createTheme({
 
 export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
     const inputElement = useRef<HTMLInputElement>(null!);
-    const [adress, setAdress] = useState<Coordinates>({lat: 0, lng: 0, formattedAdress: ''});
+    const [keywords, setKeywords] = useState<Array<string>>([]);
+
+    const [adress, setAdress] = useState<Coordinates>({lat: 0, lng: 0, formattedAddress: ''});
     const [invalidAdress, setInvalidAdress] = useState(false);
 
     const submitHandler = (e: FormEvent<HTMLFormElement>): void => {
@@ -35,6 +38,12 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
 
         const eventRequestDto: EventModelRequestDto = {
             name: data.name as string,
+            location: adress,
+            description: data.description as string,
+            duration: parseInt(data.duration.toString()),
+            websiteurl: data.url as string,
+            numberofpeople: parseInt(data.people.toString()),
+            keywords: keywords,
         };
 
         postEvent(eventRequestDto);
@@ -44,7 +53,7 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
         e.preventDefault();
 
         const addressRequest = e.currentTarget.value;
-        if(adress?.formattedAdress == addressRequest){
+        if(adress?.formattedAddress == addressRequest){
             return;
         }
         getCoordinates(addressRequest)
@@ -70,6 +79,10 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
     }
 
 
+    const adjustTextareaHeight = (textarea) => {
+        textarea.style.height = 'auto'; // Reset height to auto to recalculate height
+        textarea.style.height = `${textarea.scrollHeight}px`; // Set height to scrollHeight
+      };
 
 
     return(
@@ -141,6 +154,13 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                             />
                         </LocalizationProvider>
                     </ThemeProvider>
+                    <textarea
+                        className='textbox-primary--outline-gradient1 form-input'
+                        name='description'
+                        placeholder='Description'
+                        onChange={(e) => setDescription(e.target.value)}
+                        onInput={(e) => adjustTextareaHeight(e.target)}
+                    />
                     <select className='select-primary--outline-gradient1' name="durationtype" placeholder='Duration' > 
                         <option value="Hours">Hours duration</option>
                     </select>
@@ -148,6 +168,7 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                     <input className='input-primary--outline-gradient1 form-input' type="text" name='url' placeholder='Website url' />
                     <input className='input-primary--outline-gradient1 form-input' type='number' name='people' placeholder='Number of people'/>
                     <input className='input-primary--outline-gradient1 form-input' type="text" name='type' placeholder='Type of Event' />
+                    <TagsInput selectedTags={(tags: any) => setKeywords(tags)}  tags={[]}/>
                     <button onClick={submitHandler} type='button' className='btn-primary--gradient-outline form-input__buttonlogin'>Add Event</button>
                 </form>
             </section>
