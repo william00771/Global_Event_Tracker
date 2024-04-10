@@ -1,5 +1,7 @@
+using Event.Tracker.API.Data;
 using Event.Tracker.API.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Event.Tracker.API.Controllers;
 
@@ -7,16 +9,18 @@ namespace Event.Tracker.API.Controllers;
 [Route("api/[controller]")]
 public class EventController : ControllerBase
 {
+    private readonly EventDbContext _eventContext;
+
+    public EventController(EventDbContext eventContext)
+    {
+        _eventContext = eventContext;
+    }
 
     [HttpGet]
     public async Task<ActionResult<EventModel>> GetWeatherForecast()
     {
-        var ev = new EventModel{
-            Id = 1,
-            Name = "Tomorrowland"
-        };
-        
-        return Ok(ev);
+        var events = await _eventContext.Events.ToListAsync();
+        return Ok(events);
     }
 
     [HttpPost]
