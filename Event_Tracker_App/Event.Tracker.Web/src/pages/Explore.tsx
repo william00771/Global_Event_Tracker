@@ -1,6 +1,4 @@
 import './Explore.css'
-import { useQuery } from "react-query"
-import { fetchEvents } from "../util/http"
 import { EventModel } from "../types/types";
 import { MapContainer, Marker, TileLayer } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
@@ -10,7 +8,7 @@ import { useEffect, useState } from 'react';
 import { MOCKDATA } from '@/Data/MockData';
 import dj from '../resources/event_type_icons/dj.svg'
 import placeholder from '../resources/Placeholders/event.jpg'
-import { formatDateAndDurationToHours, formatDateToStartDateEndDate } from '@/types/dateTools';
+import { formatDateAndDurationToHours, formatDateToStartDateEndDate } from '@/util/dateTools';
 import { EventDetails } from './EventDetails';
 
 type Props = {
@@ -41,14 +39,16 @@ function Explore({ className, data }: Props) {
     type Props = {
       id: number
       showMarkerDetails: string,
-      eventData: EventModel
+      eventData: EventModel,
+      svgIcon: string,
+      width: number
     }
 
-    const ExampleIcon = ({id, showMarkerDetails, eventData} : Props) => {
+    const ExampleIcon = ({id, showMarkerDetails, eventData, svgIcon, width} : Props) => {
       return (
         <>
-          <header style={{width: 40, height: 40}} className='marker-container'>
-              <div className="marker-container__icon" style={{backgroundImage: `linear-gradient(#eb01a538, #d1363136), url(${dj})`}}></div>
+          <header style={{width: `${width}px`, height: `${width}px`}} className='marker-container'>
+              <div className="marker-container__icon" style={{backgroundImage: `linear-gradient(#eb01a538, #d1363136), url(${svgIcon})`}}></div>
           </header>
           <section className={"marker-container__section " + (showMarkerDetails === id.toString() ? "active" : "inactive")}>
               <header className='marker__header'>
@@ -92,9 +92,17 @@ function Explore({ className, data }: Props) {
       );
     }
 
-    const customIcon = ({id, showMarkerDetails, eventData} : Props) => {
+    const customIcon = ({width, id, showMarkerDetails, eventData, svgIcon} : Props) => {
       return divIcon({
-        html: renderToString(<ExampleIcon id={id} showMarkerDetails={showMarkerDetails} eventData={eventData}/>),
+        html: renderToString(
+          <ExampleIcon 
+            width={width}
+            id={id} 
+            showMarkerDetails={showMarkerDetails} 
+            eventData={eventData} 
+            svgIcon={svgIcon}
+          />
+        ),
         className: "",
         iconSize: new Point(4, 4),
       });
@@ -130,7 +138,17 @@ function Explore({ className, data }: Props) {
                             },
                         }} 
                       position={[event.location.lat, event.location.lng]} 
-                      icon={customIcon({id: event.location.lat, eventData: event, showMarkerDetails: showMarkerDetails})} 
+                      icon={
+                        customIcon(
+                          {
+                            width: 40,
+                            id: event.location.lat, 
+                            eventData: event, 
+                            showMarkerDetails: showMarkerDetails,
+                            svgIcon: dj
+                          }
+                        )
+                      }
                     />
               ))}
 

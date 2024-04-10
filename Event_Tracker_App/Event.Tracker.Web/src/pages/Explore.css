@@ -42,10 +42,13 @@
         background-color: #212733;
         
         opacity: 1;
+        visibility: visible;
         
         cursor: pointer;
 
         overflow: hidden;
+
+        animation: Expand .5s ease-in-out;
     }
     .marker-container__section.inactive{
         position: absolute;
@@ -57,10 +60,22 @@
         border-radius: 1rem;
         background-color: #212733;
         opacity: 0;
+        visibility: hidden;
         
         cursor: pointer;
 
         overflow: hidden;
+    }
+
+    @keyframes Expand{
+        0%{
+            opacity: 0;
+            filter: blur(2px);
+        }
+        100%{
+            opacity: 1;
+            filter: blur(0px);
+        }
     }
     
 

@@ -1,6 +1,6 @@
 import { EventModel } from '@/types/types'
 import './EventDetails.css'
-import { formatDateAndDurationToHours, formatDateToStartDateEndDate } from '@/types/dateTools'
+import { formatDateAndDurationToHours, formatDateToStartDateEndDate } from '@/util/dateTools'
 
 type Props = {
     className: string
