@@ -33,11 +33,12 @@ public class EventController : ControllerBase
         }
 
         var newEvent = new EventModel{
-            Name = eventModelRequestDto.name
+           Name = eventModelRequestDto.name
         };
-        
-        var eventAdded = await _eventContext.Events.AddAsync(newEvent);
 
-        return CreatedAtAction(nameof(GetEvent), eventAdded);
+        await _eventContext.Events.AddAsync(newEvent);
+        await _eventContext.SaveChangesAsync();
+        
+        return CreatedAtAction(nameof(GetEvent), newEvent);
     }
 }
