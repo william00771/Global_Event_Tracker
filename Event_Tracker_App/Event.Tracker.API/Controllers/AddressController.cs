@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Event.Tracker.API.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Event.Tracker.API.Controllers
@@ -11,7 +12,7 @@ namespace Event.Tracker.API.Controllers
     public class AddressController : ControllerBase
     {
         [HttpGet("getCoordinatesFromAddress")]
-        public async Task<ActionResult<EventMo>> getCoordinatesFromAddress(string Address)
+        public async Task<ActionResult<Coordinates>> getCoordinatesFromAddress(string Address)
         {
             
             return Ok();
