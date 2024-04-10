@@ -26,6 +26,7 @@ function App() {
   const postMutation = useMutation((eventRequestDto: EventModelRequestDto) => postEvent(eventRequestDto), {
       onSuccess: () => {
           refetch();
+          setPage('Explore');
       }
   });
 
