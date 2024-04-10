@@ -24,8 +24,7 @@
 .listevents-container,
 .savedevents-container,
 .createevent-container{
-  display: none;
-  opacity: 0;
+  visibility: hidden;
 }
 
 
@@ -34,10 +33,12 @@
 .listevents-container.active,
 .createevent-container.active{
   display: block;
+  visibility: visible;
   opacity: 1;
 }
 
 .savedevents-container.active{
+  visibility: visible;
   display: grid;
   opacity: 1;
 }

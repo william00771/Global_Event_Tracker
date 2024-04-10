@@ -60,10 +60,10 @@ function App() {
               className={"listevents-container " + (page == "ListEvents" && "active")}
               data={data}
             />
-            {/* <SavedEvents 
+            <SavedEvents 
               className={"savedevents-container " + (page == "SavedEvents" && "active")}
               data={data}
-            /> */}
+            />
             {/* <CreateEvent 
               className={"createevent-container " + (page == "CreateEvent" && "active")}
               setPage={(page) => setPage(page)}
