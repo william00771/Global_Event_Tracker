@@ -6,7 +6,8 @@ import { ThemeProvider } from '@emotion/react'
 import { createTheme } from '@mui/material'
 import placeholder from '../resources/Placeholders/event.jpg'
 import { FormEvent, useRef, useState } from 'react'
-import { EventModel, EventModelRequestDto } from '@/types/types'
+import { Coordinates, EventModel, EventModelRequestDto } from '@/types/types'
+import { GeocoderApiResponse } from '@/types/geocoder_types'
 
 type Props = {
     className: string
@@ -21,6 +22,7 @@ const darkTheme = createTheme({
 });
 
 export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
+    
 
     const submitHandler = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
@@ -34,6 +36,8 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
 
         postEvent(eventRequestDto);
     };
+
+
 
 
     return(
