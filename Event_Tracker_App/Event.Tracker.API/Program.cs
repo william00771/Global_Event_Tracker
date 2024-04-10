@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using Event.Tracker.API.Configuration;
 using Event.Tracker.API.Contracts;
 using Event.Tracker.API.Data;
 using Event.Tracker.API.Repository;
@@ -24,6 +25,7 @@ builder.Services.AddDbContext<EventDbContext>(options =>
 
 builder.Services.AddScoped<IEventsRepository, EventsRepository>();
 builder.Services.AddScoped<IGeocoderService, GeocoderService>();
+builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("Cloudinary"));
 
 builder.Services.AddCors(options =>
 {
