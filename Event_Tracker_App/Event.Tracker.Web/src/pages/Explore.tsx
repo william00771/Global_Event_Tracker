@@ -12,7 +12,6 @@ function Explore({ className, data }: Props) {
 
     
 
-
     return(
       <section className={className}>
         {data.map(event => (
