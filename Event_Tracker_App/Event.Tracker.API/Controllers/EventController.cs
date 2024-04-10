@@ -34,7 +34,13 @@ public class EventController : ControllerBase
         }
 
         var newEvent = new EventModel{
-           Name = eventModelRequestDto.name
+           Name = eventModelRequestDto.Name,
+           Location = eventModelRequestDto.Location,
+           Description = eventModelRequestDto.Description,
+           Duration = eventModelRequestDto.Duration,
+           WebsiteUrl = eventModelRequestDto.WebsiteUrl,
+           NumberOfPeople = eventModelRequestDto.NumberOfPeople,
+           Keywords = eventModelRequestDto.Keywords,
         };
 
         await _eventRepository.PostEventAsync(newEvent);
