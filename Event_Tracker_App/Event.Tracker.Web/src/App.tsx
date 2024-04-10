@@ -9,7 +9,7 @@ import { Account } from "./pages/Account";
 import { ListEvents } from "./pages/ListEvents";
 import { SavedEvents } from "./pages/SavedEvents";
 import { CreateEvent } from "./pages/CreateEvent";
-import { fetchEvents } from './util/http';
+import { fetchEvents, postEvent } from './util/http';
 import { EventModel, EventModelRequestDto } from './types/types';
 
 
@@ -23,7 +23,7 @@ function App() {
       queryFn: () => fetchEvents()
     });
 
-  const postMutation = useMutation((eventRequestDto: EventModelRequestDto) => postRequest(eventRequestDto), {
+  const postMutation = useMutation((eventRequestDto: EventModelRequestDto) => postEvent(eventRequestDto), {
       onSuccess: () => {
           refetch();
       }
