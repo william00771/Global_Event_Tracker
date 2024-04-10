@@ -2,6 +2,7 @@ using System.Text.Json.Serialization;
 using Event.Tracker.API.Contracts;
 using Event.Tracker.API.Data;
 using Event.Tracker.API.Repository;
+using Event.Tracker.API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -22,6 +23,7 @@ builder.Services.AddDbContext<EventDbContext>(options =>
 });
 
 builder.Services.AddScoped<IEventsRepository, EventsRepository>();
+builder.Services.AddScoped<IGeocoderService, GeocoderService>();
 
 builder.Services.AddCors(options =>
 {

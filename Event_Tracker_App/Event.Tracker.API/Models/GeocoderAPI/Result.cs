@@ -7,10 +7,10 @@ namespace Event.Tracker.API.Models.GeocoderAPI
 {
     public class Result
     {
-        public List<AddressComponent> AddressComponents { get; set; }
-        public string FormattedAddress { get; set; }
-        public Geometry Geometry { get; set; }
-        public string PlaceId { get; set; }
-        public List<string> Types { get; set; }
+        public List<AddressComponent> address_components { get; set; }
+        public string formatted_address { get; set; }
+        public Geometry geometry { get; set; }
+        public string place_id { get; set; }
+        public List<string> types { get; set; }
     }
 }

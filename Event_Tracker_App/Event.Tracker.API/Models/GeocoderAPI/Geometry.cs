@@ -7,9 +7,9 @@ namespace Event.Tracker.API.Models.GeocoderAPI
 {
     public class Geometry
     {
-        public Bounds Bounds { get; set; }
-        public Coordinates Location { get; set; }
-        public string LocationType { get; set; }
-        public Bounds Viewport { get; set; }
+        public Bounds bounds { get; set; }
+        public Location location { get; set; }
+        public string location_type { get; set; }
+        public Viewport viewport { get; set; }
     }
 }

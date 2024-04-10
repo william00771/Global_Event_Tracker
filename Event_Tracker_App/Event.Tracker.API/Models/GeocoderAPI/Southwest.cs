@@ -5,9 +5,9 @@ using System.Threading.Tasks;
 
 namespace Event.Tracker.API.Models.GeocoderAPI
 {
-    public class Bounds
+    public class Southwest
     {
-        public Northeast northeast { get; set; }
-        public Southwest southwest { get; set; }
+        public double lat { get; set; }
+        public double lng { get; set; }
     }
 }

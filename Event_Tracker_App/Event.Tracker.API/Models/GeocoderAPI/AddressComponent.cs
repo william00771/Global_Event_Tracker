@@ -7,8 +7,8 @@ namespace Event.Tracker.API.Models.GeocoderAPI
 {
     public class AddressComponent
     {
-        public string LongName { get; set; }
-        public string ShortName { get; set; }
-        public List<string> Types { get; set; }
+        public string long_name { get; set; }
+        public string short_name { get; set; }
+        public List<string> types { get; set; }
     }
 }
