@@ -55,6 +55,7 @@ function App() {
               // + (page == "Explore" && " active ") + (page == "TimePicker"  && " active ")
               data={data}
               setPage={(page) => setPage(page)}
+              page={page}
             />
             <ListEvents 
               className={"listevents-container " + (page == "ListEvents" && "active")}
@@ -64,11 +65,11 @@ function App() {
               className={"savedevents-container " + (page == "SavedEvents" && "active")}
               data={data}
             />
-            {/* <CreateEvent 
+            <CreateEvent 
               className={"createevent-container " + (page == "CreateEvent" && "active")}
               setPage={(page) => setPage(page)}
               postEvent={(eventRequestDto: EventModelRequestDto) => postMutation.mutate(eventRequestDto)}
-            /> */}
+            />
           </main>
         }
         <NavBarBottom 

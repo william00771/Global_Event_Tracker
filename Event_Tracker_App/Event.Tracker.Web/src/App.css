@@ -24,6 +24,7 @@
 .listevents-container,
 .savedevents-container,
 .createevent-container{
+  opacity: 0;
   visibility: hidden;
 }
 

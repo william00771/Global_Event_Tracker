@@ -11,14 +11,16 @@ import placeholder from '../resources/Placeholders/event.jpg'
 import { formatDateAndDurationToHours, formatDateToStartDateEndDate } from '@/util/dateTools';
 import { EventDetails } from './EventDetails';
 import { calculateLongitudeLatitudeBoundingBox, isCoordinateWithinBoundingBox } from '@/util/mapcalculation';
+import { timeout } from '@/util/timeOut';
 
 type Props = {
   className: string,
   data: Array<EventModel>,
-  setPage: (page: string) => void
+  setPage: (page: string) => void,
+  page: string
 }
 
-function Explore({className, data, setPage }: Props) {
+function Explore({className, data, setPage, page }: Props) {
     const [showMarkerDetails, setShowMarkerDetails] = useState<string>('');
     const [showEventDetails, setShowEventDetails] = useState<string>('');
     const [currentEventInfo, setCurrentEventInfo] = useState<EventModel>();
@@ -47,8 +49,10 @@ function Explore({className, data, setPage }: Props) {
     }, []);
 
     useEffect(() => {
-        
-    }, [zoomLevel])
+        page == 'ListEvents' && setShowEventDetails('');
+        page == 'SavedEvents' && setShowEventDetails('');
+        page == 'CreateEvent' && setShowEventDetails('');
+    }, [page])
 
     const UpdateMapCenter = () => {
         const map = useMapEvent('move', () => {
