@@ -14,10 +14,11 @@ import { calculateLongitudeLatitudeBoundingBox, isCoordinateWithinBoundingBox } 
 
 type Props = {
   className: string,
-  data: Array<EventModel>
+  data: Array<EventModel>,
+  setPage: (page: string) => void
 }
 
-function Explore({className, data }: Props) {
+function Explore({className, data, setPage }: Props) {
     const [showMarkerDetails, setShowMarkerDetails] = useState<string>('');
     const [showEventDetails, setShowEventDetails] = useState<string>('');
     const [currentEventInfo, setCurrentEventInfo] = useState<EventModel>();
@@ -33,6 +34,7 @@ function Explore({className, data }: Props) {
       const handleMoreInfoClick = (event: any) => {
           event.preventDefault()
           if (event.target.classList.contains('moreinfobtn')) {
+              setPage('EventDetails');
               setShowEventDetails(event.target.value);
           }
       };
@@ -52,7 +54,6 @@ function Explore({className, data }: Props) {
         const map = useMapEvent('move', () => {
           const newCenter = map.getCenter();
           setMapCenter({lat: newCenter.lat, long: newCenter.lng});
-          console.log(mapCenter);
 
           zoomLevel == 7 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 150));
           zoomLevel == 8 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 150));
@@ -70,7 +71,6 @@ function Explore({className, data }: Props) {
       const UpdateMarkerRenders = () => {
         const map = useMapEvent('zoom', () => {
           setZoomLevel(getCurrentZoomLevel(map));
-          console.log(zoomLevel);
 
           zoomLevel == 7 && setMaxAllowedMarkerRenders(10)
           zoomLevel == 8 && setMaxAllowedMarkerRenders(20)
@@ -185,8 +185,8 @@ function Explore({className, data }: Props) {
                                         setShowMarkerDetails('');
                                     }
                                     else{
-                                        setShowMarkerDetails(event.location.lat.toString());
-                                        setCurrentEventInfo(event);
+                                      setShowMarkerDetails(event.location.lat.toString());
+                                      setCurrentEventInfo(event);
                                     }
                                     
                                 },
@@ -216,7 +216,7 @@ function Explore({className, data }: Props) {
         <EventDetails 
           className={'event-container'} 
           visible={showEventDetails ? true : false} 
-          setShowEventDetails={(value: string) => setShowEventDetails(value)}
+          setShowEventDetails={(value: string) => {setShowEventDetails(value); setPage('Explore');}}
           eventData={currentEventInfo}
         />
 

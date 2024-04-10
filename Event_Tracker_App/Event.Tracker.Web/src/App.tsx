@@ -37,6 +37,7 @@ function App() {
         <NavbarTop 
           setPage={(page) => setPage(page)}
           page={page}
+          className={"navtop-container " + (page == "EventDetails" && "inactive")}
         />
         {data &&
           <main className="page-container">
@@ -45,18 +46,20 @@ function App() {
               className={"timepicker-container " + (page == "TimePicker" && "active")}
               setPage={(page) => setPage(page)}
             />
-            {/* <Account 
+            <Account 
               className={"account-container " + (page == "Account" && "active")}
               setPage={(page) => setPage(page)}
-            /> */}
-            <Explore 
-              className={"explore-container " + (page == "Explore" && " active ") + (page == "TimePicker"  && " active ")}
-              data={data}
             />
-            {/* <ListEvents 
+            <Explore 
+              className={"explore-container " }
+              // + (page == "Explore" && " active ") + (page == "TimePicker"  && " active ")
+              data={data}
+              setPage={(page) => setPage(page)}
+            />
+            <ListEvents 
               className={"listevents-container " + (page == "ListEvents" && "active")}
               data={data}
-            /> */}
+            />
             {/* <SavedEvents 
               className={"savedevents-container " + (page == "SavedEvents" && "active")}
               data={data}
@@ -68,10 +71,10 @@ function App() {
             /> */}
           </main>
         }
-        {/* <NavBarBottom 
+        <NavBarBottom 
           setPage={(page) => setPage(page)}
           page={page}
-        /> */}
+        />
       </>
   )
 

@@ -5,10 +5,11 @@ import IconAccount from '../icons/IconAccount'
 
 type Props = {
     page: string,
-    setPage: (page: string) => void
+    setPage: (page: string) => void,
+    className: string
 }
 
-export const NavbarTop = ({ setPage, page }: Props) => {
+export const NavbarTop = ({ className, setPage, page }: Props) => {
 
     const setPageHandler = () => {
         if(page == 'TimePicker'){
@@ -20,7 +21,7 @@ export const NavbarTop = ({ setPage, page }: Props) => {
     }
 
     return(
-        <nav className='navtop-container'>
+        <nav className={className}>
             <a
                 onClick={() => setPageHandler()}
                 className={"navtop__item "} href="#">
