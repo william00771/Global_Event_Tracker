@@ -6,11 +6,12 @@ import { ThemeProvider } from '@emotion/react'
 import { createTheme } from '@mui/material'
 import placeholder from '../resources/Placeholders/event.jpg'
 import { FormEvent, useRef, useState } from 'react'
-import { EventModel } from '@/types/types'
+import { EventModel, EventModelRequestDto } from '@/types/types'
 
 type Props = {
     className: string
     setPage: (page: string) => void
+    postEvent: (eventRequestDto: EventModelRequestDto) => void
 }
 
 const darkTheme = createTheme({
