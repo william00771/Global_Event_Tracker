@@ -15,7 +15,7 @@ import { EventModel } from './types/types';
 
 
 function App() {
-  const [page, setPage] = useState('ListEvents');
+  const [page, setPage] = useState('SavedEvents');
 
 
   const { data, isLoading, isError } = useQuery<Array<EventModel>>({
@@ -52,6 +52,7 @@ function App() {
             />
             <SavedEvents 
               className={"savedevents-container " + (page == "SavedEvents" && "active")}
+              data={data}
             />
             <CreateEvent 
               className={"createevent-container " + (page == "CreateEvent" && "active")}
