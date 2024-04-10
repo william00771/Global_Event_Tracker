@@ -32,3 +32,10 @@ export type EventModelRequestDto = {
     keywords: Array<String>,
     // image: Blob | null
 }
+
+export type BoundingBox = {
+    north: number;
+    south: number;
+    east: number;
+    west: number;
+}
