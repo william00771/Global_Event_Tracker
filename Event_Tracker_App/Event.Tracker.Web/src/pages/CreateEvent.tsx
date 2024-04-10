@@ -73,6 +73,10 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
     }
 
 
+    const adjustTextareaHeight = (textarea) => {
+        textarea.style.height = 'auto'; // Reset height to auto to recalculate height
+        textarea.style.height = `${textarea.scrollHeight}px`; // Set height to scrollHeight
+      };
 
 
     return(
@@ -144,6 +148,13 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                             />
                         </LocalizationProvider>
                     </ThemeProvider>
+                    <textarea
+                        className='textbox-primary--outline-gradient1 form-input'
+                        name='description'
+                        placeholder='Description'
+                        onChange={(e) => setDescription(e.target.value)}
+                        onInput={(e) => adjustTextareaHeight(e.target)}
+                    />
                     <select className='select-primary--outline-gradient1' name="durationtype" placeholder='Duration' > 
                         <option value="Hours">Hours duration</option>
                     </select>
