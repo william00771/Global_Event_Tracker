@@ -1,7 +1,7 @@
 export type Coordinates = {
     lat: number;
     lng: number;
-    formattedAdress: string;
+    formattedAddress: string;
 }
 
 export type EventModel = {

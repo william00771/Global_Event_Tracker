@@ -49,7 +49,7 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
         }
         getCoordinates(addressRequest)
             .then(coordinatesResponse => {
-                inputElement.current.value = coordinatesResponse.formattedAdress;
+                inputElement.current.value = coordinatesResponse.formattedAddress;
                 setAdress(coordinatesResponse);
             })
             .catch(error => {
@@ -61,14 +61,9 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
     }
 
     const getCoordinates = async (address: string): Promise<Coordinates> => {
-        const response: GeocoderApiResponse = await fetchCoordinatesFromAddress(address);
-        if(response.results != undefined){
-            const coordinatesResponse: Coordinates = {
-                lat: response.results[0].geometry.location.lat,
-                lng: response.results[0].geometry.location.lng,
-                formattedAdress: response.results[0].formatted_address
-            }
-            return coordinatesResponse;
+        const response: Coordinates = await fetchCoordinatesFromAddress(address);
+        if(response != undefined){
+            return response;
         }else{
             throw new Error("Unable to retrieve coordinates for the provided address.");
         }
