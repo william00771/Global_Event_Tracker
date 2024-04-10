@@ -24,6 +24,11 @@ namespace Event.Tracker.API.Controllers
         public async Task<ActionResult<Coordinates>> getCoordinatesFromAddress(string Address)
         {
             var coordinates = await _geocoderService.GetCoordinatesFromAddressAsync(Address);
+
+            if (coordinates == null){
+                return NotFound();
+            }
+            
             return Ok(coordinates);
         }
     }

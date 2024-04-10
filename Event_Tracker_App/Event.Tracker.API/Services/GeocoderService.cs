@@ -21,8 +21,7 @@ namespace Event.Tracker.API.Services
         {
             try
             {
-                // HttpResponseMessage response = await _httpClient.GetAsync($"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={_geocoderApiKey}");
-                HttpResponseMessage response = await _httpClient.GetAsync($"https://maps.googleapis.com/maps/api/geocode/json?address=Stockholm&key=AIzaSyBetmu8K_98HiP-_W1HagWU-HPJmQXmyG4");
+                HttpResponseMessage response = await _httpClient.GetAsync($"https://maps.googleapis.com/maps/api/geocode/json?address={address}&key={_geocoderApiKey}");
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -30,16 +29,24 @@ namespace Event.Tracker.API.Services
                 }
 
                 var jsonResponse = await response.Content.ReadFromJsonAsync<GeocoderApiResponse>();
-                var jsonFirstResult = jsonResponse.Results[0];
+
+                if (jsonResponse?.Results?.Count > 0)
+                {
+                    var result = jsonResponse.Results[0]; 
 
                     var coordinates = new Coordinates
                     {
-                        Lat = jsonFirstResult.geometry.location.lat,
-                        Lng = jsonFirstResult.geometry.location.lng,
-                        FormattedAddress = jsonFirstResult.formatted_address
+                        Lat = result.geometry.location.lat,
+                        Lng = result.geometry.location.lng,
+                        FormattedAddress = result.formatted_address
                     };
-                
-                return coordinates;
+
+                    return coordinates;
+                }
+                else
+                {
+                    return null;
+                }
             }
             catch (HttpRequestException ex)
             {
