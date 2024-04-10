@@ -1,5 +1,7 @@
 using System.Text.Json.Serialization;
+using Event.Tracker.API.Contracts;
 using Event.Tracker.API.Data;
+using Event.Tracker.API.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +20,8 @@ builder.Services.AddDbContext<EventDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("EventDbConnectionString"));
 });
+
+builder.Services.AddScoped<IEventsRepository, EventsRepository>();
 
 builder.Services.AddCors(options =>
 {
@@ -46,12 +50,12 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-// try{
-//     DbSeeder.InitDb(app);
-// }
-// catch (Exception e)
-// {
-//     Console.WriteLine(e);
-// }
+try{
+    DbSeeder.InitDb(app);
+}
+catch (Exception e)
+{
+    Console.WriteLine(e);
+}
 
 app.Run();

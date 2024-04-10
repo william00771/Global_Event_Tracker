@@ -1,3 +1,4 @@
+using Event.Tracker.API.Contracts;
 using Event.Tracker.API.Data;
 using Event.Tracker.API.Dtos;
 using Event.Tracker.API.Models;
@@ -10,17 +11,17 @@ namespace Event.Tracker.API.Controllers;
 [Route("api/[controller]")]
 public class EventController : ControllerBase
 {
-    private readonly EventDbContext _eventContext;
+    private readonly IEventsRepository _eventRepository;
 
-    public EventController(EventDbContext eventContext)
+    public EventController(IEventsRepository eventRepository)
     {
-        _eventContext = eventContext;
+        _eventRepository = eventRepository;
     }
 
     [HttpGet]
     public async Task<ActionResult<EventModel>> GetEvent()
     {
-        var events = await _eventContext.Events.ToListAsync();
+        var events = await _eventRepository.GetAllEventsAsync();
         return Ok(events);
     }
 
@@ -36,8 +37,7 @@ public class EventController : ControllerBase
            Name = eventModelRequestDto.name
         };
 
-        await _eventContext.Events.AddAsync(newEvent);
-        await _eventContext.SaveChangesAsync();
+        await _eventRepository.PostEventAsync(newEvent);
         
         return CreatedAtAction(nameof(GetEvent), newEvent);
     }
