@@ -20,7 +20,7 @@ const darkTheme = createTheme({
     }
 });
 
-export const CreateEvent = ({ className, setPage }: Props) => {
+export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
 
     const submitHandler = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
@@ -28,7 +28,11 @@ export const CreateEvent = ({ className, setPage }: Props) => {
         const fd = new FormData(target);
         const data = Object.fromEntries(fd.entries());
 
-        console.log(data.name);
+        const eventRequestDto: EventModelRequestDto = {
+            name: data.name as string,
+        };
+
+        postEvent(eventRequestDto);
     };
 
 

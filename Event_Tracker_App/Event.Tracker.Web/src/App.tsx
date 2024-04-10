@@ -1,5 +1,5 @@
 import './App.css'
-import { QueryClient, QueryClientProvider, useQuery } from "react-query";
+import { QueryClient, QueryClientProvider, useMutation, useQuery } from "react-query";
 import Explore from "./pages/Explore"
 import { useState } from "react";
 import { NavbarTop } from "./nav/NavbarTop";
@@ -10,7 +10,7 @@ import { ListEvents } from "./pages/ListEvents";
 import { SavedEvents } from "./pages/SavedEvents";
 import { CreateEvent } from "./pages/CreateEvent";
 import { fetchEvents } from './util/http';
-import { EventModel } from './types/types';
+import { EventModel, EventModelRequestDto } from './types/types';
 
 
 
@@ -18,10 +18,16 @@ function App() {
   const [page, setPage] = useState('SavedEvents');
 
 
-  const { data, isLoading, isError } = useQuery<Array<EventModel>>({
+  const { data, isLoading, isError, refetch } = useQuery<Array<EventModel>>({
       queryKey: ['fetchevents'],
       queryFn: () => fetchEvents()
     });
+
+  const postMutation = useMutation((eventRequestDto: EventModelRequestDto) => postRequest(eventRequestDto), {
+      onSuccess: () => {
+          refetch();
+      }
+  });
 
   return(
       <>
@@ -58,6 +64,7 @@ function App() {
             <CreateEvent 
               className={"createevent-container " + (page == "CreateEvent" && "active")}
               setPage={(page) => setPage(page)}
+              postEvent={(eventRequestDto) => postMutation.mutate(eventRequestDto)}
             />
           </main>
         }
