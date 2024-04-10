@@ -106,6 +106,7 @@
   border-radius: 5rem;
 }
   .input-primary--outline-gradient1:focus{
+      position: relative;
       background-color: #ffffff0a;
       outline: none;
       border: 1.5px solid transparent;

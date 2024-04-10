@@ -33,7 +33,7 @@ export const postEvent = async (eventRequestDto : EventModelRequestDto ) => {
 }
 
 
-const GEOCODER_API_KEY = "Geocoder api key";
+const GEOCODER_API_KEY = "AIzaSyBetmu8K_98HiP-_W1HagWU-HPJmQXmyG4";
 
 export const fetchCoordinatesFromAddress = async (address: string) : Promise<GeocoderApiResponse> => {
     const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GEOCODER_API_KEY}`);

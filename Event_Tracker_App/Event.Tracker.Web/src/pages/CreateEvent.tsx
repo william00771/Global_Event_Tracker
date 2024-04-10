@@ -1,4 +1,4 @@
-import { DatePicker, LocalizationProvider, TimePicker } from '@mui/x-date-pickers'
+import { DatePicker, LocalizationProvider, MobileDatePicker, TimePicker } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import './CreateEvent.css'
 import dayjs from 'dayjs'
@@ -6,7 +6,7 @@ import { ThemeProvider } from '@emotion/react'
 import { createTheme } from '@mui/material'
 import placeholder from '../resources/Placeholders/event.jpg'
 import { FormEvent, useRef, useState } from 'react'
-import { Coordinates, EventModel, EventModelRequestDto } from '@/types/types'
+import { Coordinates, EventModelRequestDto } from '@/types/types'
 import { GeocoderApiResponse } from '@/types/geocoder_types'
 import { fetchCoordinatesFromAddress } from '@/util/http'
 
@@ -18,7 +18,7 @@ type Props = {
 
 const darkTheme = createTheme({
     palette: {
-      mode: 'dark',
+        mode: 'dark'
     }
 });
 
@@ -49,7 +49,6 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
         }
         getCoordinates(addressRequest)
             .then(coordinatesResponse => {
-                // console.log("coordinatesResponse:", coordinatesResponse);
                 inputElement.current.value = coordinatesResponse.formattedAdress;
                 setAdress(coordinatesResponse);
             })
@@ -117,7 +116,7 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                     <input className='createevent-container__form-fileinput' type="file" accept=".jpg, .jpeg, .eps, .png, .webp, .tiff" placeholder='Image' name='image'/>
                     <input className='input-primary--outline-gradient1 form-input' type="text" name='name' placeholder='Event Name' />
                     <input 
-                        className={'input-primary--outline-gradient1 form-input address-input ' + (invalidAdress && '.invalid') }
+                        className={'input-primary--outline-gradient1 form-input address-input ' + (invalidAdress && 'invalid') }
                         type="text" 
                         name='location' 
                         placeholder='Location' 
@@ -126,18 +125,21 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                     />
                     <ThemeProvider theme={darkTheme}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        
                             <TimePicker
+                                sx={{ '& input': { color: '#a9a9a9', fontSize: '.8rem', marginLeft: '2%' } }}
                                 name='time'
                                 label="Time"
                                 defaultValue={dayjs()}
                             />
                             <DatePicker 
+                                sx={{ '& input': { color: '#a9a9a9', fontSize: '.8rem', marginLeft: '2%' } }}
                                 name='datefrom'
                                 label="Date From"
                                 defaultValue={dayjs()}
+                                
                             />
                             <DatePicker 
+                                sx={{ '& input': { color: '#a9a9a9', fontSize: '.8rem', marginLeft: '2%' } }}
                                 name='dateto'
                                 label="Date To"
                                 defaultValue={dayjs()}
