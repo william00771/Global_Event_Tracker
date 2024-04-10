@@ -72,9 +72,9 @@ function Explore({className, data }: Props) {
           setZoomLevel(getCurrentZoomLevel(map));
           console.log(zoomLevel);
 
-          zoomLevel == 7 && setMaxAllowedMarkerRenders(40)
-          zoomLevel == 8 && setMaxAllowedMarkerRenders(50)
-          zoomLevel == 9 && setMaxAllowedMarkerRenders(60)
+          zoomLevel == 7 && setMaxAllowedMarkerRenders(10)
+          zoomLevel == 8 && setMaxAllowedMarkerRenders(20)
+          zoomLevel == 9 && setMaxAllowedMarkerRenders(30)
           zoomLevel == 10 && setMaxAllowedMarkerRenders(100)
           zoomLevel == 11 && setMaxAllowedMarkerRenders(200)
           zoomLevel == 13 && setMaxAllowedMarkerRenders(500)
