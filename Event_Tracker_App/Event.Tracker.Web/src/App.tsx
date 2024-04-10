@@ -37,14 +37,10 @@ function App() {
         <NavbarTop 
           setPage={(page) => setPage(page)}
           page={page}
+          className={"navtop-container " + (page == "EventDetails" && "inactive")}
         />
         {data &&
-          <>
-            <Explore 
-            className={"explore-container " + (page == "Explore" && " active ") + (page == "TimePicker"  && " active ")}
-            data={data}
-          />
-          {/* <main className="page-container">
+          <main className="page-container">
             
             <TimePicker 
               className={"timepicker-container " + (page == "TimePicker" && "active")}
@@ -53,6 +49,13 @@ function App() {
             <Account 
               className={"account-container " + (page == "Account" && "active")}
               setPage={(page) => setPage(page)}
+            />
+            <Explore 
+              className={"explore-container " }
+              // + (page == "Explore" && " active ") + (page == "TimePicker"  && " active ")
+              data={data}
+              setPage={(page) => setPage(page)}
+              page={page}
             />
             <ListEvents 
               className={"listevents-container " + (page == "ListEvents" && "active")}
@@ -67,8 +70,7 @@ function App() {
               setPage={(page) => setPage(page)}
               postEvent={(eventRequestDto: EventModelRequestDto) => postMutation.mutate(eventRequestDto)}
             />
-          </main> */}
-          </>
+          </main>
         }
         <NavBarBottom 
           setPage={(page) => setPage(page)}
