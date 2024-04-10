@@ -1,4 +1,4 @@
-import { DatePicker, LocalizationProvider, TimePicker } from '@mui/x-date-pickers'
+import { DatePicker, LocalizationProvider, MobileDatePicker, TimePicker } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import './CreateEvent.css'
 import dayjs from 'dayjs'
@@ -6,7 +6,9 @@ import { ThemeProvider } from '@emotion/react'
 import { createTheme } from '@mui/material'
 import placeholder from '../resources/Placeholders/event.jpg'
 import { FormEvent, useRef, useState } from 'react'
-import { EventModel, EventModelRequestDto } from '@/types/types'
+import { Coordinates, EventModelRequestDto } from '@/types/types'
+import { GeocoderApiResponse } from '@/types/geocoder_types'
+import { fetchCoordinatesFromAddress } from '@/util/http'
 
 type Props = {
     className: string
@@ -16,11 +18,14 @@ type Props = {
 
 const darkTheme = createTheme({
     palette: {
-      mode: 'dark',
+        mode: 'dark'
     }
 });
 
 export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
+    const inputElement = useRef<HTMLInputElement>(null!);
+    const [adress, setAdress] = useState<Coordinates>({lat: 0, lng: 0, formattedAdress: ''});
+    const [invalidAdress, setInvalidAdress] = useState(false);
 
     const submitHandler = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
@@ -34,6 +39,37 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
 
         postEvent(eventRequestDto);
     };
+
+    const addressChangeHandler = (e: FormEvent<HTMLFormElement>): void => {
+        e.preventDefault();
+
+        const addressRequest = e.currentTarget.value;
+        if(adress?.formattedAdress == addressRequest){
+            return;
+        }
+        getCoordinates(addressRequest)
+            .then(coordinatesResponse => {
+                inputElement.current.value = coordinatesResponse.formattedAddress;
+                setAdress(coordinatesResponse);
+            })
+            .catch(error => {
+                setInvalidAdress(true);
+                setTimeout(() => {
+                    setInvalidAdress(false);
+                }, 3000);
+            });
+    }
+
+    const getCoordinates = async (address: string): Promise<Coordinates> => {
+        const response: Coordinates = await fetchCoordinatesFromAddress(address);
+        if(response != undefined){
+            return response;
+        }else{
+            throw new Error("Unable to retrieve coordinates for the provided address.");
+        }
+    }
+
+
 
 
     return(
@@ -74,21 +110,31 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                 <form id="myForm" onSubmit={e => { e.preventDefault(); }} className='createevent-container__form'>
                     <input className='createevent-container__form-fileinput' type="file" accept=".jpg, .jpeg, .eps, .png, .webp, .tiff" placeholder='Image' name='image'/>
                     <input className='input-primary--outline-gradient1 form-input' type="text" name='name' placeholder='Event Name' />
-                    <input className='input-primary--outline-gradient1 form-input' type="text" name='location' placeholder='Location' />
+                    <input 
+                        className={'input-primary--outline-gradient1 form-input address-input ' + (invalidAdress && 'invalid') }
+                        type="text" 
+                        name='location' 
+                        placeholder='Location' 
+                        onBlur={(e: any) => addressChangeHandler(e)}
+                        ref={inputElement}
+                    />
                     <ThemeProvider theme={darkTheme}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        
                             <TimePicker
+                                sx={{ '& input': { color: '#a9a9a9', fontSize: '.8rem', marginLeft: '2%' } }}
                                 name='time'
                                 label="Time"
                                 defaultValue={dayjs()}
                             />
                             <DatePicker 
+                                sx={{ '& input': { color: '#a9a9a9', fontSize: '.8rem', marginLeft: '2%' } }}
                                 name='datefrom'
                                 label="Date From"
                                 defaultValue={dayjs()}
+                                
                             />
                             <DatePicker 
+                                sx={{ '& input': { color: '#a9a9a9', fontSize: '.8rem', marginLeft: '2%' } }}
                                 name='dateto'
                                 label="Date To"
                                 defaultValue={dayjs()}

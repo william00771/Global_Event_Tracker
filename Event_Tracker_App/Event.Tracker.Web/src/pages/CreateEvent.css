@@ -119,6 +119,7 @@
     gap: 1.5rem;
 }
     .form-input{
+        position: relative;
         color: #fff;
     }
     .createevent-container__form-fileinput{
@@ -127,4 +128,7 @@
         width: 60%;
         height: 20%;
         opacity: 0;
+    }
+    .address-input.invalid{
+        border: 1px solid var(--red);
     }
