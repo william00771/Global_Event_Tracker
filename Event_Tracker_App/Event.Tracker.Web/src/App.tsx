@@ -34,41 +34,39 @@ function App() {
       <>
         {isLoading && <h1>Loading...</h1>}
         {isError && <h1>Error</h1>}
-        {/* <NavbarTop 
+        <NavbarTop 
           setPage={(page) => setPage(page)}
           page={page}
-        /> */}
+        />
         {data &&
-          <>
-            <Explore 
-            className={"explore-container " + (page == "Explore" && " active ") + (page == "TimePicker"  && " active ")}
-            data={data}
-          />
-          {/* <main className="page-container">
+          <main className="page-container">
             
             <TimePicker 
               className={"timepicker-container " + (page == "TimePicker" && "active")}
               setPage={(page) => setPage(page)}
             />
-            <Account 
+            {/* <Account 
               className={"account-container " + (page == "Account" && "active")}
               setPage={(page) => setPage(page)}
+            /> */}
+            <Explore 
+              className={"explore-container " + (page == "Explore" && " active ") + (page == "TimePicker"  && " active ")}
+              data={data}
             />
-            <ListEvents 
+            {/* <ListEvents 
               className={"listevents-container " + (page == "ListEvents" && "active")}
               data={data}
-            />
-            <SavedEvents 
+            /> */}
+            {/* <SavedEvents 
               className={"savedevents-container " + (page == "SavedEvents" && "active")}
               data={data}
-            />
-            <CreateEvent 
+            /> */}
+            {/* <CreateEvent 
               className={"createevent-container " + (page == "CreateEvent" && "active")}
               setPage={(page) => setPage(page)}
               postEvent={(eventRequestDto: EventModelRequestDto) => postMutation.mutate(eventRequestDto)}
-            />
-          </main> */}
-          </>
+            /> */}
+          </main>
         }
         {/* <NavBarBottom 
           setPage={(page) => setPage(page)}

@@ -4,6 +4,11 @@
     position: absolute;
     width: 100%;
     z-index: 15;
+
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+
+    height: 40vh;
 }
 
 .form_container{
@@ -15,9 +20,8 @@
     display: flex;
     gap: 5%;
     flex-wrap: wrap;
-    
 
-    background-color: #212733ba;
+    background-color: #212733e6;
     
     backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
