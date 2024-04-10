@@ -25,7 +25,9 @@ builder.Services.AddDbContext<EventDbContext>(options =>
 
 builder.Services.AddScoped<IEventsRepository, EventsRepository>();
 builder.Services.AddScoped<IGeocoderService, GeocoderService>();
+
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("Cloudinary"));
+builder.Services.AddScoped<IPhotoUploader, PhotoUploader>();
 
 builder.Services.AddCors(options =>
 {

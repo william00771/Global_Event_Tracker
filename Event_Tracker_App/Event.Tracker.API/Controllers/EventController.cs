@@ -12,10 +12,12 @@ namespace Event.Tracker.API.Controllers;
 public class EventController : ControllerBase
 {
     private readonly IEventsRepository _eventRepository;
+    private readonly IPhotoUploader _photoUploader;
 
-    public EventController(IEventsRepository eventRepository)
+    public EventController(IEventsRepository eventRepository, IPhotoUploader photoUploader)
     {
         _eventRepository = eventRepository;
+        _photoUploader = photoUploader;
     }
 
     [HttpGet]
@@ -46,5 +48,12 @@ public class EventController : ControllerBase
         await _eventRepository.PostEventAsync(newEvent);
         
         return CreatedAtAction(nameof(GetEvent), newEvent);
+    }
+
+    [HttpPost("postPhoto")]
+    public async Task<ActionResult> postPhotoTESTING(IFormFile postEventDto)
+    {
+        var resultupload = await _photoUploader.Addphoto(postEventDto);
+        return Ok(resultupload);
     }
 }
