@@ -12,5 +12,6 @@ namespace Event.Tracker.API.Models
         public required string WebsiteUrl { get; set; }
         public required int NumberOfPeople { get; set; }
         public required List<string> Keywords { get; set; }
+        public required string Image { get; set; }
     }
 }

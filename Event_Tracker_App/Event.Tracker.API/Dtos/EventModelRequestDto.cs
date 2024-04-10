@@ -15,5 +15,6 @@ namespace Event.Tracker.API.Dtos
         public required string WebsiteUrl { get; set; }
         public required int NumberOfPeople { get; set; }
         public required List<string> Keywords { get; set; }
+        public byte[] Image { get; set; }
     }
 }

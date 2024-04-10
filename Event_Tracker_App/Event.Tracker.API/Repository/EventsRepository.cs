@@ -12,10 +12,12 @@ namespace Event.Tracker.API.Repository
     public class EventsRepository : IEventsRepository
     {
         private readonly EventDbContext _eventContext;
+        private readonly IPhotoUploader _photoUploader;
 
-        public EventsRepository(EventDbContext eventContext)
+        public EventsRepository(EventDbContext eventContext, IPhotoUploader photoUploader)
         {
             _eventContext = eventContext;
+            _photoUploader = photoUploader;
         }
         public async Task<List<EventModel>> GetAllEventsAsync()
         {
@@ -25,6 +27,7 @@ namespace Event.Tracker.API.Repository
 
         public async Task PostEventAsync(EventModel eventModel)
         {
+            
             await _eventContext.Events.AddAsync(eventModel);
             await _eventContext.SaveChangesAsync();
         }
