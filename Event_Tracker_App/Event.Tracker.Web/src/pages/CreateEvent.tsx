@@ -8,6 +8,7 @@ import placeholder from '../resources/Placeholders/event.jpg'
 import { FormEvent, useRef, useState } from 'react'
 import { Coordinates, EventModel, EventModelRequestDto } from '@/types/types'
 import { GeocoderApiResponse } from '@/types/geocoder_types'
+import { fetchCoordinatesFromAddress } from '@/util/http'
 
 type Props = {
     className: string
@@ -22,7 +23,9 @@ const darkTheme = createTheme({
 });
 
 export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
-    
+    const inputElement = useRef<HTMLInputElement>(null!);
+    const [adress, setAdress] = useState<Coordinates>({lat: 0, lng: 0, formattedAdress: ''});
+    const [invalidAdress, setInvalidAdress] = useState(false);
 
     const submitHandler = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
@@ -36,6 +39,41 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
 
         postEvent(eventRequestDto);
     };
+
+    const addressChangeHandler = (e: FormEvent<HTMLFormElement>): void => {
+        e.preventDefault();
+
+        const addressRequest = e.currentTarget.value;
+        if(adress?.formattedAdress == addressRequest){
+            return;
+        }
+        getCoordinates(addressRequest)
+            .then(coordinatesResponse => {
+                // console.log("coordinatesResponse:", coordinatesResponse);
+                inputElement.current.value = coordinatesResponse.formattedAdress;
+                setAdress(coordinatesResponse);
+            })
+            .catch(error => {
+                setInvalidAdress(true);
+                setTimeout(() => {
+                    setInvalidAdress(false);
+                }, 3000);
+            });
+    }
+
+    const getCoordinates = async (address: string): Promise<Coordinates> => {
+        const response: GeocoderApiResponse = await fetchCoordinatesFromAddress(address);
+        if(response.results != undefined){
+            const coordinatesResponse: Coordinates = {
+                lat: response.results[0].geometry.location.lat,
+                lng: response.results[0].geometry.location.lng,
+                formattedAdress: response.results[0].formatted_address
+            }
+            return coordinatesResponse;
+        }else{
+            throw new Error("Unable to retrieve coordinates for the provided address.");
+        }
+    }
 
 
 
@@ -78,7 +116,14 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                 <form id="myForm" onSubmit={e => { e.preventDefault(); }} className='createevent-container__form'>
                     <input className='createevent-container__form-fileinput' type="file" accept=".jpg, .jpeg, .eps, .png, .webp, .tiff" placeholder='Image' name='image'/>
                     <input className='input-primary--outline-gradient1 form-input' type="text" name='name' placeholder='Event Name' />
-                    <input className='input-primary--outline-gradient1 form-input' type="text" name='location' placeholder='Location' />
+                    <input 
+                        className={'input-primary--outline-gradient1 form-input address-input ' + (invalidAdress && '.invalid') }
+                        type="text" 
+                        name='location' 
+                        placeholder='Location' 
+                        onBlur={(e: any) => addressChangeHandler(e)}
+                        ref={inputElement}
+                    />
                     <ThemeProvider theme={darkTheme}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
                         

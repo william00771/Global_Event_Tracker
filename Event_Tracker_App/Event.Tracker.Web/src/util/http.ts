@@ -1,3 +1,4 @@
+import { GeocoderApiResponse } from "@/types/geocoder_types";
 import { EventModel, EventModelRequestDto } from "../types/types";
 
 export const fetchEvents = async (): Promise<Array<EventModel>> => {
@@ -29,4 +30,17 @@ export const postEvent = async (eventRequestDto : EventModelRequestDto ) => {
 
     const eventPostResponse = await response.json();
     return eventPostResponse;
+}
+
+
+const GEOCODER_API_KEY = "Geocoder api key";
+
+export const fetchCoordinatesFromAddress = async (address: string) : Promise<GeocoderApiResponse> => {
+    const response = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${GEOCODER_API_KEY}`);
+
+    if(!response.ok){
+        console.log("something went wrong");
+    }
+
+    return await response.json();
 }
