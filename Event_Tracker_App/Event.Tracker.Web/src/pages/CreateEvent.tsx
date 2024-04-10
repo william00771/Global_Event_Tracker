@@ -46,9 +46,7 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
             keywords: keywords,
         };
 
-        console.table(eventRequestDto);
-
-        // postEvent(eventRequestDto);
+        postEvent(eventRequestDto);
     };
 
     const addressChangeHandler = (e: FormEvent<HTMLFormElement>): void => {
