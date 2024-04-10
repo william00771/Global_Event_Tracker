@@ -26,6 +26,7 @@ const darkTheme = createTheme({
 export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
     const inputElement = useRef<HTMLInputElement>(null!);
     const [keywords, setKeywords] = useState<Array<string>>([]);
+    const [selectedImage, setSelectedImage] = useState('');
 
     const [adress, setAdress] = useState<Coordinates>({lat: 0, lng: 0, formattedAddress: ''});
     const [invalidAdress, setInvalidAdress] = useState(false);
@@ -78,11 +79,22 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
         }
     }
 
-
     const adjustTextareaHeight = (textarea) => {
-        textarea.style.height = 'auto'; // Reset height to auto to recalculate height
-        textarea.style.height = `${textarea.scrollHeight}px`; // Set height to scrollHeight
-      };
+        textarea.style.height = 'auto';
+        textarea.style.height = `${textarea.scrollHeight}px`;
+    };
+
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        const reader = new FileReader();
+        reader.onloadend = () => {
+            setSelectedImage(reader.result);
+        };
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    };
 
 
     return(
@@ -117,12 +129,21 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                     <p className='createevent-container__header-paragraph'>Add Cover</p>
                 </div> 
                 </section>
-                <img className='createevent-container__header-bgimage' src={placeholder} alt="" />
+                <img className='createevent-container__header-bgimage' src={selectedImage || placeholder} alt="" />
             </header>
             <section className='createevent-container__main'>
                 <form id="myForm" onSubmit={e => { e.preventDefault(); }} className='createevent-container__form'>
-                    <input className='createevent-container__form-fileinput' type="file" accept=".jpg, .jpeg, .eps, .png, .webp, .tiff" placeholder='Image' name='image'/>
-                    <input className='input-primary--outline-gradient1 form-input' type="text" name='name' placeholder='Event Name' />
+                    <input 
+                        className='createevent-container__form-fileinput' 
+                        type="file" accept=".jpg, .jpeg, .eps, .png, .webp, .tiff" 
+                        placeholder='Image' name='image' 
+                        onChange={handleImageChange}
+                    />
+                    <input 
+                        className='input-primary--outline-gradient1 form-input' 
+                        type="text" name='name' 
+                        placeholder='Event Name' 
+                    />
                     <input 
                         className={'input-primary--outline-gradient1 form-input address-input ' + (invalidAdress && 'invalid') }
                         type="text" 
@@ -161,15 +182,47 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                         onChange={(e) => setDescription(e.target.value)}
                         onInput={(e) => adjustTextareaHeight(e.target)}
                     />
-                    <select className='select-primary--outline-gradient1' name="durationtype" placeholder='Duration' > 
+                    <select 
+                        className='select-primary--outline-gradient1' 
+                        name="durationtype" 
+                        placeholder='Duration' 
+                    > 
                         <option value="Hours">Hours duration</option>
                     </select>
-                    <input className='input-primary--outline-gradient1 form-input' type='number' name='duration' placeholder='Duration' />
-                    <input className='input-primary--outline-gradient1 form-input' type="text" name='url' placeholder='Website url' />
-                    <input className='input-primary--outline-gradient1 form-input' type='number' name='people' placeholder='Number of people'/>
-                    <input className='input-primary--outline-gradient1 form-input' type="text" name='type' placeholder='Type of Event' />
-                    <TagsInput selectedTags={(tags: any) => setKeywords(tags)}  tags={[]}/>
-                    <button onClick={submitHandler} type='button' className='btn-primary--gradient-outline form-input__buttonlogin'>Add Event</button>
+                    <input 
+                        className='input-primary--outline-gradient1 form-input' 
+                        type='number' 
+                        name='duration' 
+                        placeholder='Duration' 
+                    />
+                    <input 
+                        className='input-primary--outline-gradient1 form-input' 
+                        type="text" 
+                        name='url' 
+                        placeholder='Website url' 
+                    />
+                    <input 
+                        className='input-primary--outline-gradient1 form-input' 
+                        type='number' 
+                        name='people' 
+                        placeholder='Number of people'
+                    />
+                    <input 
+                        className='input-primary--outline-gradient1 form-input' 
+                        type="text" 
+                        name='type' 
+                        placeholder='Type of Event' 
+                    />
+                    <TagsInput 
+                        selectedTags={(tags: any) => setKeywords(tags)}  
+                        tags={[]}
+                    />
+                    <button 
+                        className='btn-primary--gradient-outline form-input__buttonlogin'
+                        onClick={submitHandler} 
+                        type='button'
+                    >
+                    Add Event</button>
                 </form>
             </section>
         </section>
