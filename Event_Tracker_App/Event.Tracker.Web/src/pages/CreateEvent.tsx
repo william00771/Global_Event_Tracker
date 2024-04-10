@@ -38,9 +38,17 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
 
         const eventRequestDto: EventModelRequestDto = {
             name: data.name as string,
+            location: adress,
+            description: data.description as string,
+            duration: parseInt(data.duration.toString()),
+            websiteurl: data.url as string,
+            numberofpeople: parseInt(data.people.toString()),
+            keywords: keywords,
         };
 
-        postEvent(eventRequestDto);
+        console.table(eventRequestDto);
+
+        // postEvent(eventRequestDto);
     };
 
     const addressChangeHandler = (e: FormEvent<HTMLFormElement>): void => {
