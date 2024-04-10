@@ -44,20 +44,20 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
         const imageBlob = selectedImageBlob;
 
         const eventRequestDto: EventModelRequestDto = {
-            name: data.name as string,
-            location: adress,
-            description: data.description as string,
-            time: new Date(timeValue.toString()),
-            date: new Date(dateStartValue.toString()),
-            dateTo: new Date(dateEndValue.toString()),
-            duration: parseInt(data.duration.toString()),
-            websiteUrl: data.url as string,
-            numberOfPeople: parseInt(data.people.toString()),
-            keywords: keywords,
-            // image: imageBlob
+            Name: data.name as string,
+            // location: adress,
+            // description: data.description as string,
+            // time: new Date(timeValue.toString()),
+            // date: new Date(dateStartValue.toString()),
+            // dateTo: new Date(dateEndValue.toString()),
+            // duration: parseInt(data.duration.toString()),
+            // websiteUrl: data.url as string,
+            // numberOfPeople: parseInt(data.people.toString()),
+            // keywords: keywords,
+            // image: data.imageurl as string,
         };
 
-        postEvent(eventRequestDto, imageBlob);
+        postEvent(eventRequestDto);
     };
 
     const addressChangeHandler = (e: FormEvent<HTMLFormElement>): void => {
@@ -154,6 +154,11 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                         className='input-primary--outline-gradient1 form-input' 
                         type="text" name='name' 
                         placeholder='Event Name' 
+                    />
+                    <input 
+                        className='input-primary--outline-gradient1 form-input' 
+                        type="text" name='imageurl' 
+                        placeholder='Image Url' 
                     />
                     <input 
                         className={'input-primary--outline-gradient1 form-input address-input ' + (invalidAdress && 'invalid') }
