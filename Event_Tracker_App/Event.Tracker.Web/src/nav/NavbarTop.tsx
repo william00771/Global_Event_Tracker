@@ -35,6 +35,7 @@ export const NavbarTop = ({ className, page, setPage, setFilter }: Props) => {
     }
     const submitHandler = (): void => {
         if(inputRef.current.value === ''){
+            setFilter(" ");
             setActive(false);
             return;
         }

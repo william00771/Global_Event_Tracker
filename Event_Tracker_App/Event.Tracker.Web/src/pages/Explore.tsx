@@ -19,10 +19,11 @@ type Props = {
   className: string,
   data: Array<EventModel>,
   setPage: (page: string) => void,
-  page: string
+  page: string,
+  filter: string
 }
 
-function Explore({className, data, setPage, page }: Props) {
+function Explore({className, data, setPage, page, filter }: Props) {
     const [showMarkerDetails, setShowMarkerDetails] = useState<string>('');
     const [showEventDetails, setShowEventDetails] = useState<string>('');
     const [currentEventInfo, setCurrentEventInfo] = useState<EventModel>();
@@ -181,7 +182,14 @@ function Explore({className, data, setPage, page }: Props) {
                     //url="https://api.mapbox.com/styles/v1/william00771/cltvk24s1017c01pkhsjd4774/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoid2lsbGlhbTAwNzcxIiwiYSI6ImNsdHZqeWd2cTFsYzIycW9iNGlhdHFodHAifQ.eX-yYLKA0P4QCL58IgovpA"
                 />
                 {boundingbox && data.slice(0, maxAllowedMarkerRenders).map((event) => {
-                        if(isCoordinateWithinBoundingBox({latitude: event.location.lat, longitude: event.location.lng}, boundingbox) && zoomLevel >= 7){
+                        if(
+                          isCoordinateWithinBoundingBox({latitude: event.location.lat, longitude: event.location.lng}, boundingbox) 
+                          && zoomLevel >= 7
+                          && (event.name.toLowerCase().includes(filter) 
+                          || event.description.toLowerCase().includes(filter.toLowerCase()))
+                          || event.keywords && event.keywords.some(keyword => keyword.toLowerCase() === filter)
+                          || filter == ""
+                        ){
                           const eventIcon = svgIconBasedOnKeyword(event)
                             return <Marker 
                             eventHandlers={{
