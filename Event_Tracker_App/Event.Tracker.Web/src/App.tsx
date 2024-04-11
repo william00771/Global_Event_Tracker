@@ -16,14 +16,28 @@ import { EventModel, EventModelRequestDto } from './types/types';
 
 function App() {
   const [page, setPage] = useState('Explore');
+  const [startDate, setStartDate] = useState<Date>();
+  const [endDate, setEndDate] = useState<Date>();
+
+
+  const getFilteredEventsHandler = (startDate?: Date, endDate?: Date) => {
+    if(startDate != null){
+      setStartDate(startDate);
+    }
+    if(endDate != null){
+      setEndDate(endDate);
+    }
+  }
 
 
   const { data, isLoading, isError, refetch } = useQuery<Array<EventModel>>({
-      queryKey: ['fetchevents'],
-      queryFn: () => fetchEvents()
+      queryKey: ['fetchevents', startDate, endDate],
+      queryFn: () => fetchEvents(startDate, endDate)
     });
 
-  const postMutation = useMutation((eventRequestDto: EventModelRequestDto) => postEvent(eventRequestDto), {
+  const postMutation = useMutation(
+      (eventRequestDto: EventModelRequestDto) => 
+        postEvent(eventRequestDto), {
       onSuccess: () => {
           refetch();
           setPage('Explore');
@@ -45,6 +59,7 @@ function App() {
             <TimePicker 
               className={"timepicker-container " + (page == "TimePicker" && "active")}
               setPage={(page) => setPage(page)}
+              getFilteredEvents={(startDate?: Date, endDate?: Date) => getFilteredEventsHandler(startDate, endDate)}
             />
             <Account 
               className={"account-container " + (page == "Account" && "active")}
