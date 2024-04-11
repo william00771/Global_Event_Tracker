@@ -12,6 +12,7 @@ html{
   color: #fff;
 
   height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -27,4 +28,10 @@ html{
   
   background-color: #252525;
   background-size: cover;
+}
+
+/* Manually fix material ui date problem */
+.MuiDialog-container{
+  width: 100vw !important;
+  height: 90vh !important;
 }
