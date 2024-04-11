@@ -9,75 +9,8 @@ import { MOCKDATA } from '@/Data/MockData';
 import { formatDateAndDurationToHours, formatDateToStartDateEndDate } from '@/util/dateTools';
 import { EventDetails } from './EventDetails';
 import { calculateLongitudeLatitudeBoundingBox, isCoordinateWithinBoundingBox } from '@/util/mapcalculation';
-
 import placeholder from '../resources/Placeholders/event.jpg'
-import airshow from '../resources/event_type_icons/airshow.svg';
-import art from '../resources/event_type_icons/art.svg';
-import athletics from '../resources/event_type_icons/athletics.svg';
-import ballet from '../resources/event_type_icons/ballet.svg';
-import basketball from '../resources/event_type_icons/basketball.svg';
-import beer from '../resources/event_type_icons/beer.svg';
-import birthday from '../resources/event_type_icons/birthday.svg';
-import blues from '../resources/event_type_icons/blues.svg';
-import book from '../resources/event_type_icons/book.svg';
-import business from '../resources/event_type_icons/business.svg';
-import cat from '../resources/event_type_icons/cat.svg';
-import charity from '../resources/event_type_icons/charity.svg';
-import chess from '../resources/event_type_icons/chess.svg';
-import classical from '../resources/event_type_icons/classical.svg';
-import classiccar from '../resources/event_type_icons/classiccar.svg';
-import club from '../resources/event_type_icons/club.svg';
-import coding from '../resources/event_type_icons/coding.svg';
-import comedy from '../resources/event_type_icons/comedy.svg';
-import concert from '../resources/event_type_icons/concert.svg';
-import cooking from '../resources/event_type_icons/cooking.svg';
-import cycling from '../resources/event_type_icons/cycling.svg';
-import dance from '../resources/event_type_icons/dancing.svg';
-import dj from '../resources/event_type_icons/dj.svg';
-import dog from '../resources/event_type_icons/dog.svg';
-import entrepreneur from '../resources/event_type_icons/entrepreneur.svg';
-import environmental from '../resources/event_type_icons/environmental.svg';
-import expedition from '../resources/event_type_icons/expedition.svg';
-import family from '../resources/event_type_icons/family.svg';
-import fashion from '../resources/event_type_icons/fashion.svg';
-import filmmaking from '../resources/event_type_icons/filmmaking.svg';
-import financial from '../resources/event_type_icons/financial.svg';
-import fishing from '../resources/event_type_icons/fishing.svg';
-import fitness from '../resources/event_type_icons/fitness.svg';
-import food from '../resources/event_type_icons/food.svg';
-import football from '../resources/event_type_icons/football.svg';
-import gaming from '../resources/event_type_icons/gaming.svg';
-import golf from '../resources/event_type_icons/golf.svg';
-import jazz from '../resources/event_type_icons/jazz.svg';
-import karaoke from '../resources/event_type_icons/karaoke.svg';
-import kid from '../resources/event_type_icons/kid.svg';
-import language from '../resources/event_type_icons/language.svg';
-import mindfulness from '../resources/event_type_icons/mindfulness.svg';
-import money from '../resources/event_type_icons/money.svg';
-import nature from '../resources/event_type_icons/nature.svg';
-import parenting from '../resources/event_type_icons/parenting.svg';
-import photography from '../resources/event_type_icons/photography.svg';
-import pride from '../resources/event_type_icons/pride.svg';
-import realestate from '../resources/event_type_icons/realestate.svg';
-import recycling from '../resources/event_type_icons/recycling.svg';
-import running from '../resources/event_type_icons/running.svg';
-import sailing from '../resources/event_type_icons/sailing.svg';
-import science from '../resources/event_type_icons/science.svg';
-import singing from '../resources/event_type_icons/singing.svg';
-import singles from '../resources/event_type_icons/singles.svg';
-import skateboard from '../resources/event_type_icons/skateboard.svg';
-import spa from '../resources/event_type_icons/spa.svg';
-import speeddating from '../resources/event_type_icons/speeddating.svg';
-import squash from '../resources/event_type_icons/squash.svg';
-import streetfood from '../resources/event_type_icons/streetfood.svg';
-import tech from '../resources/event_type_icons/tech.svg';
-import tennis from '../resources/event_type_icons/tennis.svg';
-import vip from '../resources/event_type_icons/vip.svg';
-import volunteer from '../resources/event_type_icons/volunteer.svg';
-import wildlife from '../resources/event_type_icons/wildlife.svg';
-import wine from '../resources/event_type_icons/wine.svg';
-import writing from '../resources/event_type_icons/writing.svg';
-import yoga from '../resources/event_type_icons/yoga.svg';
+import { svgIconBasedOnKeyword } from '@/util/svgIconBasedOnKeyword';
 
 
 
@@ -234,14 +167,6 @@ function Explore({className, data, setPage, page }: Props) {
       });
     }
 
-    const selectIcon = (description: string) => {
-        description = description.toLowerCase();
-        if (description.includes('yoga')) return yoga;
-        if (description.includes('writing')) return writing;
-        if (description.includes('salsa')) return dance;
-        return dj;
-    };
-
     return(
       <>
         <section className='explore__container'>
@@ -257,7 +182,7 @@ function Explore({className, data, setPage, page }: Props) {
                 />
                 {boundingbox && data.slice(0, maxAllowedMarkerRenders).map((event) => {
                         if(isCoordinateWithinBoundingBox({latitude: event.location.lat, longitude: event.location.lng}, boundingbox) && zoomLevel >= 7){
-                          const eventIcon = selectIcon(event.description)
+                          const eventIcon = svgIconBasedOnKeyword(event)
                             return <Marker 
                             eventHandlers={{
                                   click: () => {
