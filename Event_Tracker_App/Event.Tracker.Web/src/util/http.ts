@@ -1,5 +1,4 @@
-import { Coordinates, EventModel, EventModelRequestDto } from "../types/types";
-import { logFormData } from "./formtools";
+import { Coordinates, EventModel } from "../types/types";
 
 export const fetchEvents = async (startDate?: Date, endDate?: Date, filter?: string): Promise<Array<EventModel>> => {
     let url = `http://localhost:5200/api/Event`;

@@ -19,7 +19,7 @@ function App() {
   const [page, setPage] = useState('Explore');
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
-  const [filter, setFilter] = useState("");
+  const [filter, setFilter] = useState(" ");
 
 
   const getFilteredEventsHandler = (startDate?: Date, endDate?: Date) => {
@@ -66,12 +66,15 @@ function App() {
               className={"account-container " + (page == "Account" && "active")}
               setPage={(page) => setPage(page)}
             />
-            { page != 'CreateEvent' && <Explore 
-              className={"explore-container " }
-              data={data}
-              setPage={(page) => setPage(page)}
-              page={page}
-            />}
+            { page != 'CreateEvent' && 
+              <Explore 
+                className={"explore-container " }
+                data={data}
+                setPage={(page) => setPage(page)}
+                page={page}
+                filter={filter}
+              />
+            }
             <ListEvents 
               className={"listevents-container " + (page == "ListEvents" && "active")}
               data={data}
