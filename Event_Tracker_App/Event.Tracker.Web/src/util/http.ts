@@ -1,16 +1,20 @@
-import { GeocoderApiResponse } from "@/types/geocoder_types";
 import { Coordinates, EventModel, EventModelRequestDto } from "../types/types";
 
-export const fetchEvents = async (): Promise<Array<EventModel>> => {
-    const response = await fetch('http://localhost:5200/api/Event');
+export const fetchEvents = async (startDate?: Date, endDate?: Date): Promise<Array<EventModel>> => {
+    let url = 'http://localhost:5200/api/Event';
+    if (startDate || endDate) {
+        url += `?startDate=${startDate?.toISOString()}&endDate=${endDate?.toISOString()}`;
+    }
 
-    if(!response.ok){
+    const response = await fetch(url);
+
+    if (!response.ok) {
         const error = new Error('Error');
         error.message = await response.json();
         throw error;
     }
-    
-    return await response.json()
+
+    return await response.json();
 }
 
 export const postEvent = async (eventRequestDto : EventModelRequestDto) => {
