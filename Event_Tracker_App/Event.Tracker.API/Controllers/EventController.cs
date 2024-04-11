@@ -34,10 +34,13 @@ public class EventController : ControllerBase
         {
             return BadRequest(ModelState);
         }
-        return Ok(eventModelRequestDto);
-        // var newEventModel = await _eventRepository.PostEventAsync(eventModelRequestDto, eventModelRequestDto.Image);
+
+        var imageFile = eventModelRequestDto.Image;
+
+
+        var newEventModel = await _eventRepository.PostEventAsync(eventModelRequestDto, imageFile);
         
-        // return CreatedAtAction(nameof(GetEvent), new {Id = newEventModel.Id}, newEventModel);
+        return CreatedAtAction(nameof(GetEvent), new {Id = newEventModel.Id}, newEventModel);
         
     }
 }

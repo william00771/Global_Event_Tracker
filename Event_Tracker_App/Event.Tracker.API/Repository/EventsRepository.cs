@@ -54,24 +54,24 @@ namespace Event.Tracker.API.Repository
         {
             var imageUploadResponseObject = await _photoUploader.Addphoto(imageFileRequest);
 
-            // var newCoordinates = new Coordinates{
-            //     Lat = eventModelRequestDto.CoordinatesRequest.Lat,
-            //     Lng = eventModelRequestDto.CoordinatesRequest.Lng,
-            //     FormattedAddress = eventModelRequestDto.CoordinatesRequest.FormattedAddress,
-            // };
+            var newCoordinates = new Coordinates{
+                Lat = eventModelRequestDto.CoordinatesRequest.Lat,
+                Lng = eventModelRequestDto.CoordinatesRequest.Lng,
+                FormattedAddress = eventModelRequestDto.CoordinatesRequest.FormattedAddress,
+            };
 
             EventModel newEventModel = new EventModel{
                 Name = eventModelRequestDto.Name,
-                // Location = newCoordinates,
-                // Description = eventModelRequestDto.Description,
-                // Time = eventModelRequestDto.Time,
-                // Date = eventModelRequestDto.Date,
-                // DateTo = eventModelRequestDto.DateTo,
-                // Duration = eventModelRequestDto.Duration,
-                // WebsiteUrl = eventModelRequestDto.WebsiteUrl,
-                // NumberOfPeople = eventModelRequestDto.NumberOfPeople,
-                // Keywords = eventModelRequestDto.Keywords,
-                // Image = imageUploadResponseObject.Url
+                Location = newCoordinates,
+                Description = eventModelRequestDto.Description,
+                Time = eventModelRequestDto.Time,
+                Date = eventModelRequestDto.Date,
+                DateTo = eventModelRequestDto.DateTo,
+                Duration = eventModelRequestDto.Duration,
+                WebsiteUrl = eventModelRequestDto.WebsiteUrl,
+                NumberOfPeople = eventModelRequestDto.NumberOfPeople,
+                Keywords = eventModelRequestDto.Keywords,
+                Image = imageUploadResponseObject.Url
             };
 
             await _eventContext.Events.AddAsync(newEventModel);

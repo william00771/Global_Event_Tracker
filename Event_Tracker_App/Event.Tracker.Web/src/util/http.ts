@@ -19,7 +19,6 @@ export const fetchEvents = async (startDate?: Date, endDate?: Date, filter?: str
 }
 
 export const postEvent = async (eventRequestFormData: FormData) => {
-    logFormData(eventRequestFormData);
     const response = await fetch(`http://localhost:5200/api/Event`, {
         method: 'POST',
         body: eventRequestFormData,
@@ -32,7 +31,6 @@ export const postEvent = async (eventRequestFormData: FormData) => {
     }
 
     const eventPostResponse = await response.json();
-    console.log(eventPostResponse);
 
     return eventPostResponse;
 }

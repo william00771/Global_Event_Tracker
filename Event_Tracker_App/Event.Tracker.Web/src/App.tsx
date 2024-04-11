@@ -65,12 +65,12 @@ function App() {
               className={"account-container " + (page == "Account" && "active")}
               setPage={(page) => setPage(page)}
             />
-            {/* <Explore 
+            { page != 'CreateEvent' && <Explore 
               className={"explore-container " }
               data={data}
               setPage={(page) => setPage(page)}
               page={page}
-            /> */}
+            />}
             <ListEvents 
               className={"listevents-container " + (page == "ListEvents" && "active")}
               data={data}

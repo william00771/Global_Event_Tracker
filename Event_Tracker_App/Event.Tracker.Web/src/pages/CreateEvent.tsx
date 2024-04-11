@@ -43,21 +43,21 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
         const data = Object.fromEntries(fd.entries());
 
         const formData = new FormData();
-        formData.append('name', data.name);
-        formData.append('location.lat', adress.lat.toString());
-        formData.append('location.lng', adress.lng.toString());
-        formData.append('location.formattedAddress', adress.formattedAddress);
-        formData.append('description', data.description);
-        formData.append('time', new Date(timeValue.toString()).toISOString());
-        formData.append('date', new Date(dateStartValue.toString()).toISOString());
-        formData.append('dateTo', dateEndValue ? new Date(dateEndValue.toString()).toISOString() : '');
-        formData.append('duration', data.duration);
-        formData.append('websiteUrl', data.url);
-        formData.append('numberOfPeople', data.people);
+        formData.append('Name', data.name);
+        formData.append('CoordinatesRequest.Lat', adress.lat.toString());
+        formData.append('CoordinatesRequest.Lng', adress.lng.toString());
+        formData.append('CoordinatesRequest.FormattedAddress', adress.formattedAddress);
+        formData.append('Description', data.description);
+        formData.append('Time', new Date(timeValue.toString()).toISOString());
+        formData.append('Date', new Date(dateStartValue.toString()).toISOString());
+        formData.append('DateTo', dateEndValue ? new Date(dateEndValue.toString()).toISOString() : '');
+        formData.append('Duration', data.duration);
+        formData.append('WebsiteUrl', data.url);
+        formData.append('NumberOfPeople', data.people);
         keywords.forEach((keyword, index) => {
-            formData.append(`keywords[${index}]`, keyword);
+            formData.append(`Keywords[${index}]`, keyword);
         });
-        formData.append('image', selectedImageBlob || '');
+        formData.append('Image', selectedImageBlob || '');
         
 
         postEvent(formData);
