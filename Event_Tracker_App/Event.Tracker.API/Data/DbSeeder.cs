@@ -235,7 +235,7 @@ namespace Event.Tracker.API.Data
                             Lng = 18.0721,
                             FormattedAddress = "Sturebadet Spa, Sturegallerian, Stureplan, Stockholm, Sweden"
                         },
-                        Time = new DateTime(2024, 4, 20, 9, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 4, 20),
                         DateTo = new DateTime(2024, 4, 20),
                         Description = "Relax and rejuvenate with a full day spa retreat at Sturebadet Spa.",
@@ -256,7 +256,7 @@ namespace Event.Tracker.API.Data
                             Lng = 18.0824,
                             FormattedAddress = "Stockholm Squash Center, Hammarby Fabriksväg, Stockholm, Sweden"
                         },
-                        Time = new DateTime(2024, 4, 25, 10, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 4, 25),
                         DateTo = new DateTime(2024, 4, 25),
                         Description = "Compete in our annual squash tournament and showcase your skills.",
@@ -277,7 +277,7 @@ namespace Event.Tracker.API.Data
                             Lng = 18.0265,
                             FormattedAddress = "Hornstull Market, Hornstullstrand, Stockholm, Sweden"
                         },
-                        Time = new DateTime(2024, 4, 27, 12, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 4, 27),
                         DateTo = new DateTime(2024, 4, 27),
                         Description = "Indulge in a variety of delicious street food from around the world at our festival.",
@@ -298,7 +298,7 @@ namespace Event.Tracker.API.Data
                             Lng = 18.0544,
                             FormattedAddress = "Stockholm Waterfront Congress Centre, Nils Ericsons Plan 4, Stockholm, Sweden"
                         },
-                        Time = new DateTime(2024, 4, 30, 9, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 4, 30),
                         DateTo = new DateTime(2024, 4, 30),
                         Description = "Join industry leaders and innovators at our annual tech summit.",
@@ -319,7 +319,7 @@ namespace Event.Tracker.API.Data
                             Lng = 18.0892,
                             FormattedAddress = "Gärdet Tennis Club, Valhallavägen, Stockholm, Sweden"
                         },
-                        Time = new DateTime(2024, 5, 5, 11, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 5, 5),
                         DateTo = new DateTime(2024, 5, 5),
                         Description = "Try your hand at tennis and enjoy a fun-filled day at our open event.",
@@ -340,7 +340,7 @@ namespace Event.Tracker.API.Data
                             Lng = 18.077,
                             FormattedAddress = "Berns Salonger, Berzelii Park, Stockholm, Sweden"
                         },
-                        Time = new DateTime(2024, 5, 10, 20, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 5, 10),
                         DateTo = new DateTime(2024, 5, 10),
                         Description = "Experience luxury and exclusivity at our VIP cocktail party.",
@@ -361,7 +361,7 @@ namespace Event.Tracker.API.Data
                             Lng = 18.0997,
                             FormattedAddress = "Djurgården, Stockholm, Sweden"
                         },
-                        Time = new DateTime(2024, 5, 15, 9, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 5, 15),
                         DateTo = new DateTime(2024, 5, 15),
                         Description = "Join us in making a positive impact on the environment by participating in a volunteer cleanup event.",
@@ -382,7 +382,7 @@ namespace Event.Tracker.API.Data
                             Lng = 18.1044,
                             FormattedAddress = "Skansen, Djurgårdsslätten, Stockholm, Sweden"
                         },
-                        Time = new DateTime(2024, 5, 18, 13, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 5, 18),
                         DateTo = new DateTime(2024, 5, 18),
                         Description = "Learn wildlife photography techniques from experts at Skansen.",
@@ -403,7 +403,7 @@ namespace Event.Tracker.API.Data
                             Lng = 18.0708,
                             FormattedAddress = "Gamla Stan, Stockholm, Sweden"
                         },
-                        Time = new DateTime(2024, 5, 22, 18, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 5, 22),
                         DateTo = new DateTime(2024, 5, 22),
                         Description = "Explore the flavors of Swedish wines on a guided tasting tour through Gamla Stan.",
@@ -424,7 +424,7 @@ namespace Event.Tracker.API.Data
                             Lng = 18.0561,
                             FormattedAddress = "Stockholm Public Library, Sveavägen, Stockholm, Sweden"
                         },
-                        Time = new DateTime(2024, 5, 25, 14, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 5, 25),
                         DateTo = new DateTime(2024, 5, 25),
                         Description = "Hone your storytelling skills at our short story writing workshop.",
@@ -445,7 +445,7 @@ namespace Event.Tracker.API.Data
                             Lng = 18.0868,
                             FormattedAddress = "Humlegården, Östermalm, Stockholm, Sweden"
                         },
-                        Time = new DateTime(2024, 5, 28, 9, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 5, 28),
                         DateTo = new DateTime(2024, 5, 28),
                         Description = "Find peace and serenity with an outdoor yoga session in Humlegården.",
@@ -466,7 +466,7 @@ namespace Event.Tracker.API.Data
                             Lng = 18.0933,
                             FormattedAddress = "Djurgården, Stockholm, Sweden"
                         },
-                        Time = new DateTime(2024, 6, 1, 7, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 6, 1),
                         DateTo = new DateTime(2024, 6, 1),
                         Description = "Start your day with a refreshing morning run through the scenic trails of Djurgården.",
@@ -487,7 +487,7 @@ namespace Event.Tracker.API.Data
                             Lng = 2.1830,
                             FormattedAddress = "Port Vell, Barcelona, Spain"
                         },
-                        Time = new DateTime(2024, 5, 10, 16, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 5, 10),
                         DateTo = new DateTime(2024, 5, 10),
                         Description = "Master the art of traditional Spanish paella in this hands-on cooking class right by the sea.",
@@ -508,7 +508,7 @@ namespace Event.Tracker.API.Data
                             Lng = 2.1729,
                             FormattedAddress = "El Poble-sec, Barcelona, Spain"
                         },
-                        Time = new DateTime(2024, 6, 15, 20, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 6, 15),
                         DateTo = new DateTime(2024, 6, 15),
                         Description = "Enjoy a vibrant evening of Latin music featuring top artists at a popular local venue.",
@@ -529,7 +529,7 @@ namespace Event.Tracker.API.Data
                             Lng = 2.1734,
                             FormattedAddress = "Gothic Quarter, Barcelona, Spain"
                         },
-                        Time = new DateTime(2024, 6, 5, 19, 30, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 6, 5),
                         DateTo = new DateTime(2024, 6, 5),
                         Description = "Laugh out loud with Barcelona's finest comedians in the heart of the historic Gothic Quarter.",
@@ -550,7 +550,7 @@ namespace Event.Tracker.API.Data
                             Lng = 2.1890,
                             FormattedAddress = "Barceloneta, Barcelona, Spain"
                         },
-                        Time = new DateTime(2024, 5, 20, 18, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 5, 20),
                         DateTo = new DateTime(2024, 5, 20),
                         Description = "Swing to the rhythm of salsa with enthusiasts from all over the world, right on Barceloneta Beach.",
@@ -571,7 +571,7 @@ namespace Event.Tracker.API.Data
                             Lng = 2.1649,
                             FormattedAddress = "Eixample, Barcelona, Spain"
                         },
-                        Time = new DateTime(2024, 6, 10, 15, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 6, 10),
                         DateTo = new DateTime(2024, 6, 10),
                         Description = "Explore strategies for financial independence and wealth management with leading financial experts.",
@@ -592,7 +592,7 @@ namespace Event.Tracker.API.Data
                             Lng = 2.1901,
                             FormattedAddress = "Barceloneta Beach, Barcelona, Spain"
                         },
-                        Time = new DateTime(2024, 5, 15, 10, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 5, 15),
                         DateTo = new DateTime(2024, 5, 15),
                         Description = "Join our beachfront gymnastics session to improve flexibility and core strength under the open sky.",
@@ -613,7 +613,7 @@ namespace Event.Tracker.API.Data
                             Lng = 2.1585,
                             FormattedAddress = "Ciutat Vella, Barcelona, Spain"
                         },
-                        Time = new DateTime(2024, 6, 12, 17, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 6, 12),
                         DateTo = new DateTime(2024, 6, 12),
                         Description = "Dive into the heart of Catalan cuisine and learn to cook traditional dishes with local chefs.",
@@ -634,7 +634,7 @@ namespace Event.Tracker.API.Data
                             Lng = 2.1720,
                             FormattedAddress = "El Raval, Barcelona, Spain"
                         },
-                        Time = new DateTime(2024, 6, 8, 9, 30, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 6, 8),
                         DateTo = new DateTime(2024, 6, 8),
                         Description = "Enhance your Spanish speaking skills through practical immersion techniques in a friendly setting.",
@@ -655,7 +655,7 @@ namespace Event.Tracker.API.Data
                             Lng = 2.1599,
                             FormattedAddress = "Las Ramblas, Barcelona, Spain"
                         },
-                        Time = new DateTime(2024, 5, 25, 11, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 5, 25),
                         DateTo = new DateTime(2024, 5, 25),
                         Description = "Savor the tastes of Barcelona on a gourmet tour featuring top eateries and hidden gems.",
@@ -676,7 +676,7 @@ namespace Event.Tracker.API.Data
                             Lng = 2.1894,
                             FormattedAddress = "Barceloneta Beach, Barcelona, Spain"
                         },
-                        Time = new DateTime(2024, 5, 30, 18, 30, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 5, 30),
                         DateTo = new DateTime(2024, 5, 30),
                         Description = "Learn the sensual moves of salsa from experienced dancers in an inspiring beachfront setting.",
@@ -697,7 +697,7 @@ namespace Event.Tracker.API.Data
                             Lng = 2.1651,
                             FormattedAddress = "Eixample, Barcelona, Spain"
                         },
-                        Time = new DateTime(2024, 6, 20, 21, 0, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 6, 20),
                         DateTo = new DateTime(2024, 6, 20),
                         Description = "Experience an unforgettable night of live music under the stars at one of Barcelona's iconic open air venues.",
@@ -711,14 +711,14 @@ namespace Event.Tracker.API.Data
                         },
                         Image = "https://i.pinimg.com/564x/d1/20/fb/d120fb9c14bb302f9fe767375af0a185.jpg"
                     },
-                    new EventModel {
+                     new EventModel {
                         Name = "Beach Yoga Sunrise Session",
                         Location = new Coordinates {
                             Lat = 41.4029,
                             Lng = 2.2171,
                             FormattedAddress = "Platja de la Nova Mar Bella, Barcelona, Spain"
                         },
-                        Time = new DateTime(2024, 5, 5, 6, 30, 0),
+                        Time = new DateTime(2024, 04, 01, 00, 00, 00),
                         Date = new DateTime(2024, 5, 5),
                         DateTo = new DateTime(2024, 5, 5),
                         Description = "Greet the day with a rejuvenating yoga session as the sun rises over the Mediterranean.",
@@ -731,7 +731,7 @@ namespace Event.Tracker.API.Data
                             "Wellness"
                         },
                         Image = "https://i.pinimg.com/474x/5d/48/ad/5d48ad9aff34c95156edee0e0d2cf4f6.jpg"
-                    }
+                    },
 
                     
                 };
