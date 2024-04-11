@@ -6,11 +6,14 @@ import { renderToString } from 'react-dom/server';
 import { Point, divIcon } from 'leaflet';
 import { useEffect, useState } from 'react';
 import { MOCKDATA } from '@/Data/MockData';
-import dj from '../resources/event_type_icons/dj.svg'
-import placeholder from '../resources/Placeholders/event.jpg'
 import { formatDateAndDurationToHours, formatDateToStartDateEndDate } from '@/util/dateTools';
 import { EventDetails } from './EventDetails';
 import { calculateLongitudeLatitudeBoundingBox, isCoordinateWithinBoundingBox } from '@/util/mapcalculation';
+import placeholder from '../resources/Placeholders/event.jpg'
+import { svgIconBasedOnKeyword } from '@/util/svgIconBasedOnKeyword';
+
+
+
 
 type Props = {
   className: string,
@@ -104,7 +107,7 @@ function Explore({className, data, setPage, page }: Props) {
       return (
         <>
           <header style={{width: `${width}px`, height: `${width}px`}} className='marker-container'>
-              <div className="marker-container__icon" style={{backgroundImage: `linear-gradient(#eb01a538, #d1363136), url(${svgIcon})`}}></div>
+              <div className="marker-container__icon" style={{backgroundImage: `linear-gradient(#eb01a525, #d1363136), url(${svgIcon})`}}></div>
           </header>
           <section className={"marker-container__section " + (showMarkerDetails === id.toString() ? "active" : "inactive")}>
               <header className='marker__header'>
@@ -179,6 +182,7 @@ function Explore({className, data, setPage, page }: Props) {
                 />
                 {boundingbox && data.slice(0, maxAllowedMarkerRenders).map((event) => {
                         if(isCoordinateWithinBoundingBox({latitude: event.location.lat, longitude: event.location.lng}, boundingbox) && zoomLevel >= 7){
+                          const eventIcon = svgIconBasedOnKeyword(event)
                             return <Marker 
                             eventHandlers={{
                                   click: () => {
@@ -201,42 +205,7 @@ function Explore({className, data, setPage, page }: Props) {
                                   id: event.location.lat, 
                                   eventData: event, 
                                   showMarkerDetails: showMarkerDetails,
-                                  svgIcon: dj
-                                }
-                              )
-                            }
-                          />
-                        }
-                        else{
-                            return '';
-                        }
-                    })}
-
-                    {boundingbox && data.slice(0, maxAllowedMarkerRenders).map((event) => {
-                        if(isCoordinateWithinBoundingBox({latitude: event.location.lat, longitude: event.location.lng}, boundingbox) && zoomLevel >= 7){
-                            return <Marker 
-                            eventHandlers={{
-                                  click: () => {
-                                      if(showMarkerDetails === event.location.lat.toString())
-                                      {
-                                          setShowMarkerDetails('');
-                                      }
-                                      else{
-                                        setShowMarkerDetails(event.location.lat.toString());
-                                        setCurrentEventInfo(event);
-                                      }
-                                      
-                                  },
-                              }} 
-                            position={[event.location.lat, event.location.lng]} 
-                            icon={
-                              customIcon(
-                                {
-                                  width: 40,
-                                  id: event.location.lat, 
-                                  eventData: event, 
-                                  showMarkerDetails: showMarkerDetails,
-                                  svgIcon: dj
+                                  svgIcon: eventIcon
                                 }
                               )
                             }
