@@ -1,4 +1,4 @@
-import { MouseEventHandler, useState } from 'react'
+import { MouseEventHandler, useRef, useState } from 'react'
 import './NavbarTop.css'
 import IconTimePicker from '../icons/IconTimePicker'
 import IconAccount from '../icons/IconAccount'
@@ -10,6 +10,7 @@ type Props = {
 }
 
 export const NavbarTop = ({ className, setPage, page }: Props) => {
+    const [active, setActive] = useState(false);
 
     const setPageHandler = () => {
         if(page == 'TimePicker'){
@@ -18,6 +19,29 @@ export const NavbarTop = ({ className, setPage, page }: Props) => {
         else{
             setPage('TimePicker');
         }
+    }
+
+    const inputRef = useRef(null);
+
+    const changeHandler = (): void => {
+        active ? '' : setActive(true);
+    }
+
+    const searchHandler = (e: React.MouseEvent<HTMLInputElement>): void => {
+        e.preventDefault();
+        inputRef.current.value = '';
+        active == true ? '' : setActive(!active);
+        
+    }
+    const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
+        e.preventDefault();
+        const target = e.currentTarget as HTMLFormElement;
+        const fd = new FormData(target);
+        const data = Object.fromEntries(fd.entries());
+        console.log(data.filter.toString());
+        
+        inputRef.current.blur();
+        setActive(false);
     }
 
     return(
@@ -32,7 +56,21 @@ export const NavbarTop = ({ className, setPage, page }: Props) => {
                 </svg>
                 <p className={'navtop__title timepicker-title ' + (page == "TimePicker" && "active")}>Time</p>
             </a>
-        
+            <form onSubmit={submitHandler} className='form__container'>
+                <input 
+                className={"form__input " + (active? "active" : "inactive")}
+                ref={inputRef} 
+                onChange={changeHandler} 
+                onSubmit={submitHandler} 
+                onClick={searchHandler} 
+                name="filter"
+                type='text' 
+                placeholder='Search Events'/>
+                <button 
+                active={active ? 'true' : 'false'} 
+                // onClick={submitHandler} 
+                className={'form__input--button ' + (active? 'active' : 'inactive')}>Cancel</button>
+            </form>
             <a
                 onClick={() => setPage('Account')}
                 className={'navtop__item ' + (page == 'Account' ? 'inactive' : 'active')} href="#">
