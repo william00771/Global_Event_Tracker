@@ -177,35 +177,75 @@ function Explore({className, data, setPage, page }: Props) {
                     url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
                     //url="https://api.mapbox.com/styles/v1/william00771/cltvk24s1017c01pkhsjd4774/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoid2lsbGlhbTAwNzcxIiwiYSI6ImNsdHZqeWd2cTFsYzIycW9iNGlhdHFodHAifQ.eX-yYLKA0P4QCL58IgovpA"
                 />
-                {data.map((event) => (
-                    <Marker 
-                    eventHandlers={{
-                          click: () => {
-                              if(showMarkerDetails === event.location.lat.toString())
-                              {
-                                  setShowMarkerDetails('');
-                              }
-                              else{
-                                setShowMarkerDetails(event.location.lat.toString());
-                                setCurrentEventInfo(event);
-                              }
-                              
-                          },
-                      }} 
-                    position={[event.location.lat, event.location.lng]} 
-                    icon={
-                      customIcon(
-                        {
-                          width: 40,
-                          id: event.location.lat, 
-                          eventData: event, 
-                          showMarkerDetails: showMarkerDetails,
-                          svgIcon: dj
+                {boundingbox && data.slice(0, maxAllowedMarkerRenders).map((event) => {
+                        if(isCoordinateWithinBoundingBox({latitude: event.location.lat, longitude: event.location.lng}, boundingbox) && zoomLevel >= 7){
+                            return <Marker 
+                            eventHandlers={{
+                                  click: () => {
+                                      if(showMarkerDetails === event.location.lat.toString())
+                                      {
+                                          setShowMarkerDetails('');
+                                      }
+                                      else{
+                                        setShowMarkerDetails(event.location.lat.toString());
+                                        setCurrentEventInfo(event);
+                                      }
+                                      
+                                  },
+                              }} 
+                            position={[event.location.lat, event.location.lng]} 
+                            icon={
+                              customIcon(
+                                {
+                                  width: 40,
+                                  id: event.location.lat, 
+                                  eventData: event, 
+                                  showMarkerDetails: showMarkerDetails,
+                                  svgIcon: dj
+                                }
+                              )
+                            }
+                          />
                         }
-                      )
-                    }
-                  />
-                ))}
+                        else{
+                            return '';
+                        }
+                    })}
+
+                    {boundingbox && data.slice(0, maxAllowedMarkerRenders).map((event) => {
+                        if(isCoordinateWithinBoundingBox({latitude: event.location.lat, longitude: event.location.lng}, boundingbox) && zoomLevel >= 7){
+                            return <Marker 
+                            eventHandlers={{
+                                  click: () => {
+                                      if(showMarkerDetails === event.location.lat.toString())
+                                      {
+                                          setShowMarkerDetails('');
+                                      }
+                                      else{
+                                        setShowMarkerDetails(event.location.lat.toString());
+                                        setCurrentEventInfo(event);
+                                      }
+                                      
+                                  },
+                              }} 
+                            position={[event.location.lat, event.location.lng]} 
+                            icon={
+                              customIcon(
+                                {
+                                  width: 40,
+                                  id: event.location.lat, 
+                                  eventData: event, 
+                                  showMarkerDetails: showMarkerDetails,
+                                  svgIcon: dj
+                                }
+                              )
+                            }
+                          />
+                        }
+                        else{
+                            return '';
+                        }
+                    })}
               <UpdateMapCenter />
               <UpdateMarkerRenders />
             </MapContainer>
