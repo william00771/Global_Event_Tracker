@@ -7,7 +7,7 @@ namespace Event.Tracker.API.Dtos
         public required string Description { get; set; }
         public required DateTime Time { get; set; }
         public required DateTime Date { get; set; }
-        public required DateTime? DateTo { get; set; }
+        public required DateTime DateTo { get; set; }
         public required int Duration { get; set; }
         public required string WebsiteUrl { get; set; }
         public required int NumberOfPeople { get; set; }
