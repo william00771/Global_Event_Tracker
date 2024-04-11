@@ -10,6 +10,7 @@
     height: 100%;
     padding: 1rem;
     padding-top: 12vh;
+    padding-bottom: 15vh;
 
     background-color: var(--base);
 }
@@ -36,7 +37,7 @@
     padding: 5% 5%;
 
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     margin: 5% auto;
 
     overflow: hidden;
@@ -49,6 +50,8 @@
         width: 100%;
         height: 100%;
 
+        filter: brightness(80%);
+
         z-index: -1;
         object-fit: cover;
     }
@@ -56,23 +59,24 @@
         margin-top: auto;
         margin-bottom: 1rem;
 
-        font-size: 1.2rem;
+        font-size: 1rem;
         color: #fff;
     }
     .listevent-item__info-container{
-        margin-left: 6%;
+        display: flex;
+        gap: 1rem;
     }
     .listevent-item__article-item{
         display: flex;
-        gap: .5rem;
+        gap: .2rem;
         align-items: center;
 
-        font-size: .7rem;
+        font-size: .5rem;
         color: #fff;
         opacity: .9;
     }
         .listevent-item__article-item svg{
-            width: 29px;
+            width: 15px;
         }
 
         .listevent-item__favicon{
@@ -81,6 +85,8 @@
             transform: translateY(-50%);
             right: 5%;
             width: 10%;
+
+            opacity: .9;
         }
         .listevent-item__favicon .listevent-item__favicon--colorstroke{
             stroke: var(--text-fade2);

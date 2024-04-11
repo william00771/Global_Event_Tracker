@@ -143,7 +143,7 @@ function Explore({className, data, setPage, page, filter }: Props) {
                   <img className='marker__header-bgimage' src={ eventData.image || placeholder } alt="" />
               </header>
               <article className='marker__main'>
-                  <p className='marker__main-paragraph'>{eventData.name}
+                  <p className='marker__main-paragraph'>{eventData.description.split(" ").slice(0, 18).join(" ")}..
                   </p>
                   <button className='moreinfobtn btn-primary--gradient marker__main-btn' value={id}>More Info</button>
               </article>
@@ -178,8 +178,8 @@ function Explore({className, data, setPage, page, filter }: Props) {
             scrollWheelZoom={true}>
                 <TileLayer 
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    //url="https://api.mapbox.com/styles/v1/william00771/cltvk24s1017c01pkhsjd4774/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoid2lsbGlhbTAwNzcxIiwiYSI6ImNsdHZqeWd2cTFsYzIycW9iNGlhdHFodHAifQ.eX-yYLKA0P4QCL58IgovpA"
+                    //url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    url="https://api.mapbox.com/styles/v1/william00771/cltvk24s1017c01pkhsjd4774/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoid2lsbGlhbTAwNzcxIiwiYSI6ImNsdHZqeWd2cTFsYzIycW9iNGlhdHFodHAifQ.eX-yYLKA0P4QCL58IgovpA"
                 />
                 {boundingbox && data.slice(0, maxAllowedMarkerRenders).map((event) => {
                         if(

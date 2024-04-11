@@ -1,4 +1,4 @@
-import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers'
+import { DatePicker, LocalizationProvider, MobileDatePicker } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import './TimePicker.css'
 import dayjs from 'dayjs'
@@ -33,7 +33,7 @@ export const TimePicker = ({ className, setPage, getFilteredEvents }: Props) => 
             <form className='form_container'>
                 <ThemeProvider theme={darkTheme}>   
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DatePicker
+                        <MobileDatePicker
                                 name='date'
                                 label="From"
                                 defaultValue={dayjs()}

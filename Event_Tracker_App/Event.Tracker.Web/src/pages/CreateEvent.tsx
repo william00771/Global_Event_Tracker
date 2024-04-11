@@ -14,7 +14,6 @@ type Props = {
     className: string
     setPage: (page: string) => void
     postEvent: (eventRequestDto: FormData) => void,
-    loading: boolean
 }
 
 const darkTheme = createTheme({

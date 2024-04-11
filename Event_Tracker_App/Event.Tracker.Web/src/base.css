@@ -12,13 +12,13 @@ html{
   color: #fff;
 
   height: 100%;
+  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 0;
 
-  overflow-y: hidden;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 #root {
@@ -28,4 +28,10 @@ html{
   
   background-color: #252525;
   background-size: cover;
+}
+
+/* Manually fix material ui date problem */
+.MuiDialog-container{
+  width: 100vw !important;
+  height: 90vh !important;
 }

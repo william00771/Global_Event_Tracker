@@ -22,7 +22,7 @@ export const SavedEvents = ({ className, data }: Props) => {
                     </svg>
                     <h1 className='savedevents-container__header-title'>Saved Events</h1>
                 </header>
-                {data.map((event, index) => (
+                {data.filter(event => event.id > 5 && event.id < 12).map((event, index) => (
                     index++ % 2 == 0 &&
                         <article className='event-container__item'>
                             <h2 className='event-container__title'>{event.name}</h2>
@@ -47,7 +47,7 @@ export const SavedEvents = ({ className, data }: Props) => {
                 ))}
             </section>
             <section className='savedevents-container__right-container'>
-                {data.map((event, index) => (
+                {data.filter(event => event.id > 5 && event.id < 14).map((event, index) => (
                     index++ % 2 != 0 &&
                         <article className='event-container__item'>
                             <h2 className='event-container__title'>{event.name}</h2>
