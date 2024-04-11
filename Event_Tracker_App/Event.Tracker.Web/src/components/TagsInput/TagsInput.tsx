@@ -23,6 +23,7 @@ const TagsInput = (props) => {
           type="text"
           onKeyUp={event => event.key === "Enter" ? addTags(event) : null}
           placeholder="Press enter to add tags"
+          required
         />
         <ul id="tags">
           {tags.map((tag, index) => (

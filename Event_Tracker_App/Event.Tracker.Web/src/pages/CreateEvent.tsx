@@ -145,17 +145,19 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                 <img className='createevent-container__header-bgimage' src={selectedImage || placeholder} alt="" />
             </header>
             <section className='createevent-container__main'>
-                <form id="myForm" onSubmit={e => { e.preventDefault(); }} className='createevent-container__form'>
+                <form id="myForm" onSubmit={submitHandler} className='createevent-container__form'>
                     <input 
                         className='createevent-container__form-fileinput' 
                         type="file" accept=".jpg, .jpeg, .eps, .png, .webp, .tiff" 
                         placeholder='Image' name='image' 
                         onChange={handleImageChange}
+                        required
                     />
                     <input 
                         className='input-primary--outline-gradient1 form-input' 
                         type="text" name='name' 
                         placeholder='Event Name' 
+                        required
                     />
                     <input 
                         className={'input-primary--outline-gradient1 form-input address-input ' + (invalidAdress && 'invalid') }
@@ -164,6 +166,7 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                         placeholder='Location' 
                         onBlur={(e: any) => addressChangeHandler(e)}
                         ref={inputElement}
+                        required
                     />
                     <ThemeProvider theme={darkTheme}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -195,6 +198,7 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                         name='description'
                         placeholder='Description'
                         onInput={(e) => adjustTextareaHeight(e.target)}
+                        required
                     />
                     <select 
                         className='select-primary--outline-gradient1' 
@@ -208,24 +212,21 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                         type='number' 
                         name='duration' 
                         placeholder='Duration' 
+                        required
                     />
                     <input 
                         className='input-primary--outline-gradient1 form-input' 
                         type="text" 
                         name='url' 
                         placeholder='Website url' 
+                        required
                     />
                     <input 
                         className='input-primary--outline-gradient1 form-input' 
                         type='number' 
                         name='people' 
                         placeholder='Number of people'
-                    />
-                    <input 
-                        className='input-primary--outline-gradient1 form-input' 
-                        type="text" 
-                        name='type' 
-                        placeholder='Type of Event' 
+                        required
                     />
                     <TagsInput 
                         selectedTags={(tags: any) => setKeywords(tags)}  
@@ -233,8 +234,7 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                     />
                     <button 
                         className='btn-primary--gradient-outline form-input__buttonlogin'
-                        onClick={submitHandler} 
-                        type='button'
+                        type='submit'
                     >
                     Add Event</button>
                 </form>
