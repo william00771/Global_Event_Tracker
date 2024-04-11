@@ -125,12 +125,15 @@
 
         }
         .marker__header-bottom{
-            height: 85%;
-            padding: 0% 4%;
+            max-height: 85%;
+            min-height: 50%;
+
+            padding: 0% 4% 5%;
 
             display: flex;
             flex-wrap: wrap;
             align-items: center;
+            overflow: hidden;
             
             gap: 0rem .3rem;
 
