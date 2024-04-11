@@ -11,6 +11,7 @@ import { SavedEvents } from "./pages/SavedEvents";
 import { CreateEvent } from "./pages/CreateEvent";
 import { fetchEvents, postEvent } from './util/http';
 import { EventModel, EventModelRequestDto } from './types/types';
+import { CircularProgress } from '@mui/material';
 
 
 
@@ -45,8 +46,9 @@ function App() {
 
   return(
       <>
-        {isLoading && <h1>Loading...</h1>}
-        {isError && <h1>Error</h1>}
+        {isLoading && <div className='loading-container'><CircularProgress color="secondary" /></div>}
+        {isError && <div className='error-container'><h1>Error fetching data...</h1></div> }
+        
         <NavbarTop 
           setPage={(page) => setPage(page)}
           page={page}
