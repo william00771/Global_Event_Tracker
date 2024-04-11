@@ -32,7 +32,7 @@ import comedy from '../resources/event_type_icons/comedy.svg';
 import concert from '../resources/event_type_icons/concert.svg';
 import cooking from '../resources/event_type_icons/cooking.svg';
 import cycling from '../resources/event_type_icons/cycling.svg';
-import dancing from '../resources/event_type_icons/dancing.svg';
+import dance from '../resources/event_type_icons/dancing.svg';
 import dj from '../resources/event_type_icons/dj.svg';
 import dog from '../resources/event_type_icons/dog.svg';
 import entrepreneur from '../resources/event_type_icons/entrepreneur.svg';
@@ -234,6 +234,14 @@ function Explore({className, data, setPage, page }: Props) {
       });
     }
 
+    const selectIcon = (description: string) => {
+        description = description.toLowerCase();
+        if (description.includes('yoga')) return yoga;
+        if (description.includes('writing')) return writing;
+        if (description.includes('salsa')) return dance;
+        return dj;
+    };
+
     return(
       <>
         <section className='explore__container'>
@@ -249,6 +257,7 @@ function Explore({className, data, setPage, page }: Props) {
                 />
                 {boundingbox && data.slice(0, maxAllowedMarkerRenders).map((event) => {
                         if(isCoordinateWithinBoundingBox({latitude: event.location.lat, longitude: event.location.lng}, boundingbox) && zoomLevel >= 7){
+                          const eventIcon = selectIcon(event.description)
                             return <Marker 
                             eventHandlers={{
                                   click: () => {
@@ -271,7 +280,7 @@ function Explore({className, data, setPage, page }: Props) {
                                   id: event.location.lat, 
                                   eventData: event, 
                                   showMarkerDetails: showMarkerDetails,
-                                  svgIcon: concert
+                                  svgIcon: eventIcon
                                 }
                               )
                             }
