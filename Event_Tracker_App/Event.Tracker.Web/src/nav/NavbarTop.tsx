@@ -26,20 +26,20 @@ export const NavbarTop = ({ className, setPage, page }: Props) => {
     }
 
     const searchHandler = (e: React.MouseEvent<HTMLInputElement>): void => {
+        
+        console.log()
         e.preventDefault();
         inputRef.current.value = '';
         active == true ? '' : setActive(!active);
         
     }
-    const submitHandler = (e: React.FormEvent<HTMLFormElement>): void => {
-        e.preventDefault();
-        const target = e.currentTarget as HTMLFormElement;
-        const fd = new FormData(target);
-        const data = Object.fromEntries(fd.entries());
-        console.log(data.filter.toString());
-        
+    const submitHandler = (): void => {
+        if(inputRef.current.value === ''){
+            return;
+        }
+        console.log(inputRef.current.value)
         inputRef.current.blur();
-        setActive(false);
+        setActive(false)
     }
 
     return(
@@ -56,17 +56,17 @@ export const NavbarTop = ({ className, setPage, page }: Props) => {
             </a>
             <form onSubmit={submitHandler} className='form__container'>
                 <input 
-                className={"form__input " + (active? "active" : "inactive")}
-                ref={inputRef} 
-                onChange={changeHandler} 
-                onSubmit={submitHandler} 
-                onClick={searchHandler} 
-                name="filter"
-                type='text' 
-                placeholder='Search Events'/>
+                    className={"form__input " + (active? "active" : "inactive")}
+                    ref={inputRef} 
+                    onChange={changeHandler} 
+                    onSubmit={submitHandler} 
+                    onClick={searchHandler} 
+                    name="filter"
+                    type='text' 
+                    placeholder='Search Events'/>
                 <button 
                 active={active ? 'true' : 'false'} 
-                className={'form__input--button ' + (active? 'active' : 'inactive')} onClick={() => setActive(false)}>Cancel</button>
+                className={'form__input--button ' + (active? 'active' : 'inactive')} onClick={() => submitHandler()}>Confirm</button>
             </form>
             <a
                 onClick={() => setPage('Account')}
