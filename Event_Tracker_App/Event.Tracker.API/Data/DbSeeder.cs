@@ -144,6 +144,94 @@ namespace Event.Tracker.API.Data
                         },
                         Image = "https://s1.ticketm.net/dam/c/03e/e15ef00f-2c87-4421-ae61-d740851a703e_105891_TABLET_LANDSCAPE_3_2.jpg"
                     },
+                    new EventModel{
+                        Name = "Stockholm Fashion Week 2024",
+                        Location = new Coordinates {
+                            Lat = 59.3293,
+                            Lng = 18.0686,
+                            FormattedAddress = "Sergels torg, Stockholm, Sweden"
+                        },
+                        Time = new DateTime(2024, 4, 10, 19, 0, 0),
+                        Date = new DateTime(2024, 4, 10),
+                        DateTo = new DateTime(2024, 4, 10),
+                        Description = "Annual fashion week event showcasing the latest trends and designs.",
+                        Duration = 4,  
+                        WebsiteUrl = "https://www.stockholmfashionweek.com",
+                        NumberOfPeople = 200,  
+                        Keywords = new List<string> {
+                            "Fashion",
+                            "Fashion Show",
+                            "Trends"
+                        },
+                        Image = "https://i.pinimg.com/564x/e1/ae/a0/e1aea07ada75b0e3459ca66ced699a56.jpg"
+                    },
+                    new EventModel{
+                        Name = "Filmmaking Masterclass: Directing Techniques",
+                        Location = new Coordinates {
+                            Lat = 59.3252,
+                            Lng = 18.1051,
+                            FormattedAddress = "Djurgården, Stockholm, Sweden"
+                        },
+                        Time = new DateTime(2024, 4, 15, 10, 0, 0),
+                        Date = new DateTime(2024, 4, 15),
+                        DateTo = new DateTime(2024, 4, 15),
+                        Description = "Intensive workshop on directing techniques for aspiring filmmakers.",
+                        Duration = 6,  
+                        WebsiteUrl = "https://www.filmmakingmasterclass.com",
+                        NumberOfPeople = 50,  
+                        Keywords = new List<string> {
+                            "Filmmaking",
+                            "Workshop",
+                            "Directing"
+                        },
+                        Image = "https://i.pinimg.com/564x/ab/d0/61/abd06122e8601556763cc6e9ae092d5f.jpg"
+                    },
+                    new EventModel{
+                        Name = "Singles Mixer: Find Your Match!",
+                        Location = new Coordinates {
+                            Lat = 59.3305,
+                            Lng = 18.0633,
+                            FormattedAddress = "Gamla stan, Stockholm, Sweden"
+                        },
+                        Time = new DateTime(2024, 4, 25, 20, 0, 0),
+                        Date = new DateTime(2024, 4, 25),
+                        DateTo = new DateTime(2024, 4, 25),
+                        Description = "An evening of fun and socializing for singles looking to meet new people.",
+                        Duration = 4,  
+                        WebsiteUrl = "https://www.singlesmixer.com",
+                        NumberOfPeople = 60,  
+                        Keywords = new List<string> {
+                            "Dating",
+                            "Singles",
+                            "Socializing"
+                        },
+                        Image = "https://i.pinimg.com/736x/ac/b2/28/acb22845614e80ed857fc100e1207165.jpg"
+                    },
+                    new EventModel{
+                        Name = "Photography Workshop: Mastering Portrait Photography",
+                        Location = new Coordinates {
+                            Lat = 59.3332,
+                            Lng = 18.0652,
+                            FormattedAddress = "Vasastan, Stockholm, Sweden"
+                        },
+                        Time = new DateTime(2024, 4, 30, 9, 0, 0),
+                        Date = new DateTime(2024, 4, 30),
+                        DateTo = new DateTime(2024, 4, 30),
+                        Description = "A hands-on workshop focused on mastering portrait photography techniques.",
+                        Duration = 5,  
+                        WebsiteUrl = "https://www.portraitphotographyworkshop.com",
+                        NumberOfPeople = 30,  
+                        Keywords = new List<string> {
+                            "Photography",
+                            "Workshop",
+                            "Portrait Photography"
+                        },
+                        Image = "https://i.pinimg.com/736x/f6/21/f9/f621f906c3298a9f035ed26ba864fcf8.jpg"
+                    }
+
+    
+
+
                 };
                 context.Events.AddRange(events);
                 context.SaveChanges();
