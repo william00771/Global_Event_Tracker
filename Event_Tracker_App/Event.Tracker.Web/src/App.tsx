@@ -11,6 +11,7 @@ import { SavedEvents } from "./pages/SavedEvents";
 import { CreateEvent } from "./pages/CreateEvent";
 import { fetchEvents, postEvent } from './util/http';
 import { EventModel, EventModelRequestDto } from './types/types';
+import { CircularProgress } from '@mui/material';
 
 
 
@@ -36,8 +37,7 @@ function App() {
     });
 
   const postMutation = useMutation(
-      (eventRequestDto: EventModelRequestDto) => 
-        postEvent(eventRequestDto), {
+      (eventRequestFormData: FormData) => postEvent(eventRequestFormData), {
       onSuccess: () => {
           refetch();
           setPage('Explore');
@@ -46,8 +46,9 @@ function App() {
 
   return(
       <>
-        {isLoading && <h1>Loading...</h1>}
-        {isError && <h1>Error</h1>}
+        {isLoading && <div className='loading-container'><CircularProgress color="secondary" /></div>}
+        {isError && <div className='error-container'><h1>Error fetching data...</h1></div> }
+        
         <NavbarTop 
           setPage={(page) => setPage(page)}
           page={page}
@@ -66,12 +67,12 @@ function App() {
               className={"account-container " + (page == "Account" && "active")}
               setPage={(page) => setPage(page)}
             />
-            <Explore 
+            { page != 'CreateEvent' && <Explore 
               className={"explore-container " }
               data={data}
               setPage={(page) => setPage(page)}
               page={page}
-            />
+            />}
             <ListEvents 
               className={"listevents-container " + (page == "ListEvents" && "active")}
               data={data}
@@ -83,7 +84,7 @@ function App() {
             <CreateEvent 
               className={"createevent-container " + (page == "CreateEvent" && "active")}
               setPage={(page) => setPage(page)}
-              postEvent={(eventRequestDto: EventModelRequestDto) => postMutation.mutate(eventRequestDto)}
+              postEvent={(eventRequestFormData: FormData) => postMutation.mutate(eventRequestFormData)}
             />
           </main>
         }

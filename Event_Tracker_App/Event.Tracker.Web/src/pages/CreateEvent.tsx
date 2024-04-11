@@ -8,13 +8,14 @@ import placeholder from '../resources/Placeholders/event.jpg'
 import { FormEvent, useRef, useState } from 'react'
 import { Coordinates, EventModelRequestDto } from '@/types/types'
 import { GeocoderApiResponse } from '@/types/geocoder_types'
-import { fetchCoordinatesFromAddress } from '@/util/http'
+import { fetchCoordinatesFromAddress, postFormEvent } from '@/util/http'
 import TagsInput from '@/components/TagsInput/TagsInput'
+import { logFormData } from '@/util/formtools'
 
 type Props = {
     className: string
     setPage: (page: string) => void
-    postEvent: (eventRequestDto: EventModelRequestDto) => void
+    postEvent: (eventRequestDto: FormData) => void
 }
 
 const darkTheme = createTheme({
@@ -35,29 +36,31 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
     const [adress, setAdress] = useState<Coordinates>({lat: 0, lng: 0, formattedAddress: ''});
     const [invalidAdress, setInvalidAdress] = useState(false);
 
-    const submitHandler = (e: FormEvent<HTMLFormElement>): void => {
+    const submitHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const target = document.getElementById('myForm') as HTMLFormElement;
         const fd = new FormData(target);
         const data = Object.fromEntries(fd.entries());
 
-        const imageBlob = selectedImageBlob;
+        const formData = new FormData();
+        formData.append('Name', data.name);
+        formData.append('CoordinatesRequest.Lat', adress.lat.toString());
+        formData.append('CoordinatesRequest.Lng', adress.lng.toString());
+        formData.append('CoordinatesRequest.FormattedAddress', adress.formattedAddress);
+        formData.append('Description', data.description);
+        formData.append('Time', new Date(timeValue.toString()).toISOString());
+        formData.append('Date', new Date(dateStartValue.toString()).toISOString());
+        formData.append('DateTo', dateEndValue ? new Date(dateEndValue.toString()).toISOString() : '');
+        formData.append('Duration', data.duration);
+        formData.append('WebsiteUrl', data.url);
+        formData.append('NumberOfPeople', data.people);
+        keywords.forEach((keyword, index) => {
+            formData.append(`Keywords[${index}]`, keyword);
+        });
+        formData.append('Image', selectedImageBlob || '');
+        
 
-        const eventRequestDto: EventModelRequestDto = {
-            Name: data.name as string,
-            // location: adress,
-            // description: data.description as string,
-            // time: new Date(timeValue.toString()),
-            // date: new Date(dateStartValue.toString()),
-            // dateTo: new Date(dateEndValue.toString()),
-            // duration: parseInt(data.duration.toString()),
-            // websiteUrl: data.url as string,
-            // numberOfPeople: parseInt(data.people.toString()),
-            // keywords: keywords,
-            // image: data.imageurl as string,
-        };
-
-        postEvent(eventRequestDto);
+        postEvent(formData);
     };
 
     const addressChangeHandler = (e: FormEvent<HTMLFormElement>): void => {
@@ -107,7 +110,6 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
         }
     };
 
-
     return(
         <section className={className}>
             <header className='createevent-container__header'>
@@ -143,22 +145,19 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                 <img className='createevent-container__header-bgimage' src={selectedImage || placeholder} alt="" />
             </header>
             <section className='createevent-container__main'>
-                <form id="myForm" onSubmit={e => { e.preventDefault(); }} className='createevent-container__form'>
+                <form id="myForm" onSubmit={submitHandler} className='createevent-container__form'>
                     <input 
                         className='createevent-container__form-fileinput' 
                         type="file" accept=".jpg, .jpeg, .eps, .png, .webp, .tiff" 
                         placeholder='Image' name='image' 
                         onChange={handleImageChange}
+                        required
                     />
                     <input 
                         className='input-primary--outline-gradient1 form-input' 
                         type="text" name='name' 
                         placeholder='Event Name' 
-                    />
-                    <input 
-                        className='input-primary--outline-gradient1 form-input' 
-                        type="text" name='imageurl' 
-                        placeholder='Image Url' 
+                        required
                     />
                     <input 
                         className={'input-primary--outline-gradient1 form-input address-input ' + (invalidAdress && 'invalid') }
@@ -167,6 +166,7 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                         placeholder='Location' 
                         onBlur={(e: any) => addressChangeHandler(e)}
                         ref={inputElement}
+                        required
                     />
                     <ThemeProvider theme={darkTheme}>
                         <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -198,6 +198,7 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                         name='description'
                         placeholder='Description'
                         onInput={(e) => adjustTextareaHeight(e.target)}
+                        required
                     />
                     <select 
                         className='select-primary--outline-gradient1' 
@@ -211,24 +212,21 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                         type='number' 
                         name='duration' 
                         placeholder='Duration' 
+                        required
                     />
                     <input 
                         className='input-primary--outline-gradient1 form-input' 
                         type="text" 
                         name='url' 
                         placeholder='Website url' 
+                        required
                     />
                     <input 
                         className='input-primary--outline-gradient1 form-input' 
                         type='number' 
                         name='people' 
                         placeholder='Number of people'
-                    />
-                    <input 
-                        className='input-primary--outline-gradient1 form-input' 
-                        type="text" 
-                        name='type' 
-                        placeholder='Type of Event' 
+                        required
                     />
                     <TagsInput 
                         selectedTags={(tags: any) => setKeywords(tags)}  
@@ -236,8 +234,7 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                     />
                     <button 
                         className='btn-primary--gradient-outline form-input__buttonlogin'
-                        onClick={submitHandler} 
-                        type='button'
+                        type='submit'
                     >
                     Add Event</button>
                 </form>

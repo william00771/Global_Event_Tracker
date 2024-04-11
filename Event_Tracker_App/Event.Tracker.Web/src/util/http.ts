@@ -1,4 +1,5 @@
 import { Coordinates, EventModel, EventModelRequestDto } from "../types/types";
+import { logFormData } from "./formtools";
 
 export const fetchEvents = async (startDate?: Date, endDate?: Date, filter?: string): Promise<Array<EventModel>> => {
     let url = `http://localhost:5200/api/Event`;
@@ -17,25 +18,22 @@ export const fetchEvents = async (startDate?: Date, endDate?: Date, filter?: str
     return await response.json();
 }
 
-export const postEvent = async (eventRequestDto : EventModelRequestDto) => {
+export const postEvent = async (eventRequestFormData: FormData) => {
     const response = await fetch(`http://localhost:5200/api/Event`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(eventRequestDto),
+        body: eventRequestFormData,
     });
 
     if (!response.ok) {
-        const error = new Error('An error occurred while creating a new salty');
+        const error = new Error('An error occurred while creating a new event');
         error.message = await response.json();
         throw error;
     }
 
     const eventPostResponse = await response.json();
+
     return eventPostResponse;
 }
-
 
 export const fetchCoordinatesFromAddress = async (address: string): Promise<Coordinates> => {
     const response = await fetch(`http://localhost:5200/api/Address/getCoordinatesFromAddress?Address=${address}`);
