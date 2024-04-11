@@ -17,8 +17,7 @@ html{
   align-items: center;
   margin: 0;
 
-  overflow-y: hidden;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 #root {

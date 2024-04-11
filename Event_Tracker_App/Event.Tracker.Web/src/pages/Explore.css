@@ -98,6 +98,7 @@
         flex-direction: column;
         justify-content: space-between;
 
+        overflow: hidden;
     }
         .marker__header-bgimage{
             position: absolute;
@@ -123,9 +124,8 @@
 
         }
         .marker__header-bottom{
-            height: 35%;
-            padding: 0% 5%;
-            margin-bottom: 3%;
+            height: 85%;
+            padding: 0% 4%;
 
             display: flex;
             flex-wrap: wrap;
@@ -141,8 +141,9 @@
                 gap: .2rem;
             }
             .marker__header-title{
+                margin-top: auto;
                 font-size: 1rem;
-                margin-bottom: .2rem;
+                margin-bottom: 0rem;
                 flex: 100%;
             }
             .marker__header-paragraph{
