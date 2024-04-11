@@ -143,7 +143,7 @@ function Explore({className, data, setPage, page, filter }: Props) {
                   <img className='marker__header-bgimage' src={ eventData.image || placeholder } alt="" />
               </header>
               <article className='marker__main'>
-                  <p className='marker__main-paragraph'>{eventData.name}
+                  <p className='marker__main-paragraph'>{eventData.description.split(" ").slice(0, 18).join(" ")}..
                   </p>
                   <button className='moreinfobtn btn-primary--gradient marker__main-btn' value={id}>More Info</button>
               </article>
