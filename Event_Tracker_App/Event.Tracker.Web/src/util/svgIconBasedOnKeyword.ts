@@ -67,277 +67,223 @@ import wine from '../resources/event_type_icons/wine.svg';
 import writing from '../resources/event_type_icons/writing.svg';
 import yoga from '../resources/event_type_icons/yoga.svg';
 
+import { airshowKeywords, artKeywords, athleticsKeywords, balletKeywords, basketballKeywords, 
+    beerKeywords, birthdayKeywords, bluesKeywords, bookKeywords, businessKeywords, catKeywords, 
+    charityKeywords, chessKeywords, classicalKeywords, classiccarKeywords, clubKeywords, codingKeywords, 
+    comedyKeywords, concertKeywords, cookingKeywords, cyclingKeywords, danceKeywords, dogKeywords, 
+    entrepreneurKeywords, environmentalKeywords, expeditionKeywords, familyKeywords, fashionKeywords, 
+    filmmakingKeywords, financialKeywords, fishingKeywords, fitnessKeywords, foodKeywords, footballKeywords, 
+    gamingKeywords, golfKeywords, jazzKeywords, karaokeKeywords, kidKeywords, languageKeywords, 
+    mindfulnessKeywords, moneyKeywords, natureKeywords, parentingKeywords, photographyKeywords, 
+    prideKeywords, realestateKeywords, recyclingKeywords, runningKeywords, sailingKeywords, scienceKeywords, 
+    singingKeywords, singlesKeywords, skateboardKeywords, spaKeywords, speeddatingKeywords, squashKeywords,
+    streetfoodKeywords, techKeywords, tennisKeywords, vipKeywords, volunteerKeywords, wildlifeKeywords, 
+    wineKeywords, writingKeywords, yogaKeywords } from '@/Data/keywords';
+
 
 export const svgIconBasedOnKeyword = (event: EventModel) => {
     const name = event.name.toLocaleLowerCase();
     const description = event.description.toLocaleLowerCase();
     const keywords = event.keywords.concat([name, description]);
 
-    if (keywords.some(keyword => airshowKeywords.includes(keyword))) {
+    if (keywords.some(keyword => airshowKeywords.includes(keyword.toLowerCase()))) {
         return airshow;
     }
-    if (keywords.some(keyword => artKeywords.includes(keyword))) {
-        return art;
-    }
-    if (keywords.some(keyword => athleticsKeywords.includes(keyword))) {
-        return athletics;
-    }
-    if (keywords.some(keyword => danceKeywords.includes(keyword))) {
-        return dance;
-    }
-    if (keywords.some(keyword => balletKeywords.includes(keyword))) {
-        return ballet;
-    }
-    if (keywords.some(keyword => classicalKeywords.includes(keyword))) {
-        return classical;
-    }
-    if (keywords.some(keyword => classiccarKeywords.includes(keyword))) {
-        return classiccar;
-    }
-    if (keywords.some(keyword => clubKeywords.includes(keyword))) {
-        return club;
-    }
-    if (keywords.some(keyword => codingKeywords.includes(keyword))) {
-        return coding;
-    }
-    if (keywords.some(keyword => comedyKeywords.includes(keyword))) {
-        return comedy;
-    }
-    if (keywords.some(keyword => concertKeywords.includes(keyword))) {
-        return concert;
-    }
-    if (keywords.some(keyword => cookingKeywords.includes(keyword))) {
+    if (keywords.some(keyword => cookingKeywords.includes(keyword.toLowerCase()))) {
         return cooking;
     }
-    if (keywords.some(keyword => cyclingKeywords.includes(keyword))) {
-        return cycling;
+    if (keywords.some(keyword => artKeywords.includes(keyword.toLowerCase()))) {
+        return art;
     }
-    if (keywords.some(keyword => yogaKeywords.includes(keyword))) {
-        return yoga;
+    if (keywords.some(keyword => athleticsKeywords.includes(keyword.toLowerCase()))) {
+        return athletics;
     }
-    if (keywords.some(keyword => writingKeywords.includes(keyword))) {
-        return writing;
-    }
-    if (keywords.some(keyword => dogKeywords.includes(keyword))) {
-        return dog;
-    }
-    if (keywords.some(keyword => entrepreneurKeywords.includes(keyword))) {
-        return entrepreneur;
-    }
-    if (keywords.some(keyword => environmentalKeywords.includes(keyword))) {
-        return enviromental;
-    }
-    if (keywords.some(keyword => basketballKeywords.includes(keyword))) {
-        return basketball;
-    }
-    if (keywords.some(keyword => beerKeywords.includes(keyword))) {
-        return beer;
-    }
-    if (keywords.some(keyword => birthdayKeywords.includes(keyword))) {
-        return birthday;
-    }
-    if (keywords.some(keyword => bluesKeywords.includes(keyword))) {
-        return blues;
-    }
-    if (keywords.some(keyword => bookKeywords.includes(keyword))) {
-        return book;
-    }
-    if (keywords.some(keyword => businessKeywords.includes(keyword))) {
-        return business;
-    }
-    if (keywords.some(keyword => catKeywords.includes(keyword))) {
-        return cat;
-    }
-    if (keywords.some(keyword => charityKeywords.includes(keyword))) {
-        return charity;
-    }
-    if (keywords.some(keyword => chessKeywords.includes(keyword))) {
-        return chess;
-    }
-    if (keywords.some(keyword => expeditionKeywords.includes(keyword))) {
-        return expedition;
-    }
-    if (keywords.some(keyword => familyKeywords.includes(keyword))) {
-        return family;
-    }
-    if (keywords.some(keyword => fashionKeywords.includes(keyword))) {
-        return fashion;
-    }
-    if (keywords.some(keyword => filmmakingKeywords.includes(keyword))) {
-        return filmmaking;
-    }
-    if (keywords.some(keyword => financialKeywords.includes(keyword))) {
-        return financial;
-    }
-    if (keywords.some(keyword => fishingKeywords.includes(keyword))) {
-        return fishing;
-    }
-    if (keywords.some(keyword => fitnessKeywords.includes(keyword))) {
-        return fitness;
-    }
-    if (keywords.some(keyword => foodKeywords.includes(keyword))) {
+    if (keywords.some(keyword => foodKeywords.includes(keyword.toLowerCase()))) {
         return food;
     }
-    if (keywords.some(keyword => footballKeywords.includes(keyword))) {
+    if (keywords.some(keyword => danceKeywords.includes(keyword.toLowerCase()))) {
+        return dance;
+    }
+    if (keywords.some(keyword => balletKeywords.includes(keyword.toLowerCase()))) {
+        return ballet;
+    }
+    if (keywords.some(keyword => classicalKeywords.includes(keyword.toLowerCase()))) {
+        return classical;
+    }
+    if (keywords.some(keyword => classiccarKeywords.includes(keyword.toLowerCase()))) {
+        return classiccar;
+    }
+    if (keywords.some(keyword => clubKeywords.includes(keyword.toLowerCase()))) {
+        return club;
+    }
+    if (keywords.some(keyword => codingKeywords.includes(keyword.toLowerCase()))) {
+        return coding;
+    }
+    if (keywords.some(keyword => comedyKeywords.includes(keyword.toLowerCase()))) {
+        return comedy;
+    }
+    if (keywords.some(keyword => concertKeywords.includes(keyword.toLowerCase()))) {
+        return concert;
+    }
+    if (keywords.some(keyword => cyclingKeywords.includes(keyword.toLowerCase()))) {
+        return cycling;
+    }
+    if (keywords.some(keyword => yogaKeywords.includes(keyword.toLowerCase()))) {
+        return yoga;
+    }
+    if (keywords.some(keyword => writingKeywords.includes(keyword.toLowerCase()))) {
+        return writing;
+    }
+    if (keywords.some(keyword => dogKeywords.includes(keyword.toLowerCase()))) {
+        return dog;
+    }
+    if (keywords.some(keyword => entrepreneurKeywords.includes(keyword.toLowerCase()))) {
+        return entrepreneur;
+    }
+    if (keywords.some(keyword => environmentalKeywords.includes(keyword.toLowerCase()))) {
+        return enviromental;
+    }
+    if (keywords.some(keyword => basketballKeywords.includes(keyword.toLowerCase()))) {
+        return basketball;
+    }
+    if (keywords.some(keyword => beerKeywords.includes(keyword.toLowerCase()))) {
+        return beer;
+    }
+    if (keywords.some(keyword => birthdayKeywords.includes(keyword.toLowerCase()))) {
+        return birthday;
+    }
+    if (keywords.some(keyword => bluesKeywords.includes(keyword.toLowerCase()))) {
+        return blues;
+    }
+    if (keywords.some(keyword => bookKeywords.includes(keyword.toLowerCase()))) {
+        return book;
+    }
+    if (keywords.some(keyword => businessKeywords.includes(keyword.toLowerCase()))) {
+        return business;
+    }
+    if (keywords.some(keyword => catKeywords.includes(keyword.toLowerCase()))) {
+        return cat;
+    }
+    if (keywords.some(keyword => charityKeywords.includes(keyword.toLowerCase()))) {
+        return charity;
+    }
+    if (keywords.some(keyword => chessKeywords.includes(keyword.toLowerCase()))) {
+        return chess;
+    }
+    if (keywords.some(keyword => expeditionKeywords.includes(keyword.toLowerCase()))) {
+        return expedition;
+    }
+    if (keywords.some(keyword => familyKeywords.includes(keyword.toLowerCase()))) {
+        return family;
+    }
+    if (keywords.some(keyword => fashionKeywords.includes(keyword.toLowerCase()))) {
+        return fashion;
+    }
+    if (keywords.some(keyword => filmmakingKeywords.includes(keyword.toLowerCase()))) {
+        return filmmaking;
+    }
+    if (keywords.some(keyword => financialKeywords.includes(keyword.toLowerCase()))) {
+        return financial;
+    }
+    if (keywords.some(keyword => fishingKeywords.includes(keyword.toLowerCase()))) {
+        return fishing;
+    }
+    if (keywords.some(keyword => fitnessKeywords.includes(keyword.toLowerCase()))) {
+        return fitness;
+    }
+    if (keywords.some(keyword => footballKeywords.includes(keyword.toLowerCase()))) {
         return football;
     }
-    if (keywords.some(keyword => gamingKeywords.includes(keyword))) {
+    if (keywords.some(keyword => gamingKeywords.includes(keyword.toLowerCase()))) {
         return gaming;
     }
-    if (keywords.some(keyword => golfKeywords.includes(keyword))) {
+    if (keywords.some(keyword => golfKeywords.includes(keyword.toLowerCase()))) {
         return golf;
     }
-    if (keywords.some(keyword => jazzKeywords.includes(keyword))) {
+    if (keywords.some(keyword => jazzKeywords.includes(keyword.toLowerCase()))) {
         return jazz;
     }
-    if (keywords.some(keyword => karaokeKeywords.includes(keyword))) {
+    if (keywords.some(keyword => karaokeKeywords.includes(keyword.toLowerCase()))) {
         return karaoke;
     }
-    if (keywords.some(keyword => kidKeywords.includes(keyword))) {
+    if (keywords.some(keyword => kidKeywords.includes(keyword.toLowerCase()))) {
         return kid;
     }
-    if (keywords.some(keyword => languageKeywords.includes(keyword))) {
+    if (keywords.some(keyword => languageKeywords.includes(keyword.toLowerCase()))) {
         return language;
     }
-    if (keywords.some(keyword => mindfulnessKeywords.includes(keyword))) {
+    if (keywords.some(keyword => mindfulnessKeywords.includes(keyword.toLowerCase()))) {
         return mindfulness;
     }
-    if (keywords.some(keyword => moneyKeywords.includes(keyword))) {
+    if (keywords.some(keyword => moneyKeywords.includes(keyword.toLowerCase()))) {
         return money;
     }
-    if (keywords.some(keyword => natureKeywords.includes(keyword))) {
+    if (keywords.some(keyword => natureKeywords.includes(keyword.toLowerCase()))) {
         return nature;
     }
-    if (keywords.some(keyword => parentingKeywords.includes(keyword))) {
+    if (keywords.some(keyword => parentingKeywords.includes(keyword.toLowerCase()))) {
         return parenting;
     }
-    if (keywords.some(keyword => photographyKeywords.includes(keyword))) {
+    if (keywords.some(keyword => photographyKeywords.includes(keyword.toLowerCase()))) {
         return photography;
     }
-    if (keywords.some(keyword => prideKeywords.includes(keyword))) {
+    if (keywords.some(keyword => prideKeywords.includes(keyword.toLowerCase()))) {
         return pride;
     }
-    if (keywords.some(keyword => realestateKeywords.includes(keyword))) {
+    if (keywords.some(keyword => realestateKeywords.includes(keyword.toLowerCase()))) {
         return realestate;
     }
-    if (keywords.some(keyword => recyclingKeywords.includes(keyword))) {
+    if (keywords.some(keyword => recyclingKeywords.includes(keyword.toLowerCase()))) {
         return recycling;
     }
-    if (keywords.some(keyword => runningKeywords.includes(keyword))) {
+    if (keywords.some(keyword => runningKeywords.includes(keyword.toLowerCase()))) {
         return running;
     }
-    if (keywords.some(keyword => sailingKeywords.includes(keyword))) {
+    if (keywords.some(keyword => sailingKeywords.includes(keyword.toLowerCase()))) {
         return sailing;
     }
-    if (keywords.some(keyword => scienceKeywords.includes(keyword))) {
+    if (keywords.some(keyword => scienceKeywords.includes(keyword.toLowerCase()))) {
         return science;
     }
-    if (keywords.some(keyword => singingKeywords.includes(keyword))) {
+    if (keywords.some(keyword => singingKeywords.includes(keyword.toLowerCase()))) {
         return singing;
     }
-    if (keywords.some(keyword => singlesKeywords.includes(keyword))) {
+    if (keywords.some(keyword => singlesKeywords.includes(keyword.toLowerCase()))) {
         return singles;
     }
-    if (keywords.some(keyword => skateboardKeywords.includes(keyword))) {
+    if (keywords.some(keyword => skateboardKeywords.includes(keyword.toLowerCase()))) {
         return skateboard;
     }
-    if (keywords.some(keyword => spaKeywords.includes(keyword))) {
+    if (keywords.some(keyword => spaKeywords.includes(keyword.toLowerCase()))) {
         return spa;
     }
-    if (keywords.some(keyword => speeddatingKeywords.includes(keyword))) {
+    if (keywords.some(keyword => speeddatingKeywords.includes(keyword.toLowerCase()))) {
         return speeddating;
     }
-    if (keywords.some(keyword => squashKeywords.includes(keyword))) {
+    if (keywords.some(keyword => squashKeywords.includes(keyword.toLowerCase()))) {
         return squash;
     }
-    if (keywords.some(keyword => streetfoodKeywords.includes(keyword))) {
+    if (keywords.some(keyword => streetfoodKeywords.includes(keyword.toLowerCase()))) {
         return streetfood;
     }
-    if (keywords.some(keyword => techKeywords.includes(keyword))) {
+    if (keywords.some(keyword => techKeywords.includes(keyword.toLowerCase()))) {
         return tech;
     }
-    if (keywords.some(keyword => tennisKeywords.includes(keyword))) {
+    if (keywords.some(keyword => tennisKeywords.includes(keyword.toLowerCase()))) {
         return tennis;
     }
-    if (keywords.some(keyword => vipKeywords.includes(keyword))) {
+    if (keywords.some(keyword => vipKeywords.includes(keyword.toLowerCase()))) {
         return vip;
     }
-    if (keywords.some(keyword => volunteerKeywords.includes(keyword))) {
+    if (keywords.some(keyword => volunteerKeywords.includes(keyword.toLowerCase()))) {
         return volunteer;
     }
-    if (keywords.some(keyword => wildlifeKeywords.includes(keyword))) {
+    if (keywords.some(keyword => wildlifeKeywords.includes(keyword.toLowerCase()))) {
         return wildlife;
     }
-    if (keywords.some(keyword => wineKeywords.includes(keyword))) {
+    if (keywords.some(keyword => wineKeywords.includes(keyword.toLowerCase()))) {
         return wine;
     }
 
     return dj;
 };
-
-const airshowKeywords = ["airshow", "aircraft", "aerobatics"];
-const artKeywords = ["art", "painting", "sculpture", "gallery"];
-const athleticsKeywords = ["athletics", "track and field", "sports"];
-const balletKeywords = ["ballet", "dance", "performing arts"];
-const basketballKeywords = ["basketball", "hoops", "NBA"];
-const beerKeywords = ["beer", "brewery", "ale", "lager"];
-const birthdayKeywords = ["birthday", "celebration", "party"];
-const bluesKeywords = ["blues", "music", "jazz"];
-const bookKeywords = ["book", "reading", "literature", "novel"];
-const businessKeywords = ["business", "enterprise", "startup"];
-const catKeywords = ["cat", "feline", "pet"];
-const charityKeywords = ["charity", "fundraiser", "non-profit"];
-const chessKeywords = ["chess", "strategy", "board game"];
-const classicalKeywords = ["classical music", "orchestra", "symphony"];
-const classiccarKeywords = ["classic car", "vintage car", "auto show"];
-const clubKeywords = ["club", "nightlife", "party", "DJ"];
-const codingKeywords = ["coding", "programming", "software development"];
-const comedyKeywords = ["comedy", "stand-up", "humor"];
-const concertKeywords = ["concert", "live music", "performance"];
-const cookingKeywords = ["cooking", "culinary", "food", "recipes"];
-const cyclingKeywords = ["cycling", "biking", "bicycle"];
-const writingKeywords = ["writing", "authoring", "blogging"];
-const danceKeywords = ["dance", "salsa", "latin dance", "ballroom"];
-const dogKeywords = ["dog", "canine", "pet"];
-const entrepreneurKeywords = ["entrepreneur", "business", "startup", "business owner"];
-const environmentalKeywords = ["environmental", "eco-friendly", "conservation"];
-const expeditionKeywords = ["expedition", "adventure", "exploration"];
-const familyKeywords = ["family", "relatives", "family gathering"];
-const fashionKeywords = ["fashion", "clothing", "apparel"];
-const filmmakingKeywords = ["filmmaking", "cinema", "movie production"];
-const financialKeywords = ["financial", "finance", "money management"];
-const fishingKeywords = ["fishing", "angling", "fish"];
-const fitnessKeywords = ["fitness", "exercise", "gym"];
-const foodKeywords = ["food", "cuisine", "gastronomy"];
-const footballKeywords = ["football", "soccer", "sports"];
-const gamingKeywords = ["gaming", "video games", "esports"];
-const golfKeywords = ["golf", "putting", "greens"];
-const jazzKeywords = ["jazz", "music", "improvisation"];
-const karaokeKeywords = ["karaoke", "singing", "music entertainment"];
-const kidKeywords = ["kid", "child", "children activities"];
-const languageKeywords = ["language", "linguistics", "speech"];
-const mindfulnessKeywords = ["mindfulness", "meditation", "well-being"];
-const moneyKeywords = ["money", "finance", "economics"];
-const natureKeywords = ["nature", "outdoors", "wildlife"];
-const parentingKeywords = ["parenting", "child rearing", "family"];
-const photographyKeywords = ["photography", "photographing", "camera"];
-const prideKeywords = ["pride", "LGBTQ", "gay rights"];
-const realestateKeywords = ["real estate", "property", "housing"];
-const recyclingKeywords = ["recycling", "sustainability", "waste management"];
-const runningKeywords = ["running", "jogging", "marathon"];
-const sailingKeywords = ["sailing", "boating", "yachting"];
-const scienceKeywords = ["science", "research", "experimentation"];
-const singingKeywords = ["singing", "vocal", "music"];
-const singlesKeywords = ["singles", "dating", "relationships"];
-const skateboardKeywords = ["skateboard", "skating", "skatepark"];
-const spaKeywords = ["spa", "relaxation", "wellness"];
-const speeddatingKeywords = ["speed dating", "dating", "singles event"];
-const squashKeywords = ["squash", "racket sport", "court"];
-const streetfoodKeywords = ["street food", "food stall", "cuisine"];
-const techKeywords = ["tech", "technology", "innovation"];
-const tennisKeywords = ["tennis", "racket", "sports"];
-const vipKeywords = ["vip", "exclusive", "luxury"];
-const volunteerKeywords = ["volunteer", "charity", "community service"];
-const wildlifeKeywords = ["wildlife", "animals", "nature conservation"];
-const wineKeywords = ["wine", "vineyard", "winetasting"];
-const yogaKeywords = ["yoga", "kundalini"];
