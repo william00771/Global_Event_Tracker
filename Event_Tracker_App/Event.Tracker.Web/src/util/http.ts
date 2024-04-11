@@ -1,7 +1,7 @@
 import { Coordinates, EventModel, EventModelRequestDto } from "../types/types";
 
-export const fetchEvents = async (startDate?: Date, endDate?: Date): Promise<Array<EventModel>> => {
-    let url = 'http://localhost:5200/api/Event';
+export const fetchEvents = async (startDate?: Date, endDate?: Date, filter?: string): Promise<Array<EventModel>> => {
+    let url = `http://localhost:5200/api/Event`;
     if (startDate || endDate) {
         url += `?startDate=${startDate?.toISOString()}&endDate=${endDate?.toISOString()}`;
     }

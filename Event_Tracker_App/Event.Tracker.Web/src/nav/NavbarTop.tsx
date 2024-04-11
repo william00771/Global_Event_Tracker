@@ -1,13 +1,14 @@
-import { MouseEventHandler, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import './NavbarTop.css'
 
 type Props = {
     page: string,
-    setPage: (page: string) => void,
-    className: string
+    className: string,
+    setPage: (page: string) => void,    
+    setFilter: (filter: string) => void
 }
 
-export const NavbarTop = ({ className, setPage, page }: Props) => {
+export const NavbarTop = ({ className, page, setPage, setFilter }: Props) => {
     const [active, setActive] = useState(false);
 
     const setPageHandler = () => {
@@ -27,7 +28,6 @@ export const NavbarTop = ({ className, setPage, page }: Props) => {
 
     const searchHandler = (e: React.MouseEvent<HTMLInputElement>): void => {
         
-        console.log()
         e.preventDefault();
         inputRef.current.value = '';
         active == true ? '' : setActive(!active);
@@ -35,9 +35,10 @@ export const NavbarTop = ({ className, setPage, page }: Props) => {
     }
     const submitHandler = (): void => {
         if(inputRef.current.value === ''){
+            setActive(false);
             return;
         }
-        console.log(inputRef.current.value)
+        setFilter(inputRef.current.value.toString());
         inputRef.current.blur();
         setActive(false)
     }
