@@ -33,6 +33,7 @@
 .explore-container.active,
 .listevents-container.active,
 .createevent-container.active{
+  overflow-y: auto;
   display: block;
   visibility: visible;
   opacity: 1;
@@ -42,6 +43,7 @@
   visibility: visible;
   display: grid;
   opacity: 1;
+  overflow-y: auto;
 }
 
 
