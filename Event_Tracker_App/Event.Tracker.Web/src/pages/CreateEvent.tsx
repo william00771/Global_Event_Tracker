@@ -1,21 +1,20 @@
-import { DatePicker, LocalizationProvider, MobileDatePicker, TimePicker } from '@mui/x-date-pickers'
+import { DatePicker, LocalizationProvider, TimePicker } from '@mui/x-date-pickers'
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs'
 import './CreateEvent.css'
 import dayjs from 'dayjs'
 import { ThemeProvider } from '@emotion/react'
-import { createTheme } from '@mui/material'
+import { CircularProgress, createTheme } from '@mui/material'
 import placeholder from '../resources/Placeholders/event.jpg'
 import { FormEvent, useRef, useState } from 'react'
-import { Coordinates, EventModelRequestDto } from '@/types/types'
-import { GeocoderApiResponse } from '@/types/geocoder_types'
-import { fetchCoordinatesFromAddress, postFormEvent } from '@/util/http'
+import { Coordinates } from '@/types/types'
+import { fetchCoordinatesFromAddress } from '@/util/http'
 import TagsInput from '@/components/TagsInput/TagsInput'
-import { logFormData } from '@/util/formtools'
 
 type Props = {
     className: string
     setPage: (page: string) => void
-    postEvent: (eventRequestDto: FormData) => void
+    postEvent: (eventRequestDto: FormData) => void,
+    loading: boolean
 }
 
 const darkTheme = createTheme({
@@ -36,8 +35,15 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
     const [adress, setAdress] = useState<Coordinates>({lat: 0, lng: 0, formattedAddress: ''});
     const [invalidAdress, setInvalidAdress] = useState(false);
 
+    const [loading, setLoading] = useState(false);
+
     const submitHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        if(keywords == null){
+            return;
+        }
+        setLoading(true);
+
         const target = document.getElementById('myForm') as HTMLFormElement;
         const fd = new FormData(target);
         const data = Object.fromEntries(fd.entries());
@@ -57,10 +63,11 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
         keywords.forEach((keyword, index) => {
             formData.append(`Keywords[${index}]`, keyword);
         });
-        formData.append('Image', selectedImageBlob || '');
-        
+        formData.append('Image', selectedImageBlob || placeholder);
 
         postEvent(formData);
+        setLoading(false);
+        setPage('Explore');
     };
 
     const addressChangeHandler = (e: FormEvent<HTMLFormElement>): void => {
@@ -112,6 +119,7 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
 
     return(
         <section className={className}>
+            {loading && <div className='loading-container'><CircularProgress color="secondary" /></div>}
             <header className='createevent-container__header'>
                 <section className='createevent-container__header-top'>
                     <a onClick={() => setPage('Explore')} className='createevent-container__header-item' href="#">
@@ -145,7 +153,7 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                 <img className='createevent-container__header-bgimage' src={selectedImage || placeholder} alt="" />
             </header>
             <section className='createevent-container__main'>
-                <form id="myForm" onSubmit={submitHandler} className='createevent-container__form'>
+                <form id="myForm" className='createevent-container__form'>
                     <input 
                         className='createevent-container__form-fileinput' 
                         type="file" accept=".jpg, .jpeg, .eps, .png, .webp, .tiff" 
@@ -234,7 +242,8 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                     />
                     <button 
                         className='btn-primary--gradient-outline form-input__buttonlogin'
-                        type='submit'
+                        type='button'
+                        onClick={(e) => submitHandler(e)}
                     >
                     Add Event</button>
                 </form>

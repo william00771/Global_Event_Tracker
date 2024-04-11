@@ -107,7 +107,7 @@ function Explore({className, data, setPage, page }: Props) {
       return (
         <>
           <header style={{width: `${width}px`, height: `${width}px`}} className='marker-container'>
-              <div className="marker-container__icon" style={{backgroundImage: `linear-gradient(#eb01a538, #d1363136), url(${svgIcon})`}}></div>
+              <div className="marker-container__icon" style={{backgroundImage: `linear-gradient(#eb01a525, #d1363136), url(${svgIcon})`}}></div>
           </header>
           <section className={"marker-container__section " + (showMarkerDetails === id.toString() ? "active" : "inactive")}>
               <header className='marker__header'>

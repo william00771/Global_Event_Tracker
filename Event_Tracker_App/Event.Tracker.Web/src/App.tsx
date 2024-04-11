@@ -40,7 +40,6 @@ function App() {
       (eventRequestFormData: FormData) => postEvent(eventRequestFormData), {
       onSuccess: () => {
           refetch();
-          setPage('Explore');
       }
   });
 
