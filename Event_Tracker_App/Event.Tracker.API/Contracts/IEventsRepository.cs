@@ -9,7 +9,7 @@ namespace Event.Tracker.API.Contracts
 {
     public interface IEventsRepository
     {
-        Task<List<EventModel>> GetAllEventsAsync(DateTime? startDate, DateTime? endDate);
+        Task<List<EventModel>> GetAllEventsAsync(DateTime? startDate, DateTime? endDate, string? keyword);
         Task<EventModel> PostEventAsync(EventModelRequestDto eventModel, IFormFile imageFileRequest); 
     }
 }

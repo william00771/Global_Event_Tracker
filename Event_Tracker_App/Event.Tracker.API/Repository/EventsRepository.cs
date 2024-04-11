@@ -20,7 +20,7 @@ namespace Event.Tracker.API.Repository
             _eventContext = eventContext;
             _photoUploader = photoUploader;
         }
-        public async Task<List<EventModel>> GetAllEventsAsync(DateTime? startDate, DateTime? endDate)
+        public async Task<List<EventModel>> GetAllEventsAsync(DateTime? startDate, DateTime? endDate, string? keyword)
         {
             IQueryable<EventModel> query = _eventContext.Events.Include(ev => ev.Location);
 
@@ -32,6 +32,16 @@ namespace Event.Tracker.API.Repository
             if (endDate != null)
             {
                 query = query.Where(ev => ev.DateTo <= endDate);
+            }
+
+            if (!string.IsNullOrEmpty(keyword))
+            {
+                query = query.Where(ev => 
+                    ev.Name.Contains(keyword) ||
+                    ev.Description.Contains(keyword) ||
+                    ev.WebsiteUrl.Contains(keyword) ||
+                    ev.Keywords.Any(k => k.Contains(keyword))
+                );
             }
 
             var events = await query.ToListAsync();

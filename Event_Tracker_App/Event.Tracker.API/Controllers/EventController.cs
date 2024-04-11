@@ -21,9 +21,9 @@ public class EventController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<ActionResult<EventModel>> GetEvent(DateTime? startDate, DateTime? endDate)
+    public async Task<ActionResult<EventModel>> GetEvent(DateTime? startDate, DateTime? endDate, string? keyword)
     {
-        var events = await _eventRepository.GetAllEventsAsync(startDate, endDate);
+        var events = await _eventRepository.GetAllEventsAsync(startDate, endDate, keyword);
         return Ok(events);
     }
 

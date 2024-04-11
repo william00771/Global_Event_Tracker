@@ -18,6 +18,7 @@ function App() {
   const [page, setPage] = useState('Explore');
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
+  const [filter, setFilter] = useState("");
 
 
   const getFilteredEventsHandler = (startDate?: Date, endDate?: Date) => {
@@ -28,7 +29,6 @@ function App() {
       setEndDate(endDate);
     }
   }
-
 
   const { data, isLoading, isError, refetch } = useQuery<Array<EventModel>>({
       queryKey: ['fetchevents', startDate, endDate],
@@ -52,6 +52,7 @@ function App() {
           setPage={(page) => setPage(page)}
           page={page}
           className={"navtop-container " + (page == "EventDetails" && "inactive")}
+          setFilter={(filter: string) => setFilter(filter)}
         />
         {data &&
           <main className="page-container">
@@ -67,7 +68,6 @@ function App() {
             />
             <Explore 
               className={"explore-container " }
-              // + (page == "Explore" && " active ") + (page == "TimePicker"  && " active ")
               data={data}
               setPage={(page) => setPage(page)}
               page={page}
