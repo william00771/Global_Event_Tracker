@@ -66,7 +66,19 @@ import wildlife from '../resources/event_type_icons/wildlife.svg';
 import wine from '../resources/event_type_icons/wine.svg';
 import writing from '../resources/event_type_icons/writing.svg';
 import yoga from '../resources/event_type_icons/yoga.svg';
-import { airshowKeywords, artKeywords, athleticsKeywords, balletKeywords, basketballKeywords, beerKeywords, birthdayKeywords, bluesKeywords, bookKeywords, businessKeywords, catKeywords, charityKeywords, chessKeywords, classicalKeywords, classiccarKeywords, clubKeywords, codingKeywords, comedyKeywords, concertKeywords, cookingKeywords, cyclingKeywords, danceKeywords, dogKeywords, entrepreneurKeywords, environmentalKeywords, expeditionKeywords, familyKeywords, fashionKeywords, filmmakingKeywords, financialKeywords, fishingKeywords, fitnessKeywords, foodKeywords, footballKeywords, gamingKeywords, golfKeywords, jazzKeywords, karaokeKeywords, kidKeywords, languageKeywords, mindfulnessKeywords, moneyKeywords, natureKeywords, parentingKeywords, photographyKeywords, prideKeywords, realestateKeywords, recyclingKeywords, runningKeywords, sailingKeywords, scienceKeywords, singingKeywords, singlesKeywords, skateboardKeywords, spaKeywords, speeddatingKeywords, squashKeywords, streetfoodKeywords, techKeywords, tennisKeywords, vipKeywords, volunteerKeywords, wildlifeKeywords, wineKeywords, writingKeywords, yogaKeywords } from '@/Data/keywords';
+
+import { airshowKeywords, artKeywords, athleticsKeywords, balletKeywords, basketballKeywords, 
+    beerKeywords, birthdayKeywords, bluesKeywords, bookKeywords, businessKeywords, catKeywords, 
+    charityKeywords, chessKeywords, classicalKeywords, classiccarKeywords, clubKeywords, codingKeywords, 
+    comedyKeywords, concertKeywords, cookingKeywords, cyclingKeywords, danceKeywords, dogKeywords, 
+    entrepreneurKeywords, environmentalKeywords, expeditionKeywords, familyKeywords, fashionKeywords, 
+    filmmakingKeywords, financialKeywords, fishingKeywords, fitnessKeywords, foodKeywords, footballKeywords, 
+    gamingKeywords, golfKeywords, jazzKeywords, karaokeKeywords, kidKeywords, languageKeywords, 
+    mindfulnessKeywords, moneyKeywords, natureKeywords, parentingKeywords, photographyKeywords, 
+    prideKeywords, realestateKeywords, recyclingKeywords, runningKeywords, sailingKeywords, scienceKeywords, 
+    singingKeywords, singlesKeywords, skateboardKeywords, spaKeywords, speeddatingKeywords, squashKeywords,
+    streetfoodKeywords, techKeywords, tennisKeywords, vipKeywords, volunteerKeywords, wildlifeKeywords, 
+    wineKeywords, writingKeywords, yogaKeywords } from '@/Data/keywords';
 
 
 export const svgIconBasedOnKeyword = (event: EventModel) => {
@@ -76,6 +88,9 @@ export const svgIconBasedOnKeyword = (event: EventModel) => {
 
     if (keywords.some(keyword => airshowKeywords.includes(keyword.toLowerCase()))) {
         return airshow;
+    }
+    if (keywords.some(keyword => cookingKeywords.includes(keyword.toLowerCase()))) {
+        return cooking;
     }
     if (keywords.some(keyword => artKeywords.includes(keyword.toLowerCase()))) {
         return art;
@@ -109,9 +124,6 @@ export const svgIconBasedOnKeyword = (event: EventModel) => {
     }
     if (keywords.some(keyword => concertKeywords.includes(keyword.toLowerCase()))) {
         return concert;
-    }
-    if (keywords.some(keyword => cookingKeywords.includes(keyword.toLowerCase()))) {
-        return cooking;
     }
     if (keywords.some(keyword => cyclingKeywords.includes(keyword.toLowerCase()))) {
         return cycling;
