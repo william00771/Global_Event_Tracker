@@ -1,13 +1,17 @@
-export const formatDateToStartDateEndDate = (date: Date) => {
-    const startDate = date.getDate();
-    const endDate = date.getDate() + 1;
-    const monthFormat = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(date);
-    const year = date.getFullYear();
+export const formatDateToStartDateEndDate = (dateStartStr: string, dateEndStr: string) => {
+    const dateStart = new Date(dateStartStr);
+    const dateEnd = new Date(dateEndStr);
     
-    return `${startDate}th - ${endDate}th ${monthFormat}, ${year}`;
+    const startDate = dateStart.getDate();
+    const endDate = dateEnd.getDate();
+    const monthFormat = new Intl.DateTimeFormat('en-US', { month: 'long' }).format(dateStart);
+    const year = dateStart.getFullYear();
+    
+    return `${monthFormat} ${startDate}th - ${endDate}th, ${year}`;
 }
 
-export const formatDateAndDurationToHours = (startDateTime: Date, durationHours: number) => {
+export const formatDateAndDurationToHours = (startDateTimeStr: string, durationHours: number) => {
+    const startDateTime = new Date(startDateTimeStr);
     const endDateTime = new Date(startDateTime.getTime() + durationHours * 60 * 60 * 1000);
   
     const startHour = startDateTime.getHours();
