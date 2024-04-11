@@ -8,13 +8,14 @@ import placeholder from '../resources/Placeholders/event.jpg'
 import { FormEvent, useRef, useState } from 'react'
 import { Coordinates, EventModelRequestDto } from '@/types/types'
 import { GeocoderApiResponse } from '@/types/geocoder_types'
-import { fetchCoordinatesFromAddress } from '@/util/http'
+import { fetchCoordinatesFromAddress, postFormEvent } from '@/util/http'
 import TagsInput from '@/components/TagsInput/TagsInput'
+import { logFormData } from '@/util/formtools'
 
 type Props = {
     className: string
     setPage: (page: string) => void
-    postEvent: (eventRequestDto: EventModelRequestDto) => void
+    postEvent: (eventRequestDto: FormData) => void
 }
 
 const darkTheme = createTheme({
@@ -35,29 +36,31 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
     const [adress, setAdress] = useState<Coordinates>({lat: 0, lng: 0, formattedAddress: ''});
     const [invalidAdress, setInvalidAdress] = useState(false);
 
-    const submitHandler = (e: FormEvent<HTMLFormElement>): void => {
+    const submitHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         const target = document.getElementById('myForm') as HTMLFormElement;
         const fd = new FormData(target);
         const data = Object.fromEntries(fd.entries());
 
-        const imageBlob = selectedImageBlob;
+        const formData = new FormData();
+        formData.append('name', data.name);
+        formData.append('location.lat', adress.lat.toString());
+        formData.append('location.lng', adress.lng.toString());
+        formData.append('location.formattedAddress', adress.formattedAddress);
+        formData.append('description', data.description);
+        formData.append('time', new Date(timeValue.toString()).toISOString());
+        formData.append('date', new Date(dateStartValue.toString()).toISOString());
+        formData.append('dateTo', dateEndValue ? new Date(dateEndValue.toString()).toISOString() : '');
+        formData.append('duration', data.duration);
+        formData.append('websiteUrl', data.url);
+        formData.append('numberOfPeople', data.people);
+        keywords.forEach((keyword, index) => {
+            formData.append(`keywords[${index}]`, keyword);
+        });
+        formData.append('image', selectedImageBlob || '');
+        
 
-        const eventRequestDto: EventModelRequestDto = {
-            Name: data.name as string,
-            // location: adress,
-            // description: data.description as string,
-            // time: new Date(timeValue.toString()),
-            // date: new Date(dateStartValue.toString()),
-            // dateTo: new Date(dateEndValue.toString()),
-            // duration: parseInt(data.duration.toString()),
-            // websiteUrl: data.url as string,
-            // numberOfPeople: parseInt(data.people.toString()),
-            // keywords: keywords,
-            // image: data.imageurl as string,
-        };
-
-        postEvent(eventRequestDto);
+        postEvent(formData);
     };
 
     const addressChangeHandler = (e: FormEvent<HTMLFormElement>): void => {
@@ -107,7 +110,6 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
         }
     };
 
-
     return(
         <section className={className}>
             <header className='createevent-container__header'>
@@ -154,11 +156,6 @@ export const CreateEvent = ({ className, setPage, postEvent }: Props) => {
                         className='input-primary--outline-gradient1 form-input' 
                         type="text" name='name' 
                         placeholder='Event Name' 
-                    />
-                    <input 
-                        className='input-primary--outline-gradient1 form-input' 
-                        type="text" name='imageurl' 
-                        placeholder='Image Url' 
                     />
                     <input 
                         className={'input-primary--outline-gradient1 form-input address-input ' + (invalidAdress && 'invalid') }

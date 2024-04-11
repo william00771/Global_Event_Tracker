@@ -28,16 +28,16 @@ public class EventController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> PostEvent(EventModelRequestDto eventModelRequestDto)
+    public async Task<IActionResult> PostEvent([FromForm] EventModelRequestDto eventModelRequestDto)
     {
         if(!ModelState.IsValid)
         {
             return BadRequest(ModelState);
         }
-
-        var newEventModel = await _eventRepository.PostEventAsync(eventModelRequestDto, eventModelRequestDto.Image);
+        return Ok(eventModelRequestDto);
+        // var newEventModel = await _eventRepository.PostEventAsync(eventModelRequestDto, eventModelRequestDto.Image);
         
-        return CreatedAtAction(nameof(GetEvent), new {Id = newEventModel.Id}, newEventModel);
+        // return CreatedAtAction(nameof(GetEvent), new {Id = newEventModel.Id}, newEventModel);
         
     }
 }

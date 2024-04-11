@@ -30,7 +30,7 @@ export type EventModelRequestDto = {
     websiteUrl: string,
     numberOfPeople: number | null,
     keywords: Array<String>,
-    // image: Blob | null
+    image: Blob | null
 }
 
 export type BoundingBox = {

@@ -36,8 +36,7 @@ function App() {
     });
 
   const postMutation = useMutation(
-      (eventRequestDto: EventModelRequestDto) => 
-        postEvent(eventRequestDto), {
+      (eventRequestFormData: FormData) => postEvent(eventRequestFormData), {
       onSuccess: () => {
           refetch();
           setPage('Explore');
@@ -66,12 +65,12 @@ function App() {
               className={"account-container " + (page == "Account" && "active")}
               setPage={(page) => setPage(page)}
             />
-            <Explore 
+            {/* <Explore 
               className={"explore-container " }
               data={data}
               setPage={(page) => setPage(page)}
               page={page}
-            />
+            /> */}
             <ListEvents 
               className={"listevents-container " + (page == "ListEvents" && "active")}
               data={data}
@@ -83,7 +82,7 @@ function App() {
             <CreateEvent 
               className={"createevent-container " + (page == "CreateEvent" && "active")}
               setPage={(page) => setPage(page)}
-              postEvent={(eventRequestDto: EventModelRequestDto) => postMutation.mutate(eventRequestDto)}
+              postEvent={(eventRequestFormData: FormData) => postMutation.mutate(eventRequestFormData)}
             />
           </main>
         }
