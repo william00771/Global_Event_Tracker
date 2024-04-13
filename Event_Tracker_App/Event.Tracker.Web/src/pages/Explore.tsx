@@ -4,7 +4,7 @@ import { MapContainer, Marker, TileLayer, useMapEvent } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import { renderToString } from 'react-dom/server';
 import { Point, divIcon } from 'leaflet';
-import { useEffect, useState } from 'react';
+import { VoidFunctionComponent, useEffect, useState } from 'react';
 import { MOCKDATA } from '@/Data/MockData';
 import { formatDateAndDurationToHours, formatDateToStartDateEndDate } from '@/util/dateTools';
 import { EventDetails } from './EventDetails';
@@ -19,17 +19,18 @@ type Props = {
   page: string,
   filter: string,
   setMapCenter: (mapCenter: Coordinates) => void
-  mapCenter: Coordinates
+  mapCenter: Coordinates,
+  setMaxAllowedMarkerRenders: (quantity: number) => void,
+  maxAllowedMarkerRenders: number
 }
 
-function Explore({className, data, setPage, page, filter, mapCenter, setMapCenter}: Props) {
+function Explore({className, data, setPage, page, filter, mapCenter, setMapCenter, setMaxAllowedMarkerRenders, maxAllowedMarkerRenders}: Props) {
     const [showMarkerDetails, setShowMarkerDetails] = useState<string>('');
     const [showEventDetails, setShowEventDetails] = useState<string>('');
     const [currentEventInfo, setCurrentEventInfo] = useState<EventModel>();
     
     const [boundingbox, setBoundingBox] = useState<BoundingBox>(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 9));
     const [zoomLevel, setZoomLevel] = useState<number>(13);
-    const [maxAllowedMarkerRenders, setMaxAllowedMarkerRenders] = useState<number>(300);
 
     useEffect(() => {
       const handleMoreInfoClick = (event: any) => {
@@ -77,11 +78,11 @@ function Explore({className, data, setPage, page, filter, mapCenter, setMapCente
           setZoomLevel(getCurrentZoomLevel(map));
 
           zoomLevel == 7 && setMaxAllowedMarkerRenders(10)
-          zoomLevel == 8 && setMaxAllowedMarkerRenders(20)
-          zoomLevel == 9 && setMaxAllowedMarkerRenders(30)
+          zoomLevel == 8 && setMaxAllowedMarkerRenders(10)
+          zoomLevel == 9 && setMaxAllowedMarkerRenders(20)
           zoomLevel == 10 && setMaxAllowedMarkerRenders(100)
-          zoomLevel == 11 && setMaxAllowedMarkerRenders(200)
-          zoomLevel == 13 && setMaxAllowedMarkerRenders(500)
+          zoomLevel == 11 && setMaxAllowedMarkerRenders(100)
+          zoomLevel == 13 && setMaxAllowedMarkerRenders(100)
         });
         return null;
       };

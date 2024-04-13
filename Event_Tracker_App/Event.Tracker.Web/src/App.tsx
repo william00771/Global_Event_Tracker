@@ -25,6 +25,7 @@ function App() {
     lat: 59.3369170,
     lng: 18.0119609
   });
+  const [maxAllowedMarkerRenders, setMaxAllowedMarkerRenders] = useState<number>(300);
   // const [lastFourthDecimal, setLastFourthDecimal] = useState<number>(Math.floor(mapCenter.lat * 10000) % 10);
   // const [lastThirdDecimal, setLastThirdDecimal] = useState<number>(Math.floor(mapCenter.lat * 1000) % 10);
   // const [latLastSecondDecimal, setLatLastSecondDecimal] = useState<number>(Math.floor(mapCenter.lat * 100) % 10);
@@ -59,7 +60,7 @@ function App() {
 
   const { data, isLoading, isError, refetch } = useQuery<Array<EventModel>>({
       queryKey: ['fetchevents', startDate, endDate],
-      queryFn: () => fetchEventsFromCoordinates(boundingbox, startDate, endDate)
+      queryFn: () => fetchEventsFromCoordinates(boundingbox, maxAllowedMarkerRenders, startDate, endDate)
     });
 
   const postMutation = useMutation(
@@ -101,6 +102,8 @@ function App() {
                 filter={filter}
                 setMapCenter={(mapCenter: Coordinates) => setMapCenter(mapCenter)}
                 mapCenter={mapCenter}
+                setMaxAllowedMarkerRenders={(maxMarkers: number) => setMaxAllowedMarkerRenders(maxMarkers)}
+                maxAllowedMarkerRenders={maxAllowedMarkerRenders}
               />
             }
             <ListEvents 
