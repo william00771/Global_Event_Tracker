@@ -4,6 +4,11 @@ export type Location = {
     formattedAddress: string;
 }
 
+export type Coordinates = {
+    lat: number;
+    lng: number;
+}
+
 export type EventModel = {
     id: number,
     name: string,

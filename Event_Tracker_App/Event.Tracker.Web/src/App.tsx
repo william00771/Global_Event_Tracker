@@ -10,7 +10,7 @@ import { ListEvents } from "./pages/ListEvents";
 import { SavedEvents } from "./pages/SavedEvents";
 import { CreateEvent } from "./pages/CreateEvent";
 import { fetchEvents, fetchEventsFromCoordinates, postEvent } from './util/http';
-import { BoundingBox, EventModel, EventModelRequestDto } from './types/types';
+import { BoundingBox, Coordinates, EventModel, EventModelRequestDto } from './types/types';
 import { CircularProgress } from '@mui/material';
 import { calculateLongitudeLatitudeBoundingBox } from './util/mapcalculation';
 
@@ -21,6 +21,10 @@ function App() {
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
   const [filter, setFilter] = useState(" ");
+  const [mapCenter, setMapCenter] = useState<Coordinates>({
+    lat: 59.3369170,
+    lng: 18.0119609
+  });
 
   const [boundingbox, setBoundingBox] = useState<BoundingBox>(calculateLongitudeLatitudeBoundingBox(59.3369170, 18.0119609, 75));
 
@@ -80,6 +84,8 @@ function App() {
                 setPage={(page) => setPage(page)}
                 page={page}
                 filter={filter}
+                setMapCenter={(mapCenter: Coordinates) => setMapCenter(mapCenter)}
+                mapCenter={mapCenter}
               />
             }
             <ListEvents 

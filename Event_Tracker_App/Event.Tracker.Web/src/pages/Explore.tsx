@@ -1,5 +1,5 @@
 import './Explore.css'
-import { BoundingBox, EventModel } from "../types/types";
+import { BoundingBox, Coordinates, EventModel } from "../types/types";
 import { MapContainer, Marker, TileLayer, useMapEvent } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import { renderToString } from 'react-dom/server';
@@ -17,18 +17,17 @@ type Props = {
   data: Array<EventModel>,
   setPage: (page: string) => void,
   page: string,
-  filter: string
+  filter: string,
+  setMapCenter: (mapCenter: Coordinates) => void
+  mapCenter: Coordinates
 }
 
-function Explore({className, data, setPage, page, filter }: Props) {
+function Explore({className, data, setPage, page, filter, mapCenter, setMapCenter}: Props) {
     const [showMarkerDetails, setShowMarkerDetails] = useState<string>('');
     const [showEventDetails, setShowEventDetails] = useState<string>('');
     const [currentEventInfo, setCurrentEventInfo] = useState<EventModel>();
-    const [mapCenter, setMapCenter] = useState({
-      lat: 59.3369170,
-      long: 18.0119609
-    });
-    const [boundingbox, setBoundingBox] = useState<BoundingBox>(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 9));
+    
+    const [boundingbox, setBoundingBox] = useState<BoundingBox>(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 9));
     const [zoomLevel, setZoomLevel] = useState<number>(13);
     const [maxAllowedMarkerRenders, setMaxAllowedMarkerRenders] = useState<number>(300);
 
@@ -57,16 +56,16 @@ function Explore({className, data, setPage, page, filter }: Props) {
     const UpdateMapCenter = () => {
         const map = useMapEvent('move', () => {
           const newCenter = map.getCenter();
-          setMapCenter({lat: newCenter.lat, long: newCenter.lng});
+          setMapCenter({lat: newCenter.lat, lng: newCenter.lng});
 
-          zoomLevel == 7 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 150));
-          zoomLevel == 8 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 150));
-          zoomLevel == 9 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 150));
-          zoomLevel == 10 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 75));
-          zoomLevel == 11 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 50));
-          zoomLevel == 12 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 15));
-          zoomLevel == 13 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 9));
-          zoomLevel == 14 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 3.5));
+          zoomLevel == 7 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 150));
+          zoomLevel == 8 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 150));
+          zoomLevel == 9 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 150));
+          zoomLevel == 10 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 75));
+          zoomLevel == 11 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 50));
+          zoomLevel == 12 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 15));
+          zoomLevel == 13 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 9));
+          zoomLevel == 14 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 3.5));
           console.table(data);
         });
         return null;
