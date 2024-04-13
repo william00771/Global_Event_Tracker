@@ -1,10 +1,10 @@
 import './Explore.css'
-import { BoundingBox, EventModel } from "../types/types";
+import { BoundingBox, Coordinates, EventModel } from "../types/types";
 import { MapContainer, Marker, TileLayer, useMapEvent } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
 import { renderToString } from 'react-dom/server';
 import { Point, divIcon } from 'leaflet';
-import { useEffect, useState } from 'react';
+import { VoidFunctionComponent, useEffect, useState } from 'react';
 import { MOCKDATA } from '@/Data/MockData';
 import { formatDateAndDurationToHours, formatDateToStartDateEndDate } from '@/util/dateTools';
 import { EventDetails } from './EventDetails';
@@ -12,28 +12,25 @@ import { calculateLongitudeLatitudeBoundingBox, isCoordinateWithinBoundingBox } 
 import placeholder from '../resources/Placeholders/event.jpg'
 import { svgIconBasedOnKeyword } from '@/util/svgIconBasedOnKeyword';
 
-
-
-
 type Props = {
   className: string,
   data: Array<EventModel>,
   setPage: (page: string) => void,
   page: string,
-  filter: string
+  filter: string,
+  setMapCenter: (mapCenter: Coordinates) => void
+  mapCenter: Coordinates,
+  setMaxAllowedMarkerRenders: (quantity: number) => void,
+  maxAllowedMarkerRenders: number
 }
 
-function Explore({className, data, setPage, page, filter }: Props) {
+function Explore({className, data, setPage, page, filter, mapCenter, setMapCenter, setMaxAllowedMarkerRenders, maxAllowedMarkerRenders}: Props) {
     const [showMarkerDetails, setShowMarkerDetails] = useState<string>('');
     const [showEventDetails, setShowEventDetails] = useState<string>('');
     const [currentEventInfo, setCurrentEventInfo] = useState<EventModel>();
-    const [mapCenter, setMapCenter] = useState({
-      lat: 59.3369170,
-      long: 18.0119609
-    });
-    const [boundingbox, setBoundingBox] = useState<BoundingBox>(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 9));
+    
+    const [boundingbox, setBoundingBox] = useState<BoundingBox>(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 9));
     const [zoomLevel, setZoomLevel] = useState<number>(13);
-    const [maxAllowedMarkerRenders, setMaxAllowedMarkerRenders] = useState<number>(300);
 
     useEffect(() => {
       const handleMoreInfoClick = (event: any) => {
@@ -60,17 +57,16 @@ function Explore({className, data, setPage, page, filter }: Props) {
     const UpdateMapCenter = () => {
         const map = useMapEvent('move', () => {
           const newCenter = map.getCenter();
-          setMapCenter({lat: newCenter.lat, long: newCenter.lng});
+          setMapCenter({lat: newCenter.lat, lng: newCenter.lng});
 
-          zoomLevel == 7 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 150));
-          zoomLevel == 8 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 150));
-          zoomLevel == 9 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 150));
-          zoomLevel == 10 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 75));
-          zoomLevel == 11 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 50));
-          zoomLevel == 12 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 15));
-          zoomLevel == 13 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 9));
-          zoomLevel == 14 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 3.5));
-          
+          zoomLevel == 7 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
+          zoomLevel == 8 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
+          zoomLevel == 9 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
+          zoomLevel == 10 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
+          zoomLevel == 11 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
+          zoomLevel == 12 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
+          zoomLevel == 13 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
+          zoomLevel == 14 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 3.5));
         });
         return null;
       };
@@ -79,12 +75,13 @@ function Explore({className, data, setPage, page, filter }: Props) {
         const map = useMapEvent('zoom', () => {
           setZoomLevel(getCurrentZoomLevel(map));
 
-          zoomLevel == 7 && setMaxAllowedMarkerRenders(10)
-          zoomLevel == 8 && setMaxAllowedMarkerRenders(20)
-          zoomLevel == 9 && setMaxAllowedMarkerRenders(30)
-          zoomLevel == 10 && setMaxAllowedMarkerRenders(100)
-          zoomLevel == 11 && setMaxAllowedMarkerRenders(200)
-          zoomLevel == 13 && setMaxAllowedMarkerRenders(500)
+          zoomLevel == 8 && setMaxAllowedMarkerRenders(0)
+          zoomLevel == 9 && setMaxAllowedMarkerRenders(0)
+          zoomLevel == 10 && setMaxAllowedMarkerRenders(15)
+          zoomLevel == 11 && setMaxAllowedMarkerRenders(15)
+          zoomLevel == 12 && setMaxAllowedMarkerRenders(100)
+          zoomLevel == 13 && setMaxAllowedMarkerRenders(100)
+          console.log(zoomLevel);
         });
         return null;
       };
