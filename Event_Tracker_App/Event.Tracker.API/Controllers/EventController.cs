@@ -31,6 +31,10 @@ public class EventController : ControllerBase
     [HttpPost("GetEventFromCoordinates")]
     public async Task<ActionResult<EventModel>> GetEventFromCoordinates(BoundingBox boundingBox, int quantity, DateTime? startDate, DateTime? endDate, string? keyword)
     {
+        if(quantity == 0)
+        {
+            return Ok();
+        }
         var events = await _eventRepository.GetEventsFromCoordinates(boundingBox, quantity, startDate, endDate, keyword);
         return Ok(events);
     }

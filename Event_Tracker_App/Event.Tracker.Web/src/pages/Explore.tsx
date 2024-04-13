@@ -59,16 +59,14 @@ function Explore({className, data, setPage, page, filter, mapCenter, setMapCente
           const newCenter = map.getCenter();
           setMapCenter({lat: newCenter.lat, lng: newCenter.lng});
 
-          zoomLevel == 7 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 150));
-          zoomLevel == 8 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 150));
-          zoomLevel == 9 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 150));
-          zoomLevel == 10 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 75));
-          zoomLevel == 11 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 50));
-          zoomLevel == 12 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 15));
-          zoomLevel == 13 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 9));
+          zoomLevel == 7 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
+          zoomLevel == 8 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
+          zoomLevel == 9 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
+          zoomLevel == 10 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
+          zoomLevel == 11 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
+          zoomLevel == 12 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
+          zoomLevel == 13 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
           zoomLevel == 14 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 3.5));
-
-          console.table(data);
         });
         return null;
       };
@@ -77,12 +75,13 @@ function Explore({className, data, setPage, page, filter, mapCenter, setMapCente
         const map = useMapEvent('zoom', () => {
           setZoomLevel(getCurrentZoomLevel(map));
 
-          zoomLevel == 7 && setMaxAllowedMarkerRenders(10)
-          zoomLevel == 8 && setMaxAllowedMarkerRenders(10)
-          zoomLevel == 9 && setMaxAllowedMarkerRenders(20)
-          zoomLevel == 10 && setMaxAllowedMarkerRenders(100)
-          zoomLevel == 11 && setMaxAllowedMarkerRenders(100)
+          zoomLevel == 8 && setMaxAllowedMarkerRenders(0)
+          zoomLevel == 9 && setMaxAllowedMarkerRenders(0)
+          zoomLevel == 10 && setMaxAllowedMarkerRenders(15)
+          zoomLevel == 11 && setMaxAllowedMarkerRenders(15)
+          zoomLevel == 12 && setMaxAllowedMarkerRenders(100)
           zoomLevel == 13 && setMaxAllowedMarkerRenders(100)
+          console.log(zoomLevel);
         });
         return null;
       };

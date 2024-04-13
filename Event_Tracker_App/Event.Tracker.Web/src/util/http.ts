@@ -18,7 +18,6 @@ export const fetchEvents = async (startDate?: Date, endDate?: Date, filter?: str
 }
 
 export const fetchEventsFromCoordinates = async (boundingbox: BoundingBox, quantity: number, startDate?: Date, endDate?: Date, filter?: string) => {
-    console.log("fetching");
     const response = await fetch(`http://localhost:5200/api/Event/GetEventFromCoordinates?quantity=${quantity}`, {
         method: 'POST',
         body: JSON.stringify({
