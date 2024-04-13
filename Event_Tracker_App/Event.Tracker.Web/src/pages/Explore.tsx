@@ -12,9 +12,6 @@ import { calculateLongitudeLatitudeBoundingBox, isCoordinateWithinBoundingBox } 
 import placeholder from '../resources/Placeholders/event.jpg'
 import { svgIconBasedOnKeyword } from '@/util/svgIconBasedOnKeyword';
 
-
-
-
 type Props = {
   className: string,
   data: Array<EventModel>,
@@ -70,8 +67,7 @@ function Explore({className, data, setPage, page, filter }: Props) {
           zoomLevel == 12 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 15));
           zoomLevel == 13 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 9));
           zoomLevel == 14 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 3.5));
-          console.log(boundingbox);
-          console.log(mapCenter);
+          console.table(data);
         });
         return null;
       };

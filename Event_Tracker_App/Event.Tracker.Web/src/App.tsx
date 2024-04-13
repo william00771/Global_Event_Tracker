@@ -1,7 +1,7 @@
 import './App.css'
 import { QueryClient, QueryClientProvider, useMutation, useQuery } from "react-query";
 import Explore from "./pages/Explore"
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { NavbarTop } from "./nav/NavbarTop";
 import { NavBarBottom } from "./nav/NavBarBottom";
 import { TimePicker } from "./pages/TimePicker";
@@ -9,9 +9,10 @@ import { Account } from "./pages/Account";
 import { ListEvents } from "./pages/ListEvents";
 import { SavedEvents } from "./pages/SavedEvents";
 import { CreateEvent } from "./pages/CreateEvent";
-import { fetchEvents, postEvent } from './util/http';
-import { EventModel, EventModelRequestDto } from './types/types';
+import { fetchEvents, fetchEventsFromCoordinates, postEvent } from './util/http';
+import { BoundingBox, EventModel, EventModelRequestDto } from './types/types';
 import { CircularProgress } from '@mui/material';
+import { calculateLongitudeLatitudeBoundingBox } from './util/mapcalculation';
 
 
 
@@ -20,6 +21,8 @@ function App() {
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
   const [filter, setFilter] = useState(" ");
+
+  const [boundingbox, setBoundingBox] = useState<BoundingBox>(calculateLongitudeLatitudeBoundingBox(59.3369170, 18.0119609, 75));
 
 
   const getFilteredEventsHandler = (startDate?: Date, endDate?: Date) => {
@@ -31,9 +34,13 @@ function App() {
     }
   }
 
+  useEffect(() => {
+    
+  }, [])
+
   const { data, isLoading, isError, refetch } = useQuery<Array<EventModel>>({
       queryKey: ['fetchevents', startDate, endDate],
-      queryFn: () => fetchEvents(startDate, endDate)
+      queryFn: () => fetchEventsFromCoordinates(boundingbox, startDate, endDate)
     });
 
   const postMutation = useMutation(
