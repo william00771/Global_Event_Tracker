@@ -70,7 +70,8 @@ function Explore({className, data, setPage, page, filter }: Props) {
           zoomLevel == 12 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 15));
           zoomLevel == 13 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 9));
           zoomLevel == 14 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.long, 3.5));
-          
+          console.log(boundingbox);
+          console.log(mapCenter);
         });
         return null;
       };

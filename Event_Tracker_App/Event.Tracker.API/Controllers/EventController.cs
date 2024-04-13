@@ -2,6 +2,7 @@ using Event.Tracker.API.Contracts;
 using Event.Tracker.API.Data;
 using Event.Tracker.API.Dtos;
 using Event.Tracker.API.Models;
+using Event.Tracker.API.Models.Utility;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,6 +25,13 @@ public class EventController : ControllerBase
     public async Task<ActionResult<EventModel>> GetEvent(DateTime? startDate, DateTime? endDate, string? keyword)
     {
         var events = await _eventRepository.GetAllEventsAsync(startDate, endDate, keyword);
+        return Ok(events);
+    }
+
+    [HttpPost("GetEventFromCoordinates")]
+    public async Task<ActionResult<EventModel>> GetEventFromCoordinates(BoundingBox boundingBox, DateTime? startDate, DateTime? endDate, string? keyword)
+    {
+        var events = await _eventRepository.GetEventsFromCoordinates(boundingBox, startDate, endDate, keyword);
         return Ok(events);
     }
 
