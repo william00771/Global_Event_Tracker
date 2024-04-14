@@ -1,4 +1,4 @@
-# Personal HackDays Project at &lt;/salt&gt;
+# Personal Hack Week Project at &lt;/salt&gt;
 
 ## Demo
 [Higher Resolution](https://youtu.be/kVjsq3asS20)
