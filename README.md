@@ -5,8 +5,6 @@
 
 https://github.com/william00771/Global_Event_Tracker/assets/117780994/7ca9cd4b-07c4-470b-b007-f49a930f02a9
 
-Sorry about the cut at the end
-
 ## Timeline
 
 2 days of planning. 4 days of coding. 
