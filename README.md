@@ -13,11 +13,10 @@ Sorry about the cut at the end
 
 ## A solution that bundles all types of events into an interactive map.
 
-So Imagine this. Having a place where you can find the best events no matter where you are, tailored exactly to your personal interests and preferences. That's what this app delivers
+So Imagine this. Say you enjoy salsa during the evening, or basketball during the day, or maybe you are going to barcelona next week and want to see what's happening over there before you go on your trip. 
 
-Say you enjoy salsa during the evening, or basketball during the day, or maybe you just want to go out and party tonight and want to find a night club with a more laid back vibe so you can actually talk to people. Maybe you're going to Aiya Napa next week and want to see what's happening over there.
-
-That's the idea behind this app. A curated selection of events personalized for you. Whether you're into concerts, workshops, or food festivals, this app brings these things straight to your fingertips. No more sifting through endless listings or missing out on the events. 
+That's the idea behind this app. An curated selection of events personalized for you. Whether you're into concerts, workshops or food festivals. This app brings these things to your fingertips.
+So no more sifting through endless listings or missing out on events.
 
 ## Tech Stack
 ![slide2](https://github.com/william00771/Global_Event_Tracker/assets/117780994/d563806b-fbee-4899-92f6-ea7e5397e430)
