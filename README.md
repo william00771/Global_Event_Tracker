@@ -1,8 +1,15 @@
 # Personal HackDays Project at &lt;/salt&gt;
 
+## Demo
+[Higher Resolution](https://youtu.be/kVjsq3asS20)
+
+https://github.com/william00771/Global_Event_Tracker/assets/117780994/7ca9cd4b-07c4-470b-b007-f49a930f02a9
+
+Sorry about the cut at the end of the video :)
+
 ## Timeline
 
-2 days of planning. 2 days of coding. 
+2 days of planning. 4 days of coding. 
 
 ## A solution that bundles all types of events into an interactive map.
 
@@ -12,10 +19,18 @@ Say you enjoy salsa during the evening, or basketball during the day, or maybe y
 
 That's the idea behind this app. A curated selection of events personalized for you. Whether you're into concerts, workshops, or food festivals, this app brings these things straight to your fingertips. No more sifting through endless listings or missing out on the events. 
 
+## Tech Stack
+![slide2](https://github.com/william00771/Global_Event_Tracker/assets/117780994/d563806b-fbee-4899-92f6-ea7e5397e430)
+
 ### Basic Prototyping
 ![image](https://github.com/william00771/Global_Event_Tracker/assets/117780994/0b5470eb-1456-4ca1-9b7a-b1f6c2553ed8)
 ![image](https://github.com/william00771/Global_Event_Tracker/assets/117780994/d05f8ccf-df1c-4071-895a-869bf4fb0225)
 ![image](https://github.com/william00771/Global_Event_Tracker/assets/117780994/413074db-31e7-43ac-b59b-508671590246)
 
 ### Specifications List is located in the Planning folder along with color palette and reference material
-### Backlog is attatched to the project
+
+## Future Feature Plans
+* Integration with third party API's
+* Authentication & Messaging
+* User Position & General Ease of use improvements
+* First Release & Deployment so anyone can use the app
