@@ -9,8 +9,8 @@ import { Account } from "./pages/Account";
 import { ListEvents } from "./pages/ListEvents";
 import { SavedEvents } from "./pages/SavedEvents";
 import { CreateEvent } from "./pages/CreateEvent";
-import { fetchEvents, fetchEventsFromCoordinates, postEvent } from './util/http';
-import { BoundingBox, Coordinates, EventModel, EventModelRequestDto } from './types/types';
+import { fetchEventsFromCoordinates, postEvent } from './util/http';
+import { BoundingBox, Coordinates, EventModel } from './types/types';
 import { CircularProgress } from '@mui/material';
 import { calculateLongitudeLatitudeBoundingBox } from './util/mapcalculation';
 
@@ -18,8 +18,8 @@ import { calculateLongitudeLatitudeBoundingBox } from './util/mapcalculation';
 
 function App() {
   const [page, setPage] = useState('Explore');
-  const [startDate, setStartDate] = useState<Date>();
-  const [endDate, setEndDate] = useState<Date>();
+  const [startDate, setStartDate] = useState<Date>(new Date(2024, 3, 1));
+  const [endDate, setEndDate] = useState<Date>(new Date(2024, 4, 31)); 
   const [filter, setFilter] = useState(" ");
   const [mapCenter, setMapCenter] = useState<Coordinates>({
     lat: 59.3369170,
@@ -59,8 +59,8 @@ function App() {
   }, [mapCenter])
 
   const { data, isLoading, isError, refetch } = useQuery<Array<EventModel>>({
-      queryKey: ['fetchevents', startDate, endDate],
-      queryFn: () => fetchEventsFromCoordinates(boundingbox, maxAllowedMarkerRenders, startDate, endDate)
+      queryKey: ['fetchevents'],
+      queryFn: () => fetchEventsFromCoordinates(boundingbox, maxAllowedMarkerRenders)
     });
 
   const postMutation = useMutation(
@@ -100,6 +100,8 @@ function App() {
                 setPage={(page) => setPage(page)}
                 page={page}
                 filter={filter}
+                startDate={startDate}
+                endDate={endDate}
                 setMapCenter={(mapCenter: Coordinates) => setMapCenter(mapCenter)}
                 mapCenter={mapCenter}
                 setMaxAllowedMarkerRenders={(maxMarkers: number) => setMaxAllowedMarkerRenders(maxMarkers)}

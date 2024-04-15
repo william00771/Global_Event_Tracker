@@ -21,10 +21,12 @@ type Props = {
   setMapCenter: (mapCenter: Coordinates) => void
   mapCenter: Coordinates,
   setMaxAllowedMarkerRenders: (quantity: number) => void,
-  maxAllowedMarkerRenders: number
+  maxAllowedMarkerRenders: number,
+  startDate: Date,
+  endDate: Date
 }
 
-function Explore({className, data, setPage, page, filter, mapCenter, setMapCenter, setMaxAllowedMarkerRenders, maxAllowedMarkerRenders}: Props) {
+function Explore({className, data, setPage, page, filter, startDate, endDate, mapCenter, setMapCenter, maxAllowedMarkerRenders, setMaxAllowedMarkerRenders}: Props) {
     const [showMarkerDetails, setShowMarkerDetails] = useState<string>('');
     const [showEventDetails, setShowEventDetails] = useState<string>('');
     const [currentEventInfo, setCurrentEventInfo] = useState<EventModel>();
@@ -81,7 +83,8 @@ function Explore({className, data, setPage, page, filter, mapCenter, setMapCente
           zoomLevel == 11 && setMaxAllowedMarkerRenders(15)
           zoomLevel == 12 && setMaxAllowedMarkerRenders(100)
           zoomLevel == 13 && setMaxAllowedMarkerRenders(100)
-          console.log(zoomLevel);
+          console.log(startDate);
+          console.log(endDate);
         });
         return null;
       };
@@ -126,7 +129,7 @@ function Explore({className, data, setPage, page, filter, mapCenter, setMapCente
                               <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
                               <g id="SVGRepo_iconCarrier"> <path d="M20 10V7C20 5.89543 19.1046 5 18 5H6C4.89543 5 4 5.89543 4 7V10M20 10V19C20 20.1046 19.1046 21 18 21H6C4.89543 21 4 20.1046 4 19V10M20 10H4M8 3V7M16 3V7" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/> <rect x="6" y="12" width="3" height="3" rx="0.5" fill="#ffffff"/> <rect x="10.5" y="12" width="3" height="3" rx="0.5" fill="#ffffff"/> <rect x="15" y="12" width="3" height="3" rx="0.5" fill="#ffffff"/> </g>
                           </svg>
-                          <p className='marker__header-paragraph'>{formatDateToStartDateEndDate(eventData.date, eventData.dateTo)}</p>
+                          <p className='marker__header-paragraph'>{formatDateToStartDateEndDate(eventData.date.toString(), eventData.dateTo.toString())}</p>
                       </div> 
                       <div className='marker__header-item'>
                           <svg width="40px" height="40px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffffff">
@@ -183,6 +186,8 @@ function Explore({className, data, setPage, page, filter, mapCenter, setMapCente
                           isCoordinateWithinBoundingBox({latitude: event.location.lat, longitude: event.location.lng}, boundingbox) 
                           && zoomLevel >= 7
                           && (event.name.toLowerCase().includes(filter) 
+                          || event.date > startDate
+                          || event.date < endDate
                           || event.description.toLowerCase().includes(filter.toLowerCase()))
                           || event.keywords && event.keywords.some(keyword => keyword.toLowerCase() === filter)
                           || filter == ""

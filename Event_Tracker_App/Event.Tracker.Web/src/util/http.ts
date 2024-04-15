@@ -1,26 +1,11 @@
-import { BoundingBox, Location, EventModel } from "../types/types";
+import { BoundingBox, Location } from "../types/types";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-export const fetchEvents = async (startDate?: Date, endDate?: Date, filter?: string): Promise<Array<EventModel>> => {
-    let url = `${API_URL}/Event`;
-    if (startDate || endDate) {
-        url += `?startDate=${startDate?.toISOString()}&endDate=${endDate?.toISOString()}`;
-    }
-
-    const response = await fetch(url);
-
-    if (!response.ok) {
-        const error = new Error('Error');
-        error.message = await response.json();
-        throw error;
-    }
-
-    return await response.json();
-}
-
-export const fetchEventsFromCoordinates = async (boundingbox: BoundingBox, quantity: number, startDate?: Date, endDate?: Date, filter?: string) => {
-    const response = await fetch(`${API_URL}/Event/getEventFromBoundingBox?&north=${boundingbox.east}&south=${boundingbox.north}&east=${boundingbox.south}&west=${boundingbox.west}&quantity=${quantity}`, {
+export const fetchEventsFromCoordinates = async (boundingbox: BoundingBox, quantity: number) => {
+    let url = `${API_URL}/Event/getEventFromBoundingBox?&north=${boundingbox.east}&south=${boundingbox.north}&east=${boundingbox.south}&west=${boundingbox.west}&quantity=${quantity}`;
+    
+    const response = await fetch(url, {
         headers: {
             'Accept': 'text/plain',
             'Content-Type': 'application/json'
