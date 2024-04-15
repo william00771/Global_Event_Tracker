@@ -79,11 +79,9 @@ function Explore({className, data, setPage, page, filter, startDate, endDate, ma
           zoomLevel == 8 && setMaxAllowedMarkerRenders(0)
           zoomLevel == 9 && setMaxAllowedMarkerRenders(0)
           zoomLevel == 10 && setMaxAllowedMarkerRenders(15)
-          zoomLevel == 11 && setMaxAllowedMarkerRenders(15)
+          zoomLevel == 11 && setMaxAllowedMarkerRenders(50)
           zoomLevel == 12 && setMaxAllowedMarkerRenders(100)
           zoomLevel == 13 && setMaxAllowedMarkerRenders(100)
-          console.log(startDate);
-          console.log(endDate);
         });
         return null;
       };
@@ -113,8 +111,6 @@ function Explore({className, data, setPage, page, filter, startDate, endDate, ma
                           isCoordinateWithinBoundingBox({latitude: event.location.lat, longitude: event.location.lng}, boundingbox) 
                           && zoomLevel >= 7
                           && (event.name.toLowerCase().includes(filter) 
-                          || event.date > startDate
-                          || event.date < endDate
                           || event.description.toLowerCase().includes(filter.toLowerCase()))
                           || event.keywords && event.keywords.some(keyword => keyword.toLowerCase() === filter)
                           || filter == ""

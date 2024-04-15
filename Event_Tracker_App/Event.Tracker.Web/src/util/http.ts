@@ -3,7 +3,7 @@ import { BoundingBox, Location } from "../types/types";
 const API_URL = import.meta.env.VITE_API_URL;
 
 export const fetchEventsFromCoordinates = async (boundingbox: BoundingBox, quantity: number) => {
-    let url = `${API_URL}/Event/getEventFromBoundingBox?&north=${boundingbox.east}&south=${boundingbox.north}&east=${boundingbox.south}&west=${boundingbox.west}&quantity=${quantity}`;
+    let url = `${API_URL}/Events/bounding-box?&ynorth=${boundingbox.east}&ysouth=${boundingbox.north}&xeast=${boundingbox.south}&xwest=${boundingbox.west}&quantity=${quantity}`;
     
     const response = await fetch(url, {
         headers: {
@@ -24,7 +24,7 @@ export const fetchEventsFromCoordinates = async (boundingbox: BoundingBox, quant
 }
 
 export const postEvent = async (eventRequestFormData: FormData) => {
-    const response = await fetch(`${API_URL}/Event`, {
+    const response = await fetch(`${API_URL}/Events`, {
         method: 'POST',
         body: eventRequestFormData,
     });
