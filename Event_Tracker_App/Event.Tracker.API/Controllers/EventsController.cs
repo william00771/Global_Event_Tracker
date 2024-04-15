@@ -39,7 +39,7 @@ public class EventsController : ControllerBase
             };
             return Ok(BaseEvents);
         }
-        var events = await _eventRepository.GetEventFromBoundingBox(ynorth, ysouth, xeast, xwest, quantity, startDate, endDate, keyword);
+        var events = await _eventRepository.GetEventsFromBoundingBox(ynorth, ysouth, xeast, xwest, quantity, startDate, endDate, keyword);
         return Ok(events);
     }
 
@@ -56,7 +56,7 @@ public class EventsController : ControllerBase
 
         var newEventModel = await _eventRepository.PostEventAsync(eventModelRequestDto, imageFile);
         
-        return CreatedAtAction(nameof(getEventFromBoundingBox), new {Id = newEventModel.Id}, newEventModel);
+        return CreatedAtAction(nameof(getEventsFromBoundingBox), new {Id = newEventModel.Id}, newEventModel);
         
     }
 }

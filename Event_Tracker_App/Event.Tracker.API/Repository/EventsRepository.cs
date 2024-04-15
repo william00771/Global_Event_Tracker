@@ -51,7 +51,7 @@ namespace Event.Tracker.API.Repository
             return events;
         }
 
-        public async Task<List<EventModel>> GetEventFromBoundingBox(double north, double south, double east, double west, int quantity, DateTime? startDate, DateTime? endDate, string? keyword)
+        public async Task<List<EventModel>> GetEventsFromBoundingBox(double north, double south, double east, double west, int quantity, DateTime? startDate, DateTime? endDate, string? keyword)
         {
             IQueryable<EventModel> query = _eventContext.Events
                 .Where(ev => 
