@@ -8,7 +8,7 @@ import { FormEvent, useState } from 'react'
 type Props = {
     className: string
     setPage: (page: string) => void
-    getFilteredEvents: (startDate?: Date, endDate?: Date) => void
+    setDateFilter: (startDate?: Date, endDate?: Date) => void
 }
 
 const darkTheme = createTheme({
@@ -17,14 +17,14 @@ const darkTheme = createTheme({
     }
 });
 
-export const TimePicker = ({ className, setPage, getFilteredEvents }: Props) => {
+export const TimePicker = ({ className, setPage, setDateFilter }: Props) => {
     const [dateStartValue, setDateStartValue] = useState(dayjs());
     const [dateEndValue, setdateEndValue] = useState(dayjs());
 
     const submitHandler = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        getFilteredEvents(new Date(dateStartValue.toString()), new Date(dateEndValue.toString()));
+        setDateFilter(dateStartValue.toDate(), dateEndValue.toDate());
         setPage('Explore')
     }
 

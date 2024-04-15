@@ -72,7 +72,7 @@ function App() {
               <TimePicker 
                 className={"timepicker-container " + (page == "TimePicker" && "active")}
                 setPage={(page) => setPage(page)}
-                getFilteredEvents={(startDate?: Date, endDate?: Date) => {
+                setDateFilter={(startDate?: Date, endDate?: Date) => {
                   startDate != null && setStartDate(startDate);
                   endDate != null && setEndDate(endDate);
                 }}
