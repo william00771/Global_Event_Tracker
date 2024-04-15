@@ -2,14 +2,9 @@ import './Explore.css'
 import { BoundingBox, Coordinates, EventModel } from "../types/types";
 import { MapContainer, Marker, TileLayer, useMapEvent } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
-import { renderToString } from 'react-dom/server';
-import { Point, divIcon } from 'leaflet';
 import {useEffect, useState } from 'react';
-import { MOCKDATA } from '@/Data/MockData';
-import { formatDateAndDurationToHours, formatDateToStartDateEndDate } from '@/util/dateTools';
 import { EventDetails } from './EventDetails';
 import { calculateLongitudeLatitudeBoundingBox, isCoordinateWithinBoundingBox } from '@/util/mapcalculation';
-import placeholder from '../resources/Placeholders/event.jpg'
 import { svgIconBasedOnKeyword } from '@/util/svgIconBasedOnKeyword';
 import { CustomMarker } from '../components/Map/CustomMarker';
 
