@@ -28,14 +28,18 @@ public class EventController : ControllerBase
         return Ok(events);
     }
 
-    [HttpPost("GetEventFromCoordinates")]
-    public async Task<ActionResult<EventModel>> GetEventFromCoordinates(BoundingBox boundingBox, int quantity, DateTime? startDate, DateTime? endDate, string? keyword)
+    [HttpGet("GetEventFromBoundingBox")]
+    public async Task<ActionResult<EventModel>> GetEventFromBoundingBox(double north, double south, double east, double west, int quantity, DateTime? startDate, DateTime? endDate, string? keyword)
     {
         if(quantity == 0)
         {
-            return Ok();
+            var BaseEvents = new List<EventModel>()
+            {
+
+            };
+            return Ok(BaseEvents);
         }
-        var events = await _eventRepository.GetEventsFromCoordinates(boundingBox, quantity, startDate, endDate, keyword);
+        var events = await _eventRepository.GetEventFromBoundingBox(north, south, east, west, quantity, startDate, endDate, keyword);
         return Ok(events);
     }
 
