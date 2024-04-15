@@ -1,5 +1,5 @@
 import './App.css'
-import { QueryClient, QueryClientProvider, useMutation, useQuery } from "react-query";
+import {useMutation, useQuery } from "react-query";
 import Explore from "./pages/Explore"
 import { useEffect, useState } from "react";
 import { NavbarTop } from "./nav/NavbarTop";
@@ -13,8 +13,6 @@ import { fetchEventsFromCoordinates, postEvent } from './util/http';
 import { BoundingBox, Coordinates, EventModel } from './types/types';
 import { CircularProgress } from '@mui/material';
 import { calculateLongitudeLatitudeBoundingBox } from './util/mapcalculation';
-
-
 
 function App() {
   const [page, setPage] = useState('Explore');
@@ -117,7 +115,6 @@ function App() {
         />
       </>
   )
-
 }
 
 export default App
