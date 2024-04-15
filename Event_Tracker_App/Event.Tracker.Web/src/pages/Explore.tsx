@@ -8,6 +8,9 @@ import { calculateLongitudeLatitudeBoundingBox, isCoordinateWithinBoundingBox } 
 import { svgIconBasedOnKeyword } from '@/util/svgIconBasedOnKeyword';
 import { CustomMarker } from '../components/Map/CustomMarker';
 
+const MAP_DEFAULT_URL = import.meta.env.VITE_MAP_DEFAULT_URL;
+const MAP_MAPBOX_URL = import.meta.env.VITE_MAP_MAPBOX_URL;
+
 type Props = {
   className: string,
   data: Array<EventModel>,
@@ -102,8 +105,8 @@ function Explore({className, data, setPage, page, filter, startDate, endDate, ma
             scrollWheelZoom={true}>
                 <TileLayer 
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    //url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    url="https://api.mapbox.com/styles/v1/william00771/cltvk24s1017c01pkhsjd4774/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoid2lsbGlhbTAwNzcxIiwiYSI6ImNsdHZqeWd2cTFsYzIycW9iNGlhdHFodHAifQ.eX-yYLKA0P4QCL58IgovpA"
+                    //url={MAP_DEFAULT_URL}
+                    url={MAP_MAPBOX_URL}
                 />
                 {boundingbox && data.slice(0, maxAllowedMarkerRenders).map((event) => {
                         if(
