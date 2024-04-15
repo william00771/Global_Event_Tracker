@@ -19,6 +19,7 @@ function App() {
   const [startDate, setStartDate] = useState<Date>(new Date(2024, 3, 1));
   const [endDate, setEndDate] = useState<Date>(new Date(2024, 4, 31)); 
   const [filter, setFilter] = useState(" ");
+  const [mutationLoading, setMutationLoading] = useState(false);
 
   const [mapCenter, setMapCenter] = useState<Coordinates>({
     lat: 59.3369170,
@@ -51,12 +52,13 @@ function App() {
       (eventRequestFormData: FormData) => postEvent(eventRequestFormData), {
       onSuccess: () => {
           refetch();
+          setMutationLoading(false);
       }
   });
 
   return(
       <>
-        {isLoading && <div className='loading-container'><CircularProgress color="secondary" /></div>}
+        {isLoading || mutationLoading && <div className='loading-container'><CircularProgress color="secondary" /></div>}
         {isError && <div className='error-container'><h1>Error fetching data...</h1></div> }
         
         <NavbarTop 
@@ -105,7 +107,7 @@ function App() {
               <CreateEvent 
                 className={"createevent-container " + (page == "CreateEvent" && "active")}
                 setPage={(page) => setPage(page)}
-                postEvent={(eventRequestFormData: FormData) => postMutation.mutate(eventRequestFormData)}
+                postEvent={(eventRequestFormData: FormData) => {setMutationLoading(true); postMutation.mutate(eventRequestFormData)}}
               />
             </main>
           }
