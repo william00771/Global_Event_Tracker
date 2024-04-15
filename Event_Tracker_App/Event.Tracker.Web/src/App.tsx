@@ -95,7 +95,7 @@ function App() {
             />
             { page != 'CreateEvent' && 
               <Explore 
-                className={"explore-container " }
+                className={"explore__container " }
                 data={data}
                 setPage={(page) => setPage(page)}
                 page={page}
