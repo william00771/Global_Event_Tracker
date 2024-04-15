@@ -28,8 +28,8 @@ public class EventController : ControllerBase
         return Ok(events);
     }
 
-    [HttpGet("GetEventFromBoundingBox")]
-    public async Task<ActionResult<EventModel>> GetEventFromBoundingBox(double north, double south, double east, double west, int quantity, DateTime? startDate, DateTime? endDate, string? keyword)
+    [HttpGet("getEventFromBoundingBox")]
+    public async Task<ActionResult<EventModel>> getEventFromBoundingBox(double north, double south, double east, double west, int quantity, DateTime? startDate, DateTime? endDate, string? keyword)
     {
         if(quantity == 0)
         {
