@@ -116,5 +116,18 @@ namespace Event.Tracker.API.Repository
 
             return newEventModel;
         }
+
+        public async Task<EventModel> PostFullEventAsync(EventModel eventModel)
+        {
+            if (await _eventContext.Events.AnyAsync(e => e.Id == eventModel.Id))
+            {
+                return null;
+            }
+
+            await _eventContext.Events.AddAsync(eventModel);
+            await _eventContext.SaveChangesAsync();
+
+            return eventModel;
+        }
     }
 }

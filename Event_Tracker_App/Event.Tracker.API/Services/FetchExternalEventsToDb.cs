@@ -10,12 +10,14 @@ namespace Event.Tracker.API.Services
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly string _ticksterApiKey;
         private readonly ILogger<FetchExternalEventsToDb> _logger;
+        private readonly IEventsRepository _eventsRepository;
 
-        public FetchExternalEventsToDb(IHttpClientFactory httpClientFactory, IConfiguration configuration, ILogger<FetchExternalEventsToDb> logger)
+        public FetchExternalEventsToDb(IHttpClientFactory httpClientFactory, IConfiguration configuration, ILogger<FetchExternalEventsToDb> logger, IEventsRepository eventsRepository)
         {
             _ticksterApiKey = configuration["Tickster:apiKey"];
             _httpClientFactory = httpClientFactory;
             _logger = logger;
+            _eventsRepository = eventsRepository;
 
             if (string.IsNullOrEmpty(configuration["Tickster:apiKey"]))
             {
@@ -26,20 +28,50 @@ namespace Event.Tracker.API.Services
         {
             var client = _httpClientFactory.CreateClient();
             client.DefaultRequestHeaders.Add("x-api-key", _ticksterApiKey);
-            var response = await client.GetAsync("https://event.api.tickster.com/api/v1.0/sv/events?query=Stockholm&take=2&skip=0");
+            var response = await client.GetAsync("https://event.api.tickster.com/api/v1.0/sv/events?query=Stockholm&take=100&skip=2");
 
             if(response.IsSuccessStatusCode)
             {
                 var jsonData = await response.Content.ReadAsStringAsync();
                 var data = JsonSerializer.Deserialize<TicksterResponse>(jsonData);
-                foreach(var item in data.Items)
+                var eventResponse = new List<EventModel>();
+                if (data != null && data.Items != null)
                 {
-                    Console.WriteLine(item.Name);
+                    foreach (var ev in data.Items)
+                    {
+                        if (ev != null)
+                        {
+                            var newCoordinates = new Coordinates
+                            {
+                                Lat = ev.Venue?.Geo?.Latitude ?? 0,
+                                Lng = ev.Venue?.Geo?.Longitude ?? 0,
+                                FormattedAddress = ev.Venue?.Address?.ToString() ?? string.Empty,
+                            };
+
+                            EventModel newEventModel = new EventModel
+                            {
+                                Name = ev.Venue?.Name ?? string.Empty,
+                                Location = newCoordinates,
+                                Description = ev.Description?.Markdown ?? string.Empty,
+                                Time = ev.StartUtc,
+                                Date = ev.StartUtc,
+                                DateTo = ev.EndUtc,
+                                Duration = 0,
+                                WebsiteUrl = ev.InfoUrl,
+                                NumberOfPeople = 0,
+                                Keywords = new List<string> { ev.Name, ev.Description?.Markdown ?? string.Empty },
+                                Image = "https://res.cloudinary.com/dlw9fdrql/image/upload/v1716306744/event_jmwpwd.jpg"
+                            };
+
+                            eventResponse.Add(newEventModel);
+                            await _eventsRepository.PostFullEventAsync(newEventModel);
+                        }
+                    }
                 }
 
-                return null;
-                // return data;
+                return eventResponse;
             }
+            
             return null;
         }
     }

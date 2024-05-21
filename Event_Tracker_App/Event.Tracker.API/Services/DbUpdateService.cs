@@ -15,7 +15,7 @@ namespace Event.Tracker.API.Services
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            _timer = new Timer(Run, null, TimeSpan.Zero, TimeSpan.FromMinutes(1));
+            _timer = new Timer(Run, null, TimeSpan.Zero, TimeSpan.FromMinutes(1440));
             return Task.CompletedTask;
         }
 
@@ -42,8 +42,9 @@ namespace Event.Tracker.API.Services
 
             double minPassedSinceLastUpdated = (DateTime.UtcNow - lastUpdated.LastUpdated).TotalMinutes;
             double hoursPassedSinceLastUpdated = (DateTime.UtcNow - lastUpdated.LastUpdated).TotalHours;
+            Console.WriteLine("Last Db Update: " + Math.Round(minPassedSinceLastUpdated) + " minutes ago");
 
-            if(minPassedSinceLastUpdated > 1){
+            if(minPassedSinceLastUpdated > 1440){
                 await UpdateEventsDb(eventsRepository, updateLogsRepository, fetchExternalEventsToDb);
             }
             else{
