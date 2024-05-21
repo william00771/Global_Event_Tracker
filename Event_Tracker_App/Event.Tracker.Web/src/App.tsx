@@ -53,7 +53,8 @@ function App() {
         setLatLastFirstDecimal(currentLatSecondDecimal);
         setLngLastFirstDecimal(currentLngSecondDecimal);
         setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 56))
-        refetch();
+        // refetch();
+        console.log(data);
     }
     
   }, [mapCenter])
@@ -61,6 +62,7 @@ function App() {
   const { data, isLoading, isError, refetch } = useQuery<Array<EventModel>>({
       queryKey: ['fetchevents', startDate, endDate],
       queryFn: () => fetchEventsFromCoordinates(boundingbox, maxAllowedMarkerRenders, startDate, endDate)
+      
     });
 
   const postMutation = useMutation(

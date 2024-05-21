@@ -79,8 +79,8 @@ function Explore({className, data, setPage, page, filter, mapCenter, setMapCente
           zoomLevel == 9 && setMaxAllowedMarkerRenders(0)
           zoomLevel == 10 && setMaxAllowedMarkerRenders(15)
           zoomLevel == 11 && setMaxAllowedMarkerRenders(15)
-          zoomLevel == 12 && setMaxAllowedMarkerRenders(100)
-          zoomLevel == 13 && setMaxAllowedMarkerRenders(100)
+          zoomLevel == 12 && setMaxAllowedMarkerRenders(250)
+          zoomLevel == 13 && setMaxAllowedMarkerRenders(250)
           console.log(zoomLevel);
         });
         return null;
