@@ -26,12 +26,16 @@ namespace Event.Tracker.API.Services
         {
             var client = _httpClientFactory.CreateClient();
             client.DefaultRequestHeaders.Add("x-api-key", _ticksterApiKey);
-            var response = await client.GetAsync("https://event.api.tickster.com/api/v1.0/sv/events?query=Stockholm&take=1&skip=0");
+            var response = await client.GetAsync("https://event.api.tickster.com/api/v1.0/sv/events?query=Stockholm&take=2&skip=0");
 
             if(response.IsSuccessStatusCode)
             {
                 var jsonData = await response.Content.ReadAsStringAsync();
                 var data = JsonSerializer.Deserialize<TicksterResponse>(jsonData);
+                foreach(var item in data.Items)
+                {
+                    Console.WriteLine(item.Name);
+                }
 
                 return null;
                 // return data;

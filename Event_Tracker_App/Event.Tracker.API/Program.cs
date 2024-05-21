@@ -22,7 +22,7 @@ builder.Services.AddDbContext<EventDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("EventDbConnectionString"));
 });
-
+builder.Services.AddHttpClient();
 builder.Services.AddScoped<IEventsRepository, EventsRepository>();
 builder.Services.AddScoped<IUpdateLogsRepository, UpdateLogsRepository>();
 builder.Services.AddScoped<IGeocoderService, GeocoderService>();
