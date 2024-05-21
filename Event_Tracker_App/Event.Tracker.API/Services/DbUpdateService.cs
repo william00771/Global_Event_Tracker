@@ -25,17 +25,18 @@ namespace Event.Tracker.API.Services
             {
                 var eventsRepository = scope.ServiceProvider.GetRequiredService<IEventsRepository>();
                 var updateLogsRepository = scope.ServiceProvider.GetRequiredService<IUpdateLogsRepository>();
-                await FetchAndUpdateAllEvents(eventsRepository, updateLogsRepository);
+                var fetchExternalEventsToDb = scope.ServiceProvider.GetRequiredService<IFetchExternalEventsToDb>();
+                await FetchAndUpdateAllEvents(eventsRepository, updateLogsRepository, fetchExternalEventsToDb);
             }
         }
 
-        private async Task FetchAndUpdateAllEvents(IEventsRepository eventsRepository, IUpdateLogsRepository updateLogsRepository)
+        private async Task FetchAndUpdateAllEvents(IEventsRepository eventsRepository, IUpdateLogsRepository updateLogsRepository, IFetchExternalEventsToDb fetchExternalEventsToDb)
         {
             var lastUpdated = await updateLogsRepository.GetLatestUpdateLog();
 
             if(lastUpdated == null)
             {
-                await FetchAndUpdateAllEvents(eventsRepository, updateLogsRepository);
+                await FetchAndUpdateAllEvents(eventsRepository, updateLogsRepository, fetchExternalEventsToDb);
                 return;
             }
 
@@ -43,20 +44,23 @@ namespace Event.Tracker.API.Services
             double hoursPassedSinceLastUpdated = (DateTime.UtcNow - lastUpdated.LastUpdated).TotalHours;
 
             if(minPassedSinceLastUpdated > 1){
-                await UpdateEventsDb(eventsRepository, updateLogsRepository);
+                await UpdateEventsDb(eventsRepository, updateLogsRepository, fetchExternalEventsToDb);
             }
             else{
                 return;
             }  
         }
 
-        private async Task UpdateEventsDb(IEventsRepository eventsRepository, IUpdateLogsRepository updateLogsRepository)
+        private async Task UpdateEventsDb(IEventsRepository eventsRepository, IUpdateLogsRepository updateLogsRepository, IFetchExternalEventsToDb fetchExternalEventsToDb)
         {
+            await fetchExternalEventsToDb.FetchTickster();
+
             var updateLog = new UpdateLogItem
             {
                 LastUpdated = DateTime.UtcNow
             };
             await updateLogsRepository.AddUpdateLog(updateLog);
+
             Console.WriteLine("Successfully Updated!");
         }
 
