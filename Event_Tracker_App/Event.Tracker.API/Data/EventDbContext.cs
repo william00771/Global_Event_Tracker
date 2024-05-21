@@ -16,8 +16,8 @@ namespace Event.Tracker.API.Data
         }
 
         public DbSet<EventModel> Events { get; set; }
-
         public DbSet<Coordinates> Coordinates { get; set; }
+        public DbSet<UpdateLogItem> UpdateLogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
