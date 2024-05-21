@@ -26,6 +26,7 @@ builder.Services.AddDbContext<EventDbContext>(options =>
 builder.Services.AddScoped<IEventsRepository, EventsRepository>();
 builder.Services.AddScoped<IUpdateLogsRepository, UpdateLogsRepository>();
 builder.Services.AddScoped<IGeocoderService, GeocoderService>();
+builder.Services.AddScoped<IFetchExternalEventsToDb, FetchExternalEventsToDb>();
 
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("Cloudinary"));
 builder.Services.AddScoped<IPhotoUploader, PhotoUploader>();
