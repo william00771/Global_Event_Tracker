@@ -1,6 +1,7 @@
 using Event.Tracker.API.Contracts;
 using Event.Tracker.API.Data;
 using Event.Tracker.API.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Event.Tracker.API.Repository
 {
@@ -15,6 +16,12 @@ namespace Event.Tracker.API.Repository
         {
             await _dbContext.UpdateLogs.AddAsync(logItem);
             return logItem;
+        }
+
+        public async Task<UpdateLogItem> GetLatestUpdateLog()
+        {
+            var logItems = await _dbContext.UpdateLogs.ToListAsync();
+            return logItems.Last();
         }
     }
 }

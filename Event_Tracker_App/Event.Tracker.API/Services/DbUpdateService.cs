@@ -5,11 +5,11 @@ namespace Event.Tracker.API.Services
 {
     public class DbUpdateService
     {
-        private static DateTime _lastChecked;
+        private static IUpdateLogsRepository _updateLogsRepository;
         private readonly IEventsRepository _eventsRepository;
-        public DbUpdateService(IEventsRepository eventsRepository)
+        public DbUpdateService(IEventsRepository eventsRepository, IUpdateLogsRepository updateLogsRepository)
         {
-            _lastChecked = DateTime.UtcNow;
+            _updateLogsRepository = updateLogsRepository;
             _eventsRepository = eventsRepository;
         }
 
