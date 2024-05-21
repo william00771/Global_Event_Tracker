@@ -1,5 +1,5 @@
 using Event.Tracker.API.Contracts;
-using Event.Tracker.API.Models;
+using Event.Tracker.API.Dtos;
 
 namespace Event.Tracker.API.Services
 {
@@ -13,7 +13,7 @@ namespace Event.Tracker.API.Services
             _eventsRepository = eventsRepository;
         }
 
-        public static void UpdateEventsDb(List<EventModel> events)
+        public async void UpdateEventsDb(List<EventModelRequestDto> events)
         {
             
         }
