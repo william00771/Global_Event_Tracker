@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Event.Tracker.API")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+786b41da487d16d899b47df2cc37c9f1112b7275")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8fed4ac5942d5ae2d6075021f1ec80793d2db90b")]
 [assembly: System.Reflection.AssemblyProductAttribute("Event.Tracker.API")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Event.Tracker.API")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
