@@ -1,6 +1,8 @@
+using System.Globalization;
 using System.Text.Json;
 using Event.Tracker.API.Contracts;
 using Event.Tracker.API.Models;
+using Event.Tracker.API.Models.GoogleEvsResultsAPI;
 using Event.Tracker.API.Models.Tickster;
 
 namespace Event.Tracker.API.Services
@@ -9,21 +11,24 @@ namespace Event.Tracker.API.Services
     {
         private readonly IHttpClientFactory _httpClientFactory;
         private readonly string _ticksterApiKey;
+        private readonly string _serpApiKey;
         private readonly ILogger<FetchExternalEventsToDb> _logger;
         private readonly IEventsRepository _eventsRepository;
+        private readonly IGeocoderService _geocoderService;
 
-        public FetchExternalEventsToDb(IHttpClientFactory httpClientFactory, IConfiguration configuration, ILogger<FetchExternalEventsToDb> logger, IEventsRepository eventsRepository)
+        public FetchExternalEventsToDb(IHttpClientFactory httpClientFactory, IConfiguration configuration, ILogger<FetchExternalEventsToDb> logger, IEventsRepository eventsRepository, IGeocoderService geocoderService)
         {
             _ticksterApiKey = configuration["Tickster:apiKey"];
+            _serpApiKey = configuration["SerpApi:ApiKey"];
             _httpClientFactory = httpClientFactory;
             _logger = logger;
             _eventsRepository = eventsRepository;
+            _geocoderService = geocoderService;
 
-            if (string.IsNullOrEmpty(configuration["Tickster:apiKey"]))
-            {
-                _logger.LogError("Tickster API key is null or empty. Please check the configuration.");
-            }
+            if (configuration["Tickster:apiKey"] == "secret") _logger.LogError("Tickster API key is null or empty. Please check the configuration.");
+            if (configuration["SerpApi:apiKey"] == "secret") _logger.LogError("SerpApi API key is null or empty. Please check the configuration.");
         }
+
         public async Task<List<EventModel>> FetchTickster()
         {
             var client = _httpClientFactory.CreateClient();
@@ -70,7 +75,7 @@ namespace Event.Tracker.API.Services
                                     Duration = 0,
                                     WebsiteUrl = ev.InfoUrl,
                                     NumberOfPeople = 0,
-                                    Keywords = new List<string> { ev.Name, ev.Description?.Markdown ?? string.Empty },
+                                    Keywords = new List<string> { string.Empty },
                                     Image = "https://res.cloudinary.com/dlw9fdrql/image/upload/v1716306744/event_jmwpwd.jpg"
                                 };
 
@@ -85,6 +90,56 @@ namespace Event.Tracker.API.Services
                     }
                 }
                 excecutionsLeft--;
+            }
+            return null;
+        }
+        public async Task<List<EventModel>> FetchGoogleEventsResult()
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.DefaultRequestHeaders.Add("api_key", _serpApiKey);
+
+            var response = await client.GetAsync("https://api.serpapi.com/search?q=events+in+Stockholm&google_domain=google.com&gl=us&hl=en&num=20");
+            if(response.IsSuccessStatusCode)
+            {
+                var responseJson = await response.Content.ReadAsStringAsync();
+                var data = JsonSerializer.Deserialize<GoogleEvsAPIResponse>(responseJson);
+                var eventResponse = new List<EventModel>();
+                if (data != null && data.EventsResults.Count != null)
+                {
+                    foreach (var ev in data.EventsResults)
+                    {
+                        if (ev != null)
+                        {
+                            await Task.Delay(1000);
+                            var address = await _geocoderService.GetCoordinatesFromAddressAsync(ev.Address[0]);
+                            var newCoordinates = new Coordinates
+                            {
+                                Lat = address.Lat,
+                                Lng = address.Lng,
+                                FormattedAddress = address.FormattedAddress,
+                            };
+                            var dateUtc = DateTime.ParseExact(ev.Date.When.Substring(0, ev.Date.When.IndexOf('–')).Trim(), "ddd, MMM dd, h:mm tt", CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal).ToUniversalTime();
+                            EventModel newEventModel = new EventModel
+                            {
+                                Name = ev.Title ?? string.Empty,
+                                Location = newCoordinates,
+                                Description = ev.Title ?? string.Empty,
+                                Time = dateUtc,
+                                Date = dateUtc,
+                                DateTo = dateUtc,
+                                Duration = 0,
+                                WebsiteUrl = ev.Link,
+                                NumberOfPeople = 0,
+                                Keywords = new List<string> { string.Empty },
+                                Image = ev.Thumbnail
+                            };
+
+                            eventResponse.Add(newEventModel);
+                            await _eventsRepository.PostFullEventAsync(newEventModel);
+                        }
+                    }
+                }
+                return eventResponse;
             }
             return null;
         }
