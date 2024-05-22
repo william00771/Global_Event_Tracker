@@ -47,7 +47,6 @@ namespace Event.Tracker.API.Services
             Console.WriteLine($"Next Tickster Update in: {Math.Round(5760 - minPassedSinceLastUpdated)} minutes");
 
             var updateLog = new UpdateLogItem();
-            updateLog.TicksterLastUpdated = DateTime.UtcNow;
             if(minSinceTicksterUpdated > 5760){
                 await fetchExternalEventsToDb.FetchTickster();
                 updateLog.TicksterLastUpdated = DateTime.UtcNow;
