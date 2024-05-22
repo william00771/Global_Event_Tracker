@@ -25,7 +25,7 @@ function App() {
     lat: 59.3369170,
     lng: 18.0119609
   });
-  const [maxAllowedMarkerRenders, setMaxAllowedMarkerRenders] = useState<number>(100);
+  const [maxAllowedMarkerRenders, setMaxAllowedMarkerRenders] = useState<number>(300);
   // const [lastFourthDecimal, setLastFourthDecimal] = useState<number>(Math.floor(mapCenter.lat * 10000) % 10);
   // const [lastThirdDecimal, setLastThirdDecimal] = useState<number>(Math.floor(mapCenter.lat * 1000) % 10);
   // const [latLastSecondDecimal, setLatLastSecondDecimal] = useState<number>(Math.floor(mapCenter.lat * 100) % 10);
