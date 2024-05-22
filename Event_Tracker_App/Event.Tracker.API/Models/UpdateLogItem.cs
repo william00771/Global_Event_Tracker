@@ -4,5 +4,6 @@ namespace Event.Tracker.API.Models
     {
         public int Id { get; set; }
         public DateTime LastUpdated { get; set; }
+        public DateTime TicksterLastUpdated { get; set; }
     }
 }

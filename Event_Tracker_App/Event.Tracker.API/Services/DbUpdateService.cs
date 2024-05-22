@@ -32,37 +32,32 @@ namespace Event.Tracker.API.Services
 
         private async Task FetchAndUpdateAllEvents(IEventsRepository eventsRepository, IUpdateLogsRepository updateLogsRepository, IFetchExternalEventsToDb fetchExternalEventsToDb)
         {
-            var lastUpdated = await updateLogsRepository.GetLatestUpdateLog();
+            var lastUpdateLog = await updateLogsRepository.GetLatestUpdateLog();
 
-            if(lastUpdated == null)
+            if(lastUpdateLog == null)
             {
                 await FetchAndUpdateAllEvents(eventsRepository, updateLogsRepository, fetchExternalEventsToDb);
                 return;
             }
 
-            double minPassedSinceLastUpdated = (DateTime.UtcNow - lastUpdated.LastUpdated).TotalMinutes;
-            double hoursPassedSinceLastUpdated = (DateTime.UtcNow - lastUpdated.LastUpdated).TotalHours;
+            double minPassedSinceLastUpdated = (DateTime.UtcNow - lastUpdateLog.LastUpdated).TotalMinutes;
+            double minSinceTicksterUpdated = (DateTime.UtcNow - lastUpdateLog.TicksterLastUpdated).TotalMinutes;
             Console.WriteLine("Last Db Update: " + Math.Round(minPassedSinceLastUpdated) + " minutes ago");
+            Console.WriteLine("Last Tickster Db Update: " + Math.Round(minSinceTicksterUpdated) + " minutes ago");
+            Console.WriteLine($"Next Tickster Update in: {Math.Round(5760 - minPassedSinceLastUpdated)} minutes");
 
-            if(minPassedSinceLastUpdated > 1440){
-                await UpdateEventsDb(eventsRepository, updateLogsRepository, fetchExternalEventsToDb);
+            var updateLog = new UpdateLogItem();
+            updateLog.TicksterLastUpdated = DateTime.UtcNow;
+            if(minSinceTicksterUpdated > 5760){
+                await fetchExternalEventsToDb.FetchTickster();
+                updateLog.TicksterLastUpdated = DateTime.UtcNow;
             }
             else{
                 return;
-            }  
-        }
-
-        private async Task UpdateEventsDb(IEventsRepository eventsRepository, IUpdateLogsRepository updateLogsRepository, IFetchExternalEventsToDb fetchExternalEventsToDb)
-        {
-            await fetchExternalEventsToDb.FetchTickster();
-
-            var updateLog = new UpdateLogItem
-            {
-                LastUpdated = DateTime.UtcNow
-            };
+            }
+            updateLog.LastUpdated = DateTime.UtcNow;
             await updateLogsRepository.AddUpdateLog(updateLog);
-
-            Console.WriteLine("Successfully Updated!");
+            Console.WriteLine($"Successfully Updated! {updateLog.LastUpdated} \nTickster Last Update: {updateLog.TicksterLastUpdated}");
         }
 
         public Task StopAsync(CancellationToken cancellationToken)
