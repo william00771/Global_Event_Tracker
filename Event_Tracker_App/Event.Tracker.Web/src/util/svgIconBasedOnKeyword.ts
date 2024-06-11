@@ -81,209 +81,215 @@ import { airshowKeywords, artKeywords, athleticsKeywords, balletKeywords, basket
     wineKeywords, writingKeywords, yogaKeywords } from '@/Data/keywords';
 
 
-export const svgIconBasedOnKeyword = (event: EventModel) => {
-    const name = event.name.toLocaleLowerCase();
-    const description = event.description.toLocaleLowerCase();
-    const keywords = event.keywords.concat([name, description]);
 
-    if (keywords.some(keyword => airshowKeywords.includes(keyword.toLowerCase()))) {
-        return airshow;
-    }
-    if (keywords.some(keyword => cookingKeywords.includes(keyword.toLowerCase()))) {
-        return cooking;
-    }
-    if (keywords.some(keyword => artKeywords.includes(keyword.toLowerCase()))) {
-        return art;
-    }
-    if (keywords.some(keyword => athleticsKeywords.includes(keyword.toLowerCase()))) {
-        return athletics;
-    }
-    if (keywords.some(keyword => foodKeywords.includes(keyword.toLowerCase()))) {
-        return food;
-    }
-    if (keywords.some(keyword => danceKeywords.includes(keyword.toLowerCase()))) {
+export const svgIconBasedOnKeyword = (event: EventModel) => {
+    const keywordInText = (keywords: string[], text: string): boolean => keywords.some(keyword => text.includes(keyword));
+
+    const name = event.name.toLowerCase();
+    const description = event.description.toLowerCase();
+    const eventKeywords = event.keywords.map(keyword => keyword.toLowerCase());
+
+    const allTexts = [name, description, ...eventKeywords];
+
+    
+    if (allTexts.some(text => keywordInText(danceKeywords, text))) {
         return dance;
     }
-    if (keywords.some(keyword => balletKeywords.includes(keyword.toLowerCase()))) {
-        return ballet;
-    }
-    if (keywords.some(keyword => classicalKeywords.includes(keyword.toLowerCase()))) {
-        return classical;
-    }
-    if (keywords.some(keyword => classiccarKeywords.includes(keyword.toLowerCase()))) {
-        return classiccar;
-    }
-    if (keywords.some(keyword => clubKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(clubKeywords, text))) {
         return club;
     }
-    if (keywords.some(keyword => codingKeywords.includes(keyword.toLowerCase()))) {
-        return coding;
-    }
-    if (keywords.some(keyword => comedyKeywords.includes(keyword.toLowerCase()))) {
-        return comedy;
-    }
-    if (keywords.some(keyword => concertKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(concertKeywords, text))) {
         return concert;
     }
-    if (keywords.some(keyword => cyclingKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(airshowKeywords, text))) {
+        return airshow;
+    }
+    if (allTexts.some(text => keywordInText(artKeywords, text))) {
+        return art;
+    }
+    if (allTexts.some(text => keywordInText(foodKeywords, text))) {
+        return food;
+    }
+    if (allTexts.some(text => keywordInText(athleticsKeywords, text))) {
+        return athletics;
+    }
+    if (allTexts.some(text => keywordInText(balletKeywords, text))) {
+        return ballet;
+    }
+    if (allTexts.some(text => keywordInText(classicalKeywords, text))) {
+        return classical;
+    }
+    if (allTexts.some(text => keywordInText(classiccarKeywords, text))) {
+        return classiccar;
+    }
+    if (allTexts.some(text => keywordInText(codingKeywords, text))) {
+        return coding;
+    }
+    if (allTexts.some(text => keywordInText(comedyKeywords, text))) {
+        return comedy;
+    }
+    if (allTexts.some(text => keywordInText(cyclingKeywords, text))) {
         return cycling;
     }
-    if (keywords.some(keyword => yogaKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(yogaKeywords, text))) {
         return yoga;
     }
-    if (keywords.some(keyword => writingKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(writingKeywords, text))) {
         return writing;
     }
-    if (keywords.some(keyword => dogKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(dogKeywords, text))) {
         return dog;
     }
-    if (keywords.some(keyword => entrepreneurKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(entrepreneurKeywords, text))) {
         return entrepreneur;
     }
-    if (keywords.some(keyword => environmentalKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(environmentalKeywords, text))) {
         return enviromental;
     }
-    if (keywords.some(keyword => basketballKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(basketballKeywords, text))) {
         return basketball;
     }
-    if (keywords.some(keyword => beerKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(beerKeywords, text))) {
         return beer;
     }
-    if (keywords.some(keyword => birthdayKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(birthdayKeywords, text))) {
         return birthday;
     }
-    if (keywords.some(keyword => bluesKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(bluesKeywords, text))) {
         return blues;
     }
-    if (keywords.some(keyword => bookKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(bookKeywords, text))) {
         return book;
     }
-    if (keywords.some(keyword => businessKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(businessKeywords, text))) {
         return business;
     }
-    if (keywords.some(keyword => catKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(catKeywords, text))) {
         return cat;
     }
-    if (keywords.some(keyword => charityKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(charityKeywords, text))) {
         return charity;
     }
-    if (keywords.some(keyword => chessKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(cookingKeywords, text))) {
+        return cooking;
+    }
+    if (allTexts.some(text => keywordInText(chessKeywords, text))) {
         return chess;
     }
-    if (keywords.some(keyword => expeditionKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(expeditionKeywords, text))) {
         return expedition;
     }
-    if (keywords.some(keyword => familyKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(familyKeywords, text))) {
         return family;
     }
-    if (keywords.some(keyword => fashionKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(fashionKeywords, text))) {
         return fashion;
     }
-    if (keywords.some(keyword => filmmakingKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(filmmakingKeywords, text))) {
         return filmmaking;
     }
-    if (keywords.some(keyword => financialKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(financialKeywords, text))) {
         return financial;
     }
-    if (keywords.some(keyword => fishingKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(fishingKeywords, text))) {
         return fishing;
     }
-    if (keywords.some(keyword => fitnessKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(fitnessKeywords, text))) {
         return fitness;
     }
-    if (keywords.some(keyword => footballKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(footballKeywords, text))) {
         return football;
     }
-    if (keywords.some(keyword => gamingKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(gamingKeywords, text))) {
         return gaming;
     }
-    if (keywords.some(keyword => golfKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(golfKeywords, text))) {
         return golf;
     }
-    if (keywords.some(keyword => jazzKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(jazzKeywords, text))) {
         return jazz;
     }
-    if (keywords.some(keyword => karaokeKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(karaokeKeywords, text))) {
         return karaoke;
     }
-    if (keywords.some(keyword => kidKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(kidKeywords, text))) {
         return kid;
     }
-    if (keywords.some(keyword => languageKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(languageKeywords, text))) {
         return language;
     }
-    if (keywords.some(keyword => mindfulnessKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(mindfulnessKeywords, text))) {
         return mindfulness;
     }
-    if (keywords.some(keyword => moneyKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(moneyKeywords, text))) {
         return money;
     }
-    if (keywords.some(keyword => natureKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(natureKeywords, text))) {
         return nature;
     }
-    if (keywords.some(keyword => parentingKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(parentingKeywords, text))) {
         return parenting;
     }
-    if (keywords.some(keyword => photographyKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(photographyKeywords, text))) {
         return photography;
     }
-    if (keywords.some(keyword => prideKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(prideKeywords, text))) {
         return pride;
     }
-    if (keywords.some(keyword => realestateKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(realestateKeywords, text))) {
         return realestate;
     }
-    if (keywords.some(keyword => recyclingKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(recyclingKeywords, text))) {
         return recycling;
     }
-    if (keywords.some(keyword => runningKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(runningKeywords, text))) {
         return running;
     }
-    if (keywords.some(keyword => sailingKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(sailingKeywords, text))) {
         return sailing;
     }
-    if (keywords.some(keyword => scienceKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(scienceKeywords, text))) {
         return science;
     }
-    if (keywords.some(keyword => singingKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(singingKeywords, text))) {
         return singing;
     }
-    if (keywords.some(keyword => singlesKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(singlesKeywords, text))) {
         return singles;
     }
-    if (keywords.some(keyword => skateboardKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(skateboardKeywords, text))) {
         return skateboard;
     }
-    if (keywords.some(keyword => spaKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(spaKeywords, text))) {
         return spa;
     }
-    if (keywords.some(keyword => speeddatingKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(speeddatingKeywords, text))) {
         return speeddating;
     }
-    if (keywords.some(keyword => squashKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(squashKeywords, text))) {
         return squash;
     }
-    if (keywords.some(keyword => streetfoodKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(streetfoodKeywords, text))) {
         return streetfood;
     }
-    if (keywords.some(keyword => techKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(techKeywords, text))) {
         return tech;
     }
-    if (keywords.some(keyword => tennisKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(tennisKeywords, text))) {
         return tennis;
     }
-    if (keywords.some(keyword => vipKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(vipKeywords, text))) {
         return vip;
     }
-    if (keywords.some(keyword => volunteerKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(volunteerKeywords, text))) {
         return volunteer;
     }
-    if (keywords.some(keyword => wildlifeKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(wildlifeKeywords, text))) {
         return wildlife;
     }
-    if (keywords.some(keyword => wineKeywords.includes(keyword.toLowerCase()))) {
+    if (allTexts.some(text => keywordInText(wineKeywords, text))) {
         return wine;
     }
 
-    return dj;
+    return dj; 
 };

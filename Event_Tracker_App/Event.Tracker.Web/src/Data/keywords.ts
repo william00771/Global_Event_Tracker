@@ -13,7 +13,6 @@ export const airshowKeywords = [
 ];
 
 export const artKeywords = [
-    "art",
     "painting",
     "sculpture",
     "gallery",
@@ -197,7 +196,8 @@ export const classicalKeywords = [
     "orchestral performance",
     "symphony orchestra",
     "classical composer",
-    "classical recordings"
+    "classical recordings",
+    "teater"
 ];
 
 export const classiccarKeywords = [
@@ -227,7 +227,8 @@ export const clubKeywords = [
     "clubbing",
     "party venue",
     "club music",
-    "nightlife scene"
+    "nightlife scene",
+    "Klubb"
 ];
 
 export const codingKeywords = [

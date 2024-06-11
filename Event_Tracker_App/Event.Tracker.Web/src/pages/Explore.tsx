@@ -73,11 +73,11 @@ export const Explore = ({className, data, setPage, page, filter, mapCenter, setM
 
           zoomLevel == 8 && setMaxAllowedMarkerRenders(0)
           zoomLevel == 9 && setMaxAllowedMarkerRenders(0)
-          zoomLevel == 10 && setMaxAllowedMarkerRenders(15)
-          zoomLevel == 11 && setMaxAllowedMarkerRenders(15)
-          zoomLevel == 12 && setMaxAllowedMarkerRenders(250)
-          zoomLevel == 13 && setMaxAllowedMarkerRenders(250)
-          console.log(zoomLevel);
+          zoomLevel == 10 && setMaxAllowedMarkerRenders(50)
+          zoomLevel == 11 && setMaxAllowedMarkerRenders(50)
+          zoomLevel == 12 && setMaxAllowedMarkerRenders(50)
+          zoomLevel == 13 && setMaxAllowedMarkerRenders(50)
+          // console.log(zoomLevel);
         });
         return null;
       };
@@ -93,10 +93,10 @@ export const Explore = ({className, data, setPage, page, filter, mapCenter, setM
       <>
         <section className={className}>
             <MapContainer 
-            className='leaflet_map' 
-            center={[59.3369170, 18.0119609]} 
-            zoom={13}
-            scrollWheelZoom={true}>
+                className='leaflet_map' 
+                center={[59.3369170, 18.0119609]} 
+                zoom={13}
+                scrollWheelZoom={true}>
                 <TileLayer 
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                     // url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
