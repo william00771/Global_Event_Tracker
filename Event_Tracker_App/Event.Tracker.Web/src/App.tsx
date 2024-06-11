@@ -1,6 +1,5 @@
 import './App.css'
 import { QueryClient, QueryClientProvider, useMutation, useQuery } from "react-query";
-import Explore from "./pages/Explore"
 import { useEffect, useState } from "react";
 import { NavbarTop } from "./nav/NavbarTop";
 import { NavBarBottom } from "./nav/NavBarBottom";
@@ -13,6 +12,7 @@ import { fetchEvents, fetchEventsFromCoordinates, postEvent } from './util/http'
 import { BoundingBox, Coordinates, EventModel, EventModelRequestDto } from './types/types';
 import { CircularProgress } from '@mui/material';
 import { calculateLongitudeLatitudeBoundingBox } from './util/mapcalculation';
+import { Explore } from './pages/Explore';
 
 
 
@@ -97,9 +97,9 @@ function App() {
             />
             { page != 'CreateEvent' && 
               <Explore 
-                className={"explore-container " }
+                className={"explore__container"}
                 data={data}
-                setPage={(page) => setPage(page)}
+                setPage={(page: string) => setPage(page)}
                 page={page}
                 filter={filter}
                 setMapCenter={(mapCenter: Coordinates) => setMapCenter(mapCenter)}
