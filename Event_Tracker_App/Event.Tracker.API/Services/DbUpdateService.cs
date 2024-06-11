@@ -63,8 +63,8 @@ namespace Event.Tracker.API.Services
 
             if(minSinceTicksterUpdated > 5760 || minSinceTicksterUpdated == -1)
             {
-                await fetchExternalEventsToDb.FetchTickster();
-                ticksterUpdated = true;
+                // await fetchExternalEventsToDb.FetchTickster();
+                // ticksterUpdated = true;
             }
             if(minSinceGoogleEvsUpdated > 0 || minSinceGoogleEvsUpdated == -1)
             {
@@ -76,7 +76,7 @@ namespace Event.Tracker.API.Services
             }
 
             updateLog.LastUpdated = DateTime.UtcNow;
-            updateLog.TicksterLastUpdated = ticksterUpdated == true ? DateTime.UtcNow : lastUpdateLog.TicksterLastUpdated;
+            // updateLog.TicksterLastUpdated = ticksterUpdated == true ? DateTime.UtcNow : lastUpdateLog.TicksterLastUpdated;
             // updateLog.GoogleEvsLastUpdated = googleEvsUpdated == true ? DateTime.UtcNow : lastUpdateLog.GoogleEvsLastUpdated;
 
             await updateLogsRepository.AddUpdateLog(updateLog);
