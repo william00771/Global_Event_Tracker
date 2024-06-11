@@ -18,7 +18,6 @@ namespace Event.Tracker.API.Services
         public FetchExternalEventsToDb(
             IHttpClientFactory httpClientFactory, 
             IConfiguration configuration, 
-            ILogger<FetchExternalEventsToDb> logger, 
             IEventsRepository eventsRepository,
             IGeocoderService geocoderService
         )
@@ -106,26 +105,22 @@ namespace Event.Tracker.API.Services
         public async Task<List<EventModel>> FetchGoogleEventsResult()
         {
             var client = _httpClientFactory.CreateClient();
-            // client.DefaultRequestHeaders.Add("api_key", _serpApiKey);
-
-            // var response = await client.GetAsync($"https://serpapi.com/search.json?engine=google_events&q=Events+in+Stockholm&hl=en&gl=us&num=20&api_key={_serpApiKey}");
-
+            client.DefaultRequestHeaders.Add("api_key", _serpApiKey);
+            var response = await client.GetAsync($"https://serpapi.com/search.json?engine=google_events&q=Events+in+Stockholm&hl=en&gl=us&num=20&api_key={_serpApiKey}");
             
-            // if(response.IsSuccessStatusCode)
-            // {
-                string projectDirectory = Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.FullName;
-                string jsonFilePath = Path.Combine(projectDirectory, "Data", "jsonapiresponse.json");
-                string responseJson = await File.ReadAllTextAsync(jsonFilePath);
-                // var responseJson = await response.Content.ReadAsStringAsync();
+            if(response.IsSuccessStatusCode)
+            {
+                var responseJson = await response.Content.ReadAsStringAsync();
                 var data = JsonConvert.DeserializeObject<GoogleEvsApiResponse>(responseJson);
                 var eventResponse = new List<EventModel>();
+
                 if (data != null)
                 {
                     foreach (var ev in data.EventsResults)
                     {
                         if (ev != null)
                         {
-                            await Task.Delay(1000);
+                            await Task.Delay(1500); //To mitigate request overload to GeocoderService
                             var address = await _geocoderService.GetCoordinatesFromAddressAsync(ev.Address[0]);
                             if(address != null)
                             {
@@ -160,8 +155,10 @@ namespace Event.Tracker.API.Services
                     }
                     return eventResponse;
                 }
+            }
             return null;
         }
+
         private DateTime? ParseGoogleEventAPIDate(string dateStr)
         {
             // Possible date formats From Google Events
