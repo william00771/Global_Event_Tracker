@@ -1,0 +1,517 @@
+{
+  "search_metadata": {
+    "id": "664dee1d18ca8635049780a3",
+    "status": "Success",
+    "json_endpoint": "https://serpapi.com/searches/62f698becb280bf7/664dee1d18ca8635049780a3.json",
+    "created_at": "2024-05-22 13:07:41 UTC",
+    "processed_at": "2024-05-22 13:07:41 UTC",
+    "google_events_url": "https://www.google.com/search?q=Events+in+Stockholm&ibp=htl;events&hl=en&gl=us",
+    "raw_html_file": "https://serpapi.com/searches/62f698becb280bf7/664dee1d18ca8635049780a3.html",
+    "total_time_taken": 5.61
+  },
+  "search_parameters": {
+    "q": "Events in Stockholm",
+    "engine": "google_events",
+    "hl": "en",
+    "gl": "us"
+  },
+  "search_information": {
+    "events_results_state": "Results for exact spelling"
+  },
+  "events_results": [
+    {
+      "title": "Lil Yachty",
+      "date": {
+        "start_date": "May 25",
+        "when": "Sat, May 25, 8 PM"
+      },
+      "address": [
+        "Fryshuset Hammarby Sjöstad, Mårtensdalsgatan 2-8",
+        "Stockholm, Sweden"
+      ],
+      "link": "https://open.spotify.com/concert/096qcOMP0X5xw9uFthIeEj",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=q9Jo8nxirGNLEPUJDa7LN4KX_vaI311I7KMVjDPT5NQsC7emQZBjPoifa5cREtyPt7T0DfkxlCKz3TLHB7yiKtGG16wSkTNM5R14xSrWbO-nTZP7CZ0",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x465f79d8a145c151:0x1bb8b9a5a329fe95?sa=X&ved=2ahUKEwjQj432qaGGAxWDqJUCHbw_AtUQ9eIBegQIARAA&hl=en&gl=us",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0x465f79d8a145c151%3A0x1bb8b9a5a329fe95&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Stockholm&type=place"
+      },
+      "description": "Find tickets for Lil Yachty at Fryshuset in Stockholm on 5/25/2024 at 8:00 PM",
+      "ticket_info": [
+        {
+          "source": "Spotify",
+          "link": "https://open.spotify.com/concert/096qcOMP0X5xw9uFthIeEj",
+          "link_type": "more info"
+        },
+        {
+          "source": "Deezer",
+          "link": "https://www.deezer.com/sv/artist/9776678",
+          "link_type": "more info"
+        },
+        {
+          "source": "Ticketmaster.se",
+          "link": "https://www.ticketmaster.se/artist/lil-yachty-tickets/973468?language=en-us",
+          "link_type": "more info"
+        },
+        {
+          "source": "Live Nation",
+          "link": "https://www.livenation.se/en/show/1422012/lil-yachty/stockholm/2024-05-25",
+          "link_type": "more info"
+        },
+        {
+          "source": "Bandsintown",
+          "link": "https://www.bandsintown.com/e/104413571-lil-yachty-at-fryshuset-arenan",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Fryshuset Hammarby Sjöstad",
+        "rating": 3.9,
+        "reviews": 347,
+        "link": "https://www.google.com/search?sca_esv=8b3c2fe050857b40&sca_upv=1&hl=en&gl=us&q=Fryshuset+Hammarby+Sj%C3%B6stad&ludocid=1997550555796995733&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1uj3lJmcK08vSmVnxDUvRHmVYTZwr1ttmX0DJCSY&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSymKFZWO2BtKsfREL1d6KtVSw0-DZXs4-88QbLGhcNNeKISFjnTSPP1FFrMg&s=10"
+    },
+    {
+      "title": "Lewis Black",
+      "date": {
+        "start_date": "May 24",
+        "when": "Fri, May 24, 8 – 10 PM"
+      },
+      "address": [
+        "Södra Teatern, Mosebacke Torg 1, 3",
+        "Stockholm, Sweden"
+      ],
+      "link": "https://www.tickster.com/se/sv/events/9z48mvgb01n9rkv/2024-05-24/lewis-black-goodbye-yeller-brick-road-the-final",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=MzYHvu3s_AfgvP0tWLe51jF5G5PjXDBwlOZ279yzsj6TFxIKKVZTFN5jFnxaiTQlEKgNGhZhPvRtcTYhzwrdVT3T0hfpL4Ed8dX5ji5Ylffa9rsMEA8",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x465f77fb6c81a859:0x4935e58a9eab7b1b?sa=X&ved=2ahUKEwjQj432qaGGAxWDqJUCHbw_AtUQ9eIBegQICRAA&hl=en&gl=us",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0x465f77fb6c81a859%3A0x4935e58a9eab7b1b&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Stockholm&type=place"
+      },
+      "description": "Two-time Grammy award winning comedian/actor/writer Lewis Black uses his trademark style of comedic yelling and finger pointing to expose the absurdities of life. His comedic brilliance makes...",
+      "ticket_info": [
+        {
+          "source": "Bandsintown.com",
+          "link": "https://www.bandsintown.com/t/1031185093?came_from=209",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Tickster",
+          "link": "https://www.tickster.com/se/sv/events/9z48mvgb01n9rkv/2024-05-24/lewis-black-goodbye-yeller-brick-road-the-final",
+          "link_type": "more info"
+        },
+        {
+          "source": "Shazam",
+          "link": "https://www.shazam.com/event/08537746-614e-4abb-9bbc-e653c40441be",
+          "link_type": "more info"
+        },
+        {
+          "source": "TicketSwap",
+          "link": "https://www.ticketswap.com/event/lewis-black/fe84e83a-3340-4059-95b5-ca61150a1b33",
+          "link_type": "more info"
+        },
+        {
+          "source": "BiljettShop",
+          "link": "https://biljettshop.se/en/lewis-black/",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Södra Teatern",
+        "rating": 4.2,
+        "reviews": 3165,
+        "link": "https://www.google.com/search?sca_esv=8b3c2fe050857b40&sca_upv=1&hl=en&gl=us&q=S%C3%B6dra+Teatern&ludocid=5275374922064689947&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcScG8IkjXapYP--ivEJeervS-GpvLY8L5PN6gA5-C0&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTO5vMfkExHrSglslMRjAfPqQU9sBKVIE6da8eAJsZ_XLu-M0wUCOIOrCuEjg&s=10"
+    },
+    {
+      "title": "Drömmen Festival 2024",
+      "date": {
+        "start_date": "May 25",
+        "when": "Sat, May 25, 5 – 11 PM"
+      },
+      "address": [
+        "Stockholm Stadium, Lidingövägen",
+        "Stockholm, Sweden"
+      ],
+      "link": "https://festmore.com/event/drommen-festival-stockholm-stadium-2024/",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=Osw5bsRYDZ8tNUUHZA5UOVUio2TNtsqDbVArynp_P1hjXjMIqDDLTKsdj3lUZjDuf0isooQRXk0ucL7efuw3x22FHZGLq-L4MBWBuDLZGxig1Nu_qyE",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x465f9d46987f203b:0x84fb387fe43d367d?sa=X&ved=2ahUKEwjQj432qaGGAxWDqJUCHbw_AtUQ9eIBegQIERAA&hl=en&gl=us",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0x465f9d46987f203b%3A0x84fb387fe43d367d&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Stockholm&type=place"
+      },
+      "description": "Drömmen Festival, Stockholm 25 May Carola, Bonnie Tyler, and Boney M are just a few of the beloved artists performing at the brand-new one-day festival, Drömmen, at Stockholm Olympic Stadium...",
+      "ticket_info": [
+        {
+          "source": "Bandsintown.com",
+          "link": "https://www.bandsintown.com/f/148711-drommen-festival-2024?came_from=209",
+          "link_type": "tickets"
+        },
+        {
+          "source": "TicketSwap",
+          "link": "https://www.ticketswap.com/event/drommen-festival-2024/d9604f88-53a9-4140-aa64-1adccf313fa0",
+          "link_type": "more info"
+        },
+        {
+          "source": "StubHub",
+          "link": "https://www.stubhub.com/drommen-tickets/performer/150183224",
+          "link_type": "more info"
+        },
+        {
+          "source": "Setlist.fm",
+          "link": "https://www.setlist.fm/festival/2024/drommen-festival-2024-73d44a59.html",
+          "link_type": "more info"
+        },
+        {
+          "source": "Festmore",
+          "link": "https://festmore.com/event/drommen-festival-stockholm-stadium-2024/",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Stockholm Stadium",
+        "rating": 4.5,
+        "reviews": 2026,
+        "link": "https://www.google.com/search?sca_esv=8b3c2fe050857b40&sca_upv=1&hl=en&gl=us&q=Stockholm+Stadium&ludocid=9582314754102081149&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTqKZ1WdUhnRr3bVdpuWeuStOvzjSfd8ACM0WcVzLoaOobq3txY5w3GaIg&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyVPU6-NDIH8UzSrdiTcm9DR2kz3he22zZFmrQPB2iTw&s"
+    },
+    {
+      "title": "José González",
+      "date": {
+        "start_date": "May 25",
+        "when": "Sat, May 25, 6:30 PM – Sun, May 26, 12:30 AM"
+      },
+      "address": [
+        "Orionteatern AB, Katarina Bangata 77",
+        "Stockholm, Sweden"
+      ],
+      "link": "https://www.bandsintown.com/e/105411232-jose-gonzalez-at-orion-theatre",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=GfzgyVSU7vQC8z_2YUt7eA-BGCwMsRVVG23k_r6JlX9xi67Cexcng414Tv8tpGwqOvFszJpE6j4oDDNUu_aOGNszvYCyLtrt04HbKiVW1zNJHrkWqbE",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x465f781db7d15e9f:0xe0c862d52cbce2fe?sa=X&ved=2ahUKEwjQj432qaGGAxWDqJUCHbw_AtUQ9eIBegQIGRAA&hl=en&gl=us",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0x465f781db7d15e9f%3A0xe0c862d52cbce2fe&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Stockholm&type=place"
+      },
+      "ticket_info": [
+        {
+          "source": "Ticketswap.com",
+          "link": "https://www.ticketswap.com/event/jose-gonzalez/94d5b7dd-dcbc-4df4-b27f-ef3e93c89a1c",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Bandsintown.com",
+          "link": "https://www.bandsintown.com/e/105411232?app_id=ggl_feed&came_from=289&utm_medium=web&utm_source=ggl_feed&utm_campaign=event",
+          "link_type": "tickets"
+        },
+        {
+          "source": "JamBase",
+          "link": "https://www.jambase.com/show/jose-gonzalez-orionteatern-20240525",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Orionteatern AB",
+        "rating": 4.5,
+        "reviews": 235,
+        "link": "https://www.google.com/search?sca_esv=8b3c2fe050857b40&sca_upv=1&hl=en&gl=us&q=Orionteatern+AB&ludocid=16197304727556121342&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIxnjNj5NKiPvGV1cxDccpK48yWN9q39pCJsLHOPQ&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkahLNbNFNJ6nOws9UpFyS5gqYqdXE2EYoZbYSxb5aMg&s=10"
+    },
+    {
+      "title": "José González",
+      "date": {
+        "start_date": "May 24",
+        "when": "Fri, May 24, 6:30 PM – Sat, May 25, 12:30 AM"
+      },
+      "address": [
+        "Orionteatern AB, Katarina Bangata 77",
+        "Stockholm, Sweden"
+      ],
+      "link": "https://open.spotify.com/concert/38y3M7wrc9hPIiwg1OZSyK",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=GfzgyVSU7vQC8z_2YUt7eA-BGCwMsRVVG23k_r6JlX9xi67Cexcng414Tv8tpGwqOvFszJpE6j4oDDNUu_aOGNszvYCyLtrt04HbKiVW1zNJHrkWqbE",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x465f781db7d15e9f:0xe0c862d52cbce2fe?sa=X&ved=2ahUKEwjQj432qaGGAxWDqJUCHbw_AtUQ9eIBegQIIRAA&hl=en&gl=us",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0x465f781db7d15e9f%3A0xe0c862d52cbce2fe&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Stockholm&type=place"
+      },
+      "description": "Find tickets for José González at Orion Theatre in Stockholm on 5/24/2024 at 6:30 PM",
+      "ticket_info": [
+        {
+          "source": "Bandsintown.com",
+          "link": "https://www.bandsintown.com/t/105411226?came_from=209",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Spotify",
+          "link": "https://open.spotify.com/concert/38y3M7wrc9hPIiwg1OZSyK",
+          "link_type": "more info"
+        },
+        {
+          "source": "TicketSwap",
+          "link": "https://www.ticketswap.com/event/jose-gonzalez/448e2590-bf7c-4b83-b0e1-1b17771bc9a9",
+          "link_type": "more info"
+        },
+        {
+          "source": "JamBase",
+          "link": "https://www.jambase.com/show/jose-gonzalez-orionteatern-20240524",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Orionteatern AB",
+        "rating": 4.5,
+        "reviews": 235,
+        "link": "https://www.google.com/search?sca_esv=8b3c2fe050857b40&sca_upv=1&hl=en&gl=us&q=Orionteatern+AB&ludocid=16197304727556121342&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRIxnjNj5NKiPvGV1cxDccpK48yWN9q39pCJsLHOPQ&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQkahLNbNFNJ6nOws9UpFyS5gqYqdXE2EYoZbYSxb5aMg&s=10"
+    },
+    {
+      "title": "26/5 2024 RAKIM | DEBASER STRAND",
+      "date": {
+        "start_date": "May 26",
+        "when": "Sun, May 26, 6:30 – 11:30 PM"
+      },
+      "address": [
+        "Debaser Hornstulls Strand, Hornstulls strand 4",
+        "Stockholm, Sweden"
+      ],
+      "link": "https://www.last.fm/event/4645096+Rakim+at+Debaser+-+Brooklyn+Bar+on+26+May+2024/lineup",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=p7a-PgaA1qpU6p20LimCBkcDY6HTuiA_oXgWzi7jeNow3ta4F0ffSy2RP7WHSMTkz1z037cBjW9aWlqCGRwrzByC9zjJ_t4aav9EMoZXYzvpaYZoJZQ",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x465f77c5cf624105:0x1de25bc121445c6b?sa=X&ved=2ahUKEwjQj432qaGGAxWDqJUCHbw_AtUQ9eIBegQIKRAA&hl=en&gl=us",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0x465f77c5cf624105%3A0x1de25bc121445c6b&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Stockholm&type=place"
+      },
+      "description": "Last.fm concert page for Rakim at Debaser - Brooklyn Bar (Stockholm) on May 26, 2024. Discuss the gig, get concert tickets, see who's attending, find similar events.",
+      "ticket_info": [
+        {
+          "source": "Wegow.com",
+          "link": "https://www.wegow.com/us/concerts/rakim-concert-in-stockholm-debaser-strand",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Seatsnet.com",
+          "link": "https://www.seatsnet.com/en/concerts/rap-hip-hop-reggae/26-5-2024-rakim-debaser-strand/",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Tickster",
+          "link": "https://www.tickster.com/se/en/events/16zhctltpg22dp7/2024-05-26/26-5-2024-rakim-debaser-strand",
+          "link_type": "more info"
+        },
+        {
+          "source": "Last.fm",
+          "link": "https://www.last.fm/event/4645096+Rakim+at+Debaser+-+Brooklyn+Bar+on+26+May+2024/lineup",
+          "link_type": "more info"
+        },
+        {
+          "source": "TicketSwap",
+          "link": "https://www.ticketswap.com/event/rakim-dj-viet-naam/e70df6de-f9ef-4110-aa77-0c9d83cb0c95",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Debaser Hornstulls Strand",
+        "rating": 3.9,
+        "reviews": 408,
+        "link": "https://www.google.com/search?sca_esv=8b3c2fe050857b40&sca_upv=1&hl=en&gl=us&q=Debaser+Hornstulls+Strand&ludocid=2153384456881462379&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSg5qT4YOu3h-Ju7gJqbXV68kW6PBgGWzo3xVvX7ueAVNm8GfPBpkKJS1g&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShKcX4bGbjwfwX53KryL1lyEHZh3WHAcK22KWjPwosixSI3IQPVWBOxMVDqg&s=10"
+    },
+    {
+      "title": "Nelly Furtado",
+      "date": {
+        "start_date": "May 24",
+        "when": "Fri, May 24, 8 PM – Sat, May 25, 2 AM"
+      },
+      "address": [
+        "Stora Scen, Lilla Allmänna Gränd",
+        "Stockholm, Sweden"
+      ],
+      "link": "https://www.visitstockholm.com/events/nelly-furtado/2024-05-24/",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=CQxhdLJr0QrCCB7NroVrkwlWeexMU41OSJ1so-jEcvqv2VnRLkBCKe5vr9Of8UXtAR-wJL078gPmqsLHSXpVmK8K7tCb_okoYFDO0kMnbmcPcEh4Tm0",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x465f82aaa4ac2771:0x168fe6948d193767?sa=X&ved=2ahUKEwjQj432qaGGAxWDqJUCHbw_AtUQ9eIBegQIMRAA&hl=en&gl=us",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0x465f82aaa4ac2771%3A0x168fe6948d193767&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Stockholm&type=place"
+      },
+      "description": "Nelly Furtado became famous in 2000 with the super hit \"I'm Like A Bird\" and has since delivered world hit after world hit together with Timbaland and Justin Timberlake, such as \"Maneater\" and...",
+      "ticket_info": [
+        {
+          "source": "Bandsintown.com",
+          "link": "https://www.bandsintown.com/e/1031584549?app_id=ggl_feed&came_from=289&utm_medium=web&utm_source=ggl_feed&utm_campaign=event",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Visit Stockholm",
+          "link": "https://www.visitstockholm.com/events/nelly-furtado/2024-05-24/",
+          "link_type": "more info"
+        },
+        {
+          "source": "Shazam",
+          "link": "https://www.shazam.com/event/f60013b1-1557-4cf9-840d-70eedf7a07aa",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Stora Scen",
+        "rating": 4.4,
+        "reviews": 57,
+        "link": "https://www.google.com/search?sca_esv=8b3c2fe050857b40&sca_upv=1&hl=en&gl=us&q=Stora+Scen&ludocid=1625771516200826727&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQuOZosVWlbw5znCIhxJYngrkd7uVqtbZVzqK7pmUlH5XkQc1WWRy0MVaU&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdkHxv_xTWJnJvpJNR6FlyLGs3SPwPJJk0-RTa6BZ-V1sY7I8Eo82ZrjbMPA&s=10"
+    },
+    {
+      "title": "Ane Brun",
+      "date": {
+        "start_date": "May 22",
+        "when": "Wed, May 22, 7 – 10 PM"
+      },
+      "address": [
+        "Orionteatern AB, Katarina Bangata 77",
+        "Stockholm, Sweden"
+      ],
+      "link": "https://open.spotify.com/concert/0wrUJKK0eA46ly5DaaLpRL",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=GfzgyVSU7vQC8z_2YUt7eA-BGCwMsRVVG23k_r6JlX9xi67Cexcng414Tv8tpGwqOvFszJpE6j4oDDNUu_aOGNszvYCyLtrt04HbKiVW1zNJHrkWqbE",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x465f781db7d15e9f:0xe0c862d52cbce2fe?sa=X&ved=2ahUKEwjQj432qaGGAxWDqJUCHbw_AtUQ9eIBegQIORAA&hl=en&gl=us",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0x465f781db7d15e9f%3A0xe0c862d52cbce2fe&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Stockholm&type=place"
+      },
+      "description": "Find tickets for Ane Brun at Orion Theatre in Stockholm on 5/22/2024 at 7:00 PM",
+      "ticket_info": [
+        {
+          "source": "Bandsintown.com",
+          "link": "https://www.bandsintown.com/t/105388485?came_from=209",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Prf.hn",
+          "link": "https://prf.hn/click/camref:1011l9QnS/destination:https://www.stubhub.com/ane-brun-stockholm-tickets-5-22-2024/event/153575883/",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Spotify",
+          "link": "https://open.spotify.com/concert/0wrUJKK0eA46ly5DaaLpRL",
+          "link_type": "more info"
+        },
+        {
+          "source": "Shazam",
+          "link": "https://www.shazam.com/event/3f93873e-6d3a-47ed-b334-1d7db36875f9",
+          "link_type": "more info"
+        },
+        {
+          "source": "JamBase",
+          "link": "https://www.jambase.com/show/ane-brun-orionteatern-20240522",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Orionteatern AB",
+        "rating": 4.5,
+        "reviews": 235,
+        "link": "https://www.google.com/search?sca_esv=8b3c2fe050857b40&sca_upv=1&hl=en&gl=us&q=Orionteatern+AB&ludocid=16197304727556121342&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQqwKR45MSi4gpYk34oLe-_0kdBYyWqGBOsY71Y2Ag&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkXtpp_DxTkX9jIoTiDF0j5-KLfXAbWEHSWUtpT79R0A&s=10"
+    },
+    {
+      "title": "Goran Kajfes Music",
+      "date": {
+        "start_date": "May 25",
+        "when": "Sat, May 25, 8 PM – Sun, May 26, 2 AM"
+      },
+      "address": [
+        "Fasching, Kungsgatan 63",
+        "Stockholm, Sweden"
+      ],
+      "link": "https://open.spotify.com/concert/3tDidlkibLip8h0GgTtpYM",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=6fegyzkfPZesSsfOaJbEEDw9x0csVNZ_5K69uUGltW6sbrpdl2pUKxLn7TqwYB9AeSfhSRZCkOtZf8LKowr-Jenk0YP_2uHNoC4Vt7ccB5ptU0SlDQI",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x465f9d6128c05d81:0xc346c6e7022185e4?sa=X&ved=2ahUKEwjQj432qaGGAxWDqJUCHbw_AtUQ9eIBegQIQRAA&hl=en&gl=us",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0x465f9d6128c05d81%3A0xc346c6e7022185e4&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Stockholm&type=place"
+      },
+      "description": "Find tickets for Goran Kajfes at Fasching in Stockholm on 5/25/2024 at 8:00 PM",
+      "ticket_info": [
+        {
+          "source": "Bandsintown.com",
+          "link": "https://www.bandsintown.com/e/1030829460?app_id=ggl_feed&came_from=289&utm_medium=web&utm_source=ggl_feed&utm_campaign=event",
+          "link_type": "tickets"
+        },
+        {
+          "source": "Spotify",
+          "link": "https://open.spotify.com/concert/3tDidlkibLip8h0GgTtpYM",
+          "link_type": "more info"
+        },
+        {
+          "source": "TicketSwap",
+          "link": "https://www.ticketswap.com/event/tropiques/ab99849d-994e-49f3-a4c8-22f6ac91a5de",
+          "link_type": "more info"
+        },
+        {
+          "source": "AllEvents.in",
+          "link": "https://allevents.in/stockholm/cello",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Fasching",
+        "rating": 4.4,
+        "reviews": 1478,
+        "link": "https://www.google.com/search?sca_esv=8b3c2fe050857b40&sca_upv=1&hl=en&gl=us&q=Fasching&ludocid=14071152781241189860&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrd0lXsnmQY9N-CDeo60IPlb_iS6ERFGgc8OKdtJw&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRSzFY4y_k_GjAqwKjFMLDyweH2hzc33MEqmB7c9jX5dmtXBFnX53kiNEZFyg&s=10"
+    },
+    {
+      "title": "Live Sessions: Ellen Krauss",
+      "date": {
+        "start_date": "May 23",
+        "when": "Thu, May 23, 5 – 10 PM"
+      },
+      "address": [
+        "Trädgården, Hammarby Slussväg 2",
+        "Stockholm, Sweden"
+      ],
+      "link": "https://www.visitstockholm.com/events/live-sessions-ellen-krauss/2024-05-23/",
+      "event_location_map": {
+        "image": "https://www.google.com/maps/vt/data=nJRujOnBeq2iaRo1NTEKE-tjMVg9T7wM0vgZEXrZ80cHS0-cgX4nL3lepvDHDDBF9Y2myPUKt48sdyKz-Y96xQUTXokIlHCpR7QgDudzeSHkSO31Ky0",
+        "link": "https://www.google.com/maps/place//data=!4m2!3m1!1s0x465f77f5a178ec4d:0xc4f7b3864e67bfab?sa=X&ved=2ahUKEwjQj432qaGGAxWDqJUCHbw_AtUQ9eIBegQISRAA&hl=en&gl=us",
+        "serpapi_link": "https://serpapi.com/search.json?data=%214m2%213m1%211s0x465f77f5a178ec4d%3A0xc4f7b3864e67bfab&engine=google_maps&google_domain=google.com&hl=en&q=Events+in+Stockholm&type=place"
+      },
+      "description": "Welcome to a wonderful evening together with Ellen and her band on Trädgården's stage under the Skanstulls bridge.",
+      "ticket_info": [
+        {
+          "source": "Visit Stockholm",
+          "link": "https://www.visitstockholm.com/events/live-sessions-ellen-krauss/2024-05-23/",
+          "link_type": "more info"
+        },
+        {
+          "source": "TicketSwap",
+          "link": "https://www.ticketswap.com/event/live-sessions-ellen-krauss/e9f45f3d-c5d9-4067-83b9-8afa14411469",
+          "link_type": "more info"
+        },
+        {
+          "source": "AllEvents.in",
+          "link": "https://allevents.in/stockholm/live-sessions-ellen-krauss/200026521592925?ref=eventlist-cat",
+          "link_type": "more info"
+        },
+        {
+          "source": "GigsGuide",
+          "link": "https://gigs.guide/event/uo827P2bVNv/live-sessions-ellen-krauss-stockholm-23-may-2024",
+          "link_type": "more info"
+        }
+      ],
+      "venue": {
+        "name": "Trädgården",
+        "rating": 4.1,
+        "reviews": 1005,
+        "link": "https://www.google.com/search?sca_esv=8b3c2fe050857b40&sca_upv=1&hl=en&gl=us&q=Tr%C3%A4dg%C3%A5rden&ludocid=14193010140103819179&ibp=gwp%3B0,7"
+      },
+      "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSAIsxglUDD149eJNni6XT8_CtKmRCnfFrRr3hEueX3bqgMbXIjL5HdgsM&s",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2c9zXtkg_jK7wUICrau4NC5vPKjPjy4detzXiqvHY7A&s"
+    }
+  ]
+}

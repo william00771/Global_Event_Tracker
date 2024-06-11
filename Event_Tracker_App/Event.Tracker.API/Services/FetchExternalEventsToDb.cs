@@ -1,9 +1,9 @@
 using System.Globalization;
-using System.Text.Json;
 using Event.Tracker.API.Contracts;
 using Event.Tracker.API.Models;
 using Event.Tracker.API.Models.GoogleEvsResultsAPI;
 using Event.Tracker.API.Models.Tickster;
+using Newtonsoft.Json;
 
 namespace Event.Tracker.API.Services
 {
@@ -38,7 +38,7 @@ namespace Event.Tracker.API.Services
             client2.DefaultRequestHeaders.Add("x-api-key", _ticksterApiKey);
             var initResponse = await client.GetAsync($"https://event.api.tickster.com/api/v1.0/sv/events?query=Stockholm&take=1&skip=0");
             var initJsonData = await initResponse.Content.ReadAsStringAsync();
-            var initData = JsonSerializer.Deserialize<TicksterResponse>(initJsonData);
+            var initData = JsonConvert.DeserializeObject<TicksterResponse>(initJsonData);
             var excecutionsLeft = (int)Math.Ceiling((double)initData.TotalItems / 100);
 
             while(excecutionsLeft > -1)
@@ -48,7 +48,7 @@ namespace Event.Tracker.API.Services
                 if(response.IsSuccessStatusCode)
                 {
                     var jsonData = await response.Content.ReadAsStringAsync();
-                    var data = JsonSerializer.Deserialize<TicksterResponse>(jsonData);
+                    var data = JsonConvert.DeserializeObject<TicksterResponse>(jsonData);
                     var eventResponse = new List<EventModel>();
 
                     if (data != null && data.Items != null)
@@ -96,15 +96,20 @@ namespace Event.Tracker.API.Services
         public async Task<List<EventModel>> FetchGoogleEventsResult()
         {
             var client = _httpClientFactory.CreateClient();
-            client.DefaultRequestHeaders.Add("api_key", _serpApiKey);
+            // client.DefaultRequestHeaders.Add("api_key", _serpApiKey);
 
-            var response = await client.GetAsync("https://api.serpapi.com/search?q=events+in+Stockholm&google_domain=google.com&gl=us&hl=en&num=20");
-            if(response.IsSuccessStatusCode)
-            {
-                var responseJson = await response.Content.ReadAsStringAsync();
-                var data = JsonSerializer.Deserialize<GoogleEvsAPIResponse>(responseJson);
+            // var response = await client.GetAsync($"https://serpapi.com/search.json?engine=google_events&q=Events+in+Stockholm&hl=en&gl=us&num=20&api_key={_serpApiKey}");
+
+            
+            // if(response.IsSuccessStatusCode)
+            // {
+                string projectDirectory = Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.FullName;
+                string jsonFilePath = Path.Combine(projectDirectory, "Data", "jsonapiresponse.json");
+                string responseJson = await File.ReadAllTextAsync(jsonFilePath);
+                // var responseJson = await response.Content.ReadAsStringAsync();
+                var data = JsonConvert.DeserializeObject<GoogleEvsApiResponse>(responseJson);
                 var eventResponse = new List<EventModel>();
-                if (data != null && data.EventsResults.Count != null)
+                if (data != null)
                 {
                     foreach (var ev in data.EventsResults)
                     {
@@ -112,36 +117,68 @@ namespace Event.Tracker.API.Services
                         {
                             await Task.Delay(1000);
                             var address = await _geocoderService.GetCoordinatesFromAddressAsync(ev.Address[0]);
-                            var newCoordinates = new Coordinates
+                            if(address != null)
                             {
-                                Lat = address.Lat,
-                                Lng = address.Lng,
-                                FormattedAddress = address.FormattedAddress,
-                            };
-                            var dateUtc = DateTime.ParseExact(ev.Date.When.Substring(0, ev.Date.When.IndexOf('–')).Trim(), "ddd, MMM dd, h:mm tt", CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal).ToUniversalTime();
-                            EventModel newEventModel = new EventModel
-                            {
-                                Name = ev.Title ?? string.Empty,
-                                Location = newCoordinates,
-                                Description = ev.Title ?? string.Empty,
-                                Time = dateUtc,
-                                Date = dateUtc,
-                                DateTo = dateUtc,
-                                Duration = 0,
-                                WebsiteUrl = ev.Link,
-                                NumberOfPeople = 0,
-                                Keywords = new List<string> { string.Empty },
-                                Image = ev.Thumbnail
-                            };
+                                var newCoordinates = new Coordinates
+                                {
+                                    Lat = address.Lat,
+                                    Lng = address.Lng,
+                                    FormattedAddress = address.FormattedAddress,
+                                };
 
-                            eventResponse.Add(newEventModel);
-                            await _eventsRepository.PostFullEventAsync(newEventModel);
+                                EventModel newEventModel = new EventModel
+                                {
+                                    Name = ev.Title ?? string.Empty,
+                                    Location = newCoordinates,
+                                    Description = ev.Title ?? string.Empty,
+                                    Time = EventDateParser.ParseEventDate(ev.Date.StartDate) ?? DateTime.Now,
+                                    Date = EventDateParser.ParseEventDate(ev.Date.StartDate) ?? DateTime.Now,
+                                    DateTo = EventDateParser.ParseEventDate(ev.Date.StartDate) ?? DateTime.Now,
+                                    Duration = 0,
+                                    WebsiteUrl = ev.Link,
+                                    NumberOfPeople = 0,
+                                    Keywords = new List<string> { string.Empty },
+                                    Image = ev.Thumbnail
+                                };
+                                if(newEventModel.Date != DateTime.Now)
+                                {
+                                    eventResponse.Add(newEventModel);
+                                    await _eventsRepository.PostFullEventAsync(newEventModel);
+                                } 
+                            }
                         }
                     }
+                    return eventResponse;
                 }
-                return eventResponse;
-            }
             return null;
         }
+    }
+}
+
+public class EventDateParser
+{
+    public static DateTime? ParseEventDate(string dateStr)
+    {
+        // Define possible date formats
+        string[] formats = new[]
+        {
+            "MMM dd", // May 25
+            "ddd, MMM dd, h:mm tt", // Fri, May 24, 8 PM
+            "ddd, MMM dd, h:mm tt – ddd, MMM dd, h:mm tt", // Sat, May 25, 6:30 PM – Sun, May 26, 12:30 AM
+            "ddd, MMM dd, h – h tt", // Fri, May 24, 8 – 10 PM
+            "ddd, MMM dd, h:mm tt – h:mm tt" // Sat, May 25, 6:30 PM – 12:30 AM
+        };
+
+        // Attempt to parse the date string
+        foreach (var format in formats)
+        {
+            if (DateTime.TryParseExact(dateStr, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime date))
+            {
+                return date;
+            }
+        }
+
+        // Return null if parsing fails
+        return null;
     }
 }

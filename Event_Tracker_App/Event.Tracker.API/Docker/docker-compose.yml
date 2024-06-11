@@ -1,7 +1,7 @@
 version: '3.2'
 services:
   sql-server-db:
-    container_name: sql-server-db
+    container_name: event-tracker-sql-server
     image: mcr.microsoft.com/azure-sql-edge:latest
     ports:
       - '1433:1433'
