@@ -68,19 +68,19 @@ namespace Event.Tracker.API.Services
             }
             if(minSinceGoogleEvsUpdated > 0 || minSinceGoogleEvsUpdated == -1)
             {
-                await fetchExternalEventsToDb.FetchGoogleEventsResult();
-                googleEvsUpdated = true;
+                // await fetchExternalEventsToDb.FetchGoogleEventsResult();
+                // googleEvsUpdated = true;
             }
             else{
                 return;
             }
 
-            updateLog.TicksterLastUpdated = ticksterUpdated ? DateTime.UtcNow : lastUpdateLog.TicksterLastUpdated;
-            updateLog.GoogleEvsLastUpdated = googleEvsUpdated ? DateTime.UtcNow : lastUpdateLog.GoogleEvsLastUpdated;
             updateLog.LastUpdated = DateTime.UtcNow;
+            updateLog.TicksterLastUpdated = ticksterUpdated == true ? DateTime.UtcNow : lastUpdateLog.TicksterLastUpdated;
+            // updateLog.GoogleEvsLastUpdated = googleEvsUpdated == true ? DateTime.UtcNow : lastUpdateLog.GoogleEvsLastUpdated;
 
             await updateLogsRepository.AddUpdateLog(updateLog);
-            
+
             Console.WriteLine($"Successfully Updated! {updateLog.LastUpdated} \nTickster Last Update: {updateLog.TicksterLastUpdated}\nGoogleEvs Last Update: {updateLog.GoogleEvsLastUpdated}");
         }
 
