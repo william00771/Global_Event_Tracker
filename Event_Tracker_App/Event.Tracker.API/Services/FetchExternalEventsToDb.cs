@@ -50,57 +50,60 @@ namespace Event.Tracker.API.Services
 
             var runsLeft = await calcTicksterRunCountNeeded();
 
+            var eventResponse = new List<EventModel>();
             while(runsLeft > -1)
             {
-                await Task.Delay(20000);
-                var response = await client.GetAsync($"https://event.api.tickster.com/api/v1.0/sv/events?query=Stockholm&take=100&skip={runsLeft*100}");
-                if(response.IsSuccessStatusCode)
+                await Task.Delay(20000); //To mitigate request overload to tickster API
+                try
                 {
-                    var jsonData = await response.Content.ReadAsStringAsync();
-                    var data = JsonConvert.DeserializeObject<TicksterResponse>(jsonData);
-                    var eventResponse = new List<EventModel>();
-
-                    if (data != null && data.Items != null)
+                    var response = await client.GetAsync($"https://event.api.tickster.com/api/v1.0/sv/events?query=Stockholm&take=100&skip={runsLeft*100}");
+                    if(response.IsSuccessStatusCode)
                     {
-                        foreach (var ev in data.Items)
+                        var jsonData = await response.Content.ReadAsStringAsync();
+                        var data = JsonConvert.DeserializeObject<TicksterResponse>(jsonData);
+
+                        if (data != null && data.Items != null)
                         {
-                            if (ev != null)
+                            foreach (var ev in data.Items)
                             {
-                                var newCoordinates = new Coordinates
+                                if (ev != null)
                                 {
-                                    Lat = ev.Venue?.Geo?.Latitude ?? 0,
-                                    Lng = ev.Venue?.Geo?.Longitude ?? 0,
-                                    FormattedAddress = ev.Venue?.Address?.ToString() ?? string.Empty,
-                                };
+                                    var newCoordinates = new Coordinates
+                                    {
+                                        Lat = ev.Venue?.Geo?.Latitude ?? 0,
+                                        Lng = ev.Venue?.Geo?.Longitude ?? 0,
+                                        FormattedAddress = ev.Venue?.Address?.ToString() ?? string.Empty,
+                                    };
 
-                                EventModel newEventModel = new EventModel
-                                {
-                                    Name = ev.Venue?.Name ?? string.Empty,
-                                    Location = newCoordinates,
-                                    Description = ev.Description?.Markdown ?? string.Empty,
-                                    Time = ev.StartUtc,
-                                    Date = ev.StartUtc,
-                                    DateTo = ev.EndUtc,
-                                    Duration = 0,
-                                    WebsiteUrl = ev.InfoUrl,
-                                    NumberOfPeople = 0,
-                                    Keywords = new List<string> { string.Empty },
-                                    Image = "https://res.cloudinary.com/dlw9fdrql/image/upload/v1716306744/event_jmwpwd.jpg"
-                                };
+                                    EventModel newEventModel = new EventModel
+                                    {
+                                        Name = ev.Venue?.Name ?? string.Empty,
+                                        Location = newCoordinates,
+                                        Description = ev.Description?.Markdown ?? string.Empty,
+                                        Time = ev.StartUtc,
+                                        Date = ev.StartUtc,
+                                        DateTo = ev.EndUtc,
+                                        Duration = 0,
+                                        WebsiteUrl = ev.InfoUrl,
+                                        NumberOfPeople = 0,
+                                        Keywords = new List<string> { string.Empty },
+                                        Image = "https://res.cloudinary.com/dlw9fdrql/image/upload/v1716306744/event_jmwpwd.jpg"
+                                    };
 
-                                eventResponse.Add(newEventModel);
-                                await _eventsRepository.PostFullEventAsync(newEventModel);
+                                    eventResponse.Add(newEventModel);
+                                    await _eventsRepository.PostFullEventAsync(newEventModel);
+                                }
                             }
                         }
                     }
-                    if(runsLeft == 0)
-                    {
-                        return eventResponse;
-                    }
+                }
+                catch (HttpRequestException ex)
+                {
+                    Console.WriteLine($"An error occurred: {ex.Message}");
                 }
                 runsLeft--;
             }
-            return null;
+            return eventResponse;
         }
         public async Task<List<EventModel>> FetchGoogleEventsResult()
         {
