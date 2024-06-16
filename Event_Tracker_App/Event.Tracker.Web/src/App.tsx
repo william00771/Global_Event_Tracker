@@ -21,25 +21,18 @@ const initialCoordinates: Coordinates = {
 
 function App() {
   const [page, setPage] = useState('Explore');
+  
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
   const [filter, setFilter] = useState(" ");
+
   const [mapCenter, setMapCenter] = useState<Coordinates>(initialCoordinates);
-  const [maxAllowedMarkerRenders, setMaxAllowedMarkerRenders] = useState<number>(50);
+  
   const [latUpdateCycle, setLatUpdateCycle] = useState<number>(Math.floor(mapCenter.lat * 10) % 10);
   const [lngUpdateCycle, setLngUpdateCycle] = useState<number>(Math.floor(mapCenter.lng * 10) % 10);
 
+  const [maxAllowedMarkerRenders, setMaxAllowedMarkerRenders] = useState<number>(50);
   const [boundingbox, setBoundingBox] = useState<BoundingBox>(calculateLongitudeLatitudeBoundingBox(initialCoordinates.lat, initialCoordinates.lng, 3.5));
-
-
-  const getFilteredEventsHandler = (startDate?: Date, endDate?: Date) => {
-    if(startDate != null){
-      setStartDate(startDate);
-    }
-    if(endDate != null){
-      setEndDate(endDate);
-    }
-  }
 
   useEffect(() => {
     const currentLatSecondDecimal = Math.floor(mapCenter.lat * 100) % 10;
@@ -49,10 +42,18 @@ function App() {
         setLatUpdateCycle(currentLatSecondDecimal);
         setLngUpdateCycle(currentLngSecondDecimal);
         refetch();
-        console.log(data);
     }
     
   }, [mapCenter])
+
+  const getFilteredEventsHandler = (startDate?: Date, endDate?: Date) => {
+    if(startDate != null){
+      setStartDate(startDate);
+    }
+    if(endDate != null){
+      setEndDate(endDate);
+    }
+  }
 
   const { data, isLoading, isError, refetch } = useQuery<Array<EventModel>>({
       queryKey: ['fetchevents', startDate, endDate],
@@ -64,7 +65,10 @@ function App() {
       (eventRequestFormData: FormData) => postEvent(eventRequestFormData), {
       onSuccess: () => {
           refetch();
-      }
+      },
+      onError: (error: any) => {
+        alert('Failed to add new event: ' + error.message);
+      },
   });
 
   return(
