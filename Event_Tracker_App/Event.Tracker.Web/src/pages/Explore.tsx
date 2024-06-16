@@ -135,6 +135,7 @@ export const Explore = ({className, initialCoordinates, data, setPage, page, fil
                                       
                                   },
                               }} 
+                            zIndexOffset={showMarkerDetails === event.location.lat.toString() ? 500 : 1}
                             position={[event.location.lat, event.location.lng]} 
                             icon={
                               CustomIcon(
