@@ -46,14 +46,14 @@ namespace Event.Tracker.API.Repository
             return events;
         }
 
-        public async Task<List<EventModel>> GetEventsFromBoundingBox(double north, double south, double east, double west, int quantity, DateTime? startDate, DateTime? endDate, string? keyword)
+        public async Task<List<EventModel>> GetEventsFromCoordinates(BoundingBox boundingBox, int quantity, DateTime? startDate, DateTime? endDate, string? keyword)
         {
             IQueryable<EventModel> query = _eventContext.Events
                 .Where(ev => 
-                    ev.Location.Lat <= south &&
-                    ev.Location.Lat >= north &&
-                    ev.Location.Lng >= west &&
-                    ev.Location.Lng <= east)
+                    ev.Location.Lat <= boundingBox.South &&
+                    ev.Location.Lat >= boundingBox.North &&
+                    ev.Location.Lng >= boundingBox.West &&
+                    ev.Location.Lng <= boundingBox.East)
                 .Include(ev => ev.Location)
                 .Take(quantity);
                 
@@ -76,7 +76,6 @@ namespace Event.Tracker.API.Repository
                     ev.Keywords.Any(k => k.Contains(keyword))
                 );
             }
-            
 
             var events = await query.ToListAsync();
 
