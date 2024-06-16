@@ -2,35 +2,31 @@ import './Explore.css'
 import { BoundingBox, Coordinates, EventModel } from "../types/types";
 import { MapContainer, Marker, TileLayer, useMapEvent } from 'react-leaflet';
 import "leaflet/dist/leaflet.css";
-import {useEffect, useState } from 'react';
 import { EventDetails } from './EventDetails';
 import { calculateLongitudeLatitudeBoundingBox, isCoordinateWithinBoundingBox } from '@/util/mapcalculation';
 import { svgIconBasedOnKeyword } from '@/util/svgIconBasedOnKeyword';
-import { CustomMarker } from '../components/Map/CustomMarker';
-
-const MAP_DEFAULT_URL = import.meta.env.VITE_MAP_DEFAULT_URL;
-const MAP_MAPBOX_URL = import.meta.env.VITE_MAP_MAPBOX_URL;
+import { CustomIcon } from '@/components/Leaflet/CustomIcon';
+import { useEffect, useState } from 'react';
 
 type Props = {
   className: string,
+  initialCoordinates: Coordinates,
   data: Array<EventModel>,
   setPage: (page: string) => void,
   page: string,
   filter: string,
   setMapCenter: (mapCenter: Coordinates) => void
   mapCenter: Coordinates,
+  setBoundingBox: (boundingbox: BoundingBox) => void,
+  boundingbox: BoundingBox,
   setMaxAllowedMarkerRenders: (quantity: number) => void,
-  maxAllowedMarkerRenders: number,
-  startDate: Date,
-  endDate: Date
+  maxAllowedMarkerRenders: number
 }
 
-function Explore({className, data, setPage, page, filter, startDate, endDate, mapCenter, setMapCenter, maxAllowedMarkerRenders, setMaxAllowedMarkerRenders}: Props) {
+export const Explore = ({className, initialCoordinates, data, setPage, page, filter, mapCenter, setMapCenter, setMaxAllowedMarkerRenders, maxAllowedMarkerRenders, setBoundingBox, boundingbox}: Props) => {
     const [showMarkerDetails, setShowMarkerDetails] = useState<string>('');
     const [showEventDetails, setShowEventDetails] = useState<string>('');
     const [currentEventInfo, setCurrentEventInfo] = useState<EventModel>();
-    
-    const [boundingbox, setBoundingBox] = useState<BoundingBox>(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 9));
     const [zoomLevel, setZoomLevel] = useState<number>(13);
 
     useEffect(() => {
@@ -59,15 +55,7 @@ function Explore({className, data, setPage, page, filter, startDate, endDate, ma
         const map = useMapEvent('move', () => {
           const newCenter = map.getCenter();
           setMapCenter({lat: newCenter.lat, lng: newCenter.lng});
-
-          zoomLevel == 7 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
-          zoomLevel == 8 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
-          zoomLevel == 9 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
-          zoomLevel == 10 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
-          zoomLevel == 11 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
-          zoomLevel == 12 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
-          zoomLevel == 13 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
-          zoomLevel == 14 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 3.5));
+          updateRendersAndBoundingBox();
         });
         return null;
       };
@@ -75,16 +63,33 @@ function Explore({className, data, setPage, page, filter, startDate, endDate, ma
       const UpdateMarkerRenders = () => {
         const map = useMapEvent('zoom', () => {
           setZoomLevel(getCurrentZoomLevel(map));
-
-          zoomLevel == 8 && setMaxAllowedMarkerRenders(0)
-          zoomLevel == 9 && setMaxAllowedMarkerRenders(0)
-          zoomLevel == 10 && setMaxAllowedMarkerRenders(15)
-          zoomLevel == 11 && setMaxAllowedMarkerRenders(50)
-          zoomLevel == 12 && setMaxAllowedMarkerRenders(100)
-          zoomLevel == 13 && setMaxAllowedMarkerRenders(100)
+          updateRendersAndBoundingBox();
         });
         return null;
       };
+
+      const updateRendersAndBoundingBox = () => {
+        // Allowed Marker Renders
+        zoomLevel == 10 && setMaxAllowedMarkerRenders(20) // ~ 30km
+        zoomLevel == 11 && setMaxAllowedMarkerRenders(30) // ~ 12km
+        zoomLevel == 12 && setMaxAllowedMarkerRenders(40) // ~ 6km
+        zoomLevel == 13 && setMaxAllowedMarkerRenders(250) // ~ 4km
+        zoomLevel == 14 && setMaxAllowedMarkerRenders(250) // ~ 2km
+        zoomLevel == 15 && setMaxAllowedMarkerRenders(250) // ~ 1km
+        zoomLevel == 16 && setMaxAllowedMarkerRenders(250) // ~ 200 meters
+        zoomLevel == 17 && setMaxAllowedMarkerRenders(250) // ~ 100 meters
+
+        // Fetch Radius
+        zoomLevel == 10 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 30));  // ~ 30km
+        zoomLevel == 11 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 20));  // ~ 12km
+        zoomLevel == 12 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 10));  // ~ 6km
+        zoomLevel == 13 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 3.5)); // ~ 4km
+        zoomLevel == 14 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 2.5)); // ~ 2km 
+        zoomLevel == 15 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 1.5)); // ~ 1km
+        zoomLevel == 16 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, .5));  // ~ 200 meters
+        zoomLevel == 17 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, .2));  // ~ 100 meters
+      }
+
 
     const getCurrentZoomLevel = (map: any) => {
         if (map) {
@@ -97,19 +102,19 @@ function Explore({className, data, setPage, page, filter, startDate, endDate, ma
       <>
         <section className={className}>
             <MapContainer 
-            className='leaflet_map' 
-            center={[59.3369170, 18.0119609]} 
-            zoom={13}
-            scrollWheelZoom={true}>
+                className='leaflet_map' 
+                center={[initialCoordinates.lat, initialCoordinates.lng]} 
+                zoom={14}
+                scrollWheelZoom={true}>
                 <TileLayer 
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                    //url={MAP_DEFAULT_URL}
-                    url={MAP_MAPBOX_URL}
+                    // url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+                    url="https://api.mapbox.com/styles/v1/william00771/cltvk24s1017c01pkhsjd4774/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoid2lsbGlhbTAwNzcxIiwiYSI6ImNsdHZqeWd2cTFsYzIycW9iNGlhdHFodHAifQ.eX-yYLKA0P4QCL58IgovpA"
                 />
                 {boundingbox && data.slice(0, maxAllowedMarkerRenders).map((event) => {
                         if(
                           isCoordinateWithinBoundingBox({latitude: event.location.lat, longitude: event.location.lng}, boundingbox) 
-                          && zoomLevel >= 7
+                          && zoomLevel >= 10
                           && (event.name.toLowerCase().includes(filter) 
                           || event.description.toLowerCase().includes(filter.toLowerCase()))
                           || event.keywords && event.keywords.some(keyword => keyword.toLowerCase() === filter)
@@ -130,9 +135,10 @@ function Explore({className, data, setPage, page, filter, startDate, endDate, ma
                                       
                                   },
                               }} 
+                            zIndexOffset={showMarkerDetails === event.location.lat.toString() ? 500 : 1}
                             position={[event.location.lat, event.location.lng]} 
                             icon={
-                              CustomMarker(
+                              CustomIcon(
                                 {
                                   width: 40,
                                   id: event.location.lat, 
@@ -158,9 +164,6 @@ function Explore({className, data, setPage, page, filter, startDate, endDate, ma
           setShowEventDetails={(value: string) => {setShowEventDetails(value); setPage('Explore');}}
           eventData={currentEventInfo}
         />
-
     </>
     )
 }
-
-export default Explore

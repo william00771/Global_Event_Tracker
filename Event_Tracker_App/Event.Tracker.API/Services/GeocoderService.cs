@@ -1,7 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Event.Tracker.API.Contracts;
 using Event.Tracker.API.Models;
 using Event.Tracker.API.Models.GeocoderAPI;
@@ -12,7 +8,7 @@ namespace Event.Tracker.API.Services
     {
         private readonly HttpClient _httpClient;
         private readonly string _geocoderApiKey;
-        public GeocoderService(IConfiguration config)
+        public GeocoderService(IConfiguration config, IHttpClientFactory httpClientFactory)
         {
             _httpClient = new HttpClient();
             _geocoderApiKey = config.GetValue<string>("Geocoder:ApiKey");

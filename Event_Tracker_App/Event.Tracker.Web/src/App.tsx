@@ -1,6 +1,5 @@
 import './App.css'
-import {useMutation, useQuery } from "react-query";
-import Explore from "./pages/Explore"
+import { useMutation, useQuery } from "react-query";
 import { useEffect, useState } from "react";
 import { NavbarTop } from "./nav/NavbarTop";
 import { NavBarBottom } from "./nav/NavBarBottom";
@@ -13,52 +12,68 @@ import { fetchEventsFromCoordinates, postEvent } from './util/http';
 import { BoundingBox, Coordinates, EventModel } from './types/types';
 import { CircularProgress } from '@mui/material';
 import { calculateLongitudeLatitudeBoundingBox } from './util/mapcalculation';
+import { Explore } from './pages/Explore';
+
+const initialCoordinates: Coordinates = {
+  lat: 59.324894,
+  lng: 18.0656708
+}
 
 function App() {
   const [page, setPage] = useState('Explore');
-  const [startDate, setStartDate] = useState<Date>(new Date(2024, 3, 1));
-  const [endDate, setEndDate] = useState<Date>(new Date(2024, 4, 31)); 
+  
+  const [startDate, setStartDate] = useState<Date>();
+  const [endDate, setEndDate] = useState<Date>();
   const [filter, setFilter] = useState(" ");
-  const [mutationLoading, setMutationLoading] = useState(false);
 
-  const [mapCenter, setMapCenter] = useState<Coordinates>({
-    lat: 59.3369170,
-    lng: 18.0119609
-  });
-  const [maxAllowedMarkerRenders, setMaxAllowedMarkerRenders] = useState<number>(100);
-  const [boundingbox, setBoundingBox] = useState<BoundingBox>(calculateLongitudeLatitudeBoundingBox(59.3369170, 18.0119609, 75));
-  const [latFirstDecimal, setLatFirstDecimal] = useState<number>(Math.floor(mapCenter.lat * 10) % 10);
-  const [lngFirstDecimal, setLngFirstDecimal] = useState<number>(Math.floor(mapCenter.lng * 10) % 10);
+  const [mapCenter, setMapCenter] = useState<Coordinates>(initialCoordinates);
+  
+  const [latUpdateCycle, setLatUpdateCycle] = useState<number>(Math.floor(mapCenter.lat * 10) % 10);
+  const [lngUpdateCycle, setLngUpdateCycle] = useState<number>(Math.floor(mapCenter.lng * 10) % 10);
+
+  const [maxAllowedMarkerRenders, setMaxAllowedMarkerRenders] = useState<number>(50);
+  const [boundingbox, setBoundingBox] = useState<BoundingBox>(calculateLongitudeLatitudeBoundingBox(initialCoordinates.lat, initialCoordinates.lng, 3.5));
 
   useEffect(() => {
     const currentLatSecondDecimal = Math.floor(mapCenter.lat * 100) % 10;
     const currentLngSecondDecimal = Math.floor(mapCenter.lng * 100) % 10;
 
-    if (latFirstDecimal !== currentLatSecondDecimal || lngFirstDecimal !== currentLngSecondDecimal) {
-        setLatFirstDecimal(currentLatSecondDecimal);
-        setLngFirstDecimal(currentLngSecondDecimal);
-        setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 56))
+    if (latUpdateCycle !== currentLatSecondDecimal || lngUpdateCycle !== currentLngSecondDecimal) {
+        setLatUpdateCycle(currentLatSecondDecimal);
+        setLngUpdateCycle(currentLngSecondDecimal);
         refetch();
     }
     
   }, [mapCenter])
 
+  const getFilteredEventsHandler = (startDate?: Date, endDate?: Date) => {
+    if(startDate != null){
+      setStartDate(startDate);
+    }
+    if(endDate != null){
+      setEndDate(endDate);
+    }
+  }
+
   const { data, isLoading, isError, refetch } = useQuery<Array<EventModel>>({
-      queryKey: ['fetchevents'],
-      queryFn: () => fetchEventsFromCoordinates(boundingbox, maxAllowedMarkerRenders)
+      queryKey: ['fetchevents', startDate, endDate],
+      queryFn: () => fetchEventsFromCoordinates(boundingbox, maxAllowedMarkerRenders, startDate, endDate)
+      
     });
 
   const postMutation = useMutation(
       (eventRequestFormData: FormData) => postEvent(eventRequestFormData), {
       onSuccess: () => {
           refetch();
-          setMutationLoading(false);
-      }
+      },
+      onError: (error: any) => {
+        alert('Failed to add new event: ' + error.message);
+      },
   });
 
   return(
       <>
-        {isLoading || mutationLoading && <div className='loading-container'><CircularProgress color="secondary" /></div>}
+        {isLoading && <div className='loading-container'><CircularProgress color="secondary" /></div>}
         {isError && <div className='error-container'><h1>Error fetching data...</h1></div> }
         
         <NavbarTop 
@@ -67,56 +82,56 @@ function App() {
           className={"navtop-container " + (page == "EventDetails" && "inactive")}
           setFilter={(filter: string) => setFilter(filter)}
         />
-          {data &&
-            <main className="page-container">     
-              <TimePicker 
-                className={"timepicker-container " + (page == "TimePicker" && "active")}
-                setPage={(page) => setPage(page)}
-                setDateFilter={(startDate?: Date, endDate?: Date) => {
-                  startDate != null && setStartDate(startDate);
-                  endDate != null && setEndDate(endDate);
-                }}
-              />
-              <Account 
-                className={"account-container " + (page == "Account" && "active")}
-                setPage={(page) => setPage(page)}
-              />
-              { page != 'CreateEvent' && 
-                <Explore 
-                  className={"explore__container " }
-                  data={data}
-                  setPage={(page) => setPage(page)}
-                  page={page}
-                  filter={filter}
-                  startDate={startDate}
-                  endDate={endDate}
-                  setMapCenter={(mapCenter: Coordinates) => setMapCenter(mapCenter)}
-                  mapCenter={mapCenter}
-                  setMaxAllowedMarkerRenders={(maxMarkers: number) => setMaxAllowedMarkerRenders(maxMarkers)}
-                  maxAllowedMarkerRenders={maxAllowedMarkerRenders}
-                />
-              }
-              <ListEvents 
-                className={"listevents-container " + (page == "ListEvents" && "active")}
+        {data &&
+          <main className="page-container">
+            
+            <TimePicker 
+              className={"timepicker-container " + (page == "TimePicker" && "active")}
+              setPage={(page) => setPage(page)}
+              getFilteredEvents={(startDate?: Date, endDate?: Date) => getFilteredEventsHandler(startDate, endDate)}
+            />
+            <Account 
+              className={"account-container " + (page == "Account" && "active")}
+              setPage={(page) => setPage(page)}
+            />
+            { page != 'CreateEvent' && 
+              <Explore 
+                className={"explore__container"}
+                initialCoordinates={initialCoordinates}
                 data={data}
+                setPage={(page: string) => setPage(page)}
+                page={page}
+                filter={filter}
+                setMapCenter={(mapCenter: Coordinates) => setMapCenter(mapCenter)}
+                mapCenter={mapCenter}
+                setMaxAllowedMarkerRenders={(maxMarkers: number) => setMaxAllowedMarkerRenders(maxMarkers)}
+                maxAllowedMarkerRenders={maxAllowedMarkerRenders}
+                setBoundingBox={setBoundingBox}
+                boundingbox={boundingbox}
               />
-              <SavedEvents 
-                className={"savedevents-container " + (page == "SavedEvents" && "active")}
-                data={data}
-              />
-              <CreateEvent 
-                className={"createevent-container " + (page == "CreateEvent" && "active")}
-                setPage={(page) => setPage(page)}
-                postEvent={(eventRequestFormData: FormData) => {setMutationLoading(true); postMutation.mutate(eventRequestFormData)}}
-              />
-            </main>
-          }
+            }
+            <ListEvents 
+              className={"listevents-container " + (page == "ListEvents" && "active")}
+              data={data}
+            />
+            <SavedEvents 
+              className={"savedevents-container " + (page == "SavedEvents" && "active")}
+              data={data}
+            />
+            <CreateEvent 
+              className={"createevent-container " + (page == "CreateEvent" && "active")}
+              setPage={(page) => setPage(page)}
+              postEvent={(eventRequestFormData: FormData) => postMutation.mutate(eventRequestFormData)}
+            />
+          </main>
+        }
         <NavBarBottom 
           setPage={(page) => setPage(page)}
           page={page}
         />
       </>
   )
+
 }
 
 export default App

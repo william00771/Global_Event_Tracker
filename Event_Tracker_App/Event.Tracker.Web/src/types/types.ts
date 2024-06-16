@@ -7,6 +7,7 @@ export type Location = {
 export type Coordinates = {
     lat: number;
     lng: number;
+    formattedAddress?: string;
 }
 
 export type EventModel = {
@@ -15,8 +16,8 @@ export type EventModel = {
     location: Location,
     description: string,
     time: string,
-    date: Date,
-    dateTo: Date, 
+    date: string,
+    dateTo: string | null, 
     duration: number,
     websiteUrl: string,
     numberOfPeople: number | null,

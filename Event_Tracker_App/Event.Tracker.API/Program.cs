@@ -7,7 +7,6 @@ using Event.Tracker.API.Services;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
-
 // Add services to the container.
 
 builder.Services.AddControllers()
@@ -22,12 +21,15 @@ builder.Services.AddDbContext<EventDbContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("EventDbConnectionString"));
 });
-
+builder.Services.AddHttpClient();
 builder.Services.AddScoped<IEventsRepository, EventsRepository>();
+builder.Services.AddScoped<IUpdateLogsRepository, UpdateLogsRepository>();
 builder.Services.AddScoped<IGeocoderService, GeocoderService>();
+builder.Services.AddScoped<IFetchExternalEventsToDb, FetchExternalEventsToDb>();
 
 builder.Services.Configure<CloudinarySettings>(builder.Configuration.GetSection("Cloudinary"));
 builder.Services.AddScoped<IPhotoUploader, PhotoUploader>();
+builder.Services.AddHostedService<DbUpdateService>();
 
 builder.Services.AddCors(options =>
 {

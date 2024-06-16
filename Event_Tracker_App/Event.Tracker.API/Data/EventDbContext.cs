@@ -1,10 +1,5 @@
 using Event.Tracker.API.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Metrics;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Event.Tracker.API.Data
 {
@@ -16,8 +11,8 @@ namespace Event.Tracker.API.Data
         }
 
         public DbSet<EventModel> Events { get; set; }
-
         public DbSet<Coordinates> Coordinates { get; set; }
+        public DbSet<UpdateLogItem> UpdateLogs { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "tF2WDPpJ2TUIvlbFBpqxBDnTVONPzaTCZTL/1H2Z/7yQAa6a3MlS4vTsWZ4Tr47qPIdZTIY4BmEfj5KSw1zdkg==",
+  "dgSpecHash": "qPbqeTCw4pNrxJI3j5R20VAPcg4XBlFA2TXV0CMYGJ9HpeYwSs4jiUQFAAp4yYlxbs+6fckcbVB/5LBJQ909yw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\willi\\SALT\\Personal_Project\\Global_Event_Tracker - Copy\\Event_Tracker_App\\Event.Tracker.API\\Event.Tracker.API.csproj",
+  "projectFilePath": "C:\\Users\\willi\\SALT\\Personal_Project\\Global_Event_Tracker\\Event_Tracker_App\\Event.Tracker.API\\Event.Tracker.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\willi\\.nuget\\packages\\azure.core\\1.35.0\\azure.core.1.35.0.nupkg.sha512",
     "C:\\Users\\willi\\.nuget\\packages\\azure.identity\\1.10.3\\azure.identity.1.10.3.nupkg.sha512",

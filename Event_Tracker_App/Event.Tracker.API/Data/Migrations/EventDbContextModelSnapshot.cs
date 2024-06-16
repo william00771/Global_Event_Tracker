@@ -99,6 +99,28 @@ namespace Event.Tracker.API.Data.Migrations
                     b.ToTable("Events");
                 });
 
+            modelBuilder.Entity("Event.Tracker.API.Models.UpdateLogItem", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("GoogleEvsLastUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("LastUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("TicksterLastUpdated")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("UpdateLogs");
+                });
+
             modelBuilder.Entity("Event.Tracker.API.Models.EventModel", b =>
                 {
                     b.HasOne("Event.Tracker.API.Models.Coordinates", "Location")

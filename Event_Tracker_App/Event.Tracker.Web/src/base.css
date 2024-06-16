@@ -10,9 +10,6 @@ html{
   font-size: 16px;
   background-color: #0F0F0F;
   color: #fff;
-
-  height: 100%;
-  width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -22,16 +19,31 @@ html{
 }
 
 #root {
+  position: relative;
   width: 100vw;
   height: 100vh;
+  max-width: 400px;
   margin: 0 auto;
   
   background-color: #252525;
   background-size: cover;
 }
 
+@media (min-width: 1200px) {
+  #root {
+    max-width: 375px;
+  }
+}
+
+@media (min-width: 1920px) {
+  #root {
+    max-width: 675px;
+  }
+}
+
 /* Manually fix material ui date problem */
 .MuiDialog-container{
   width: 100vw !important;
+  max-width: 575px !important;
   height: 90vh !important;
 }
