@@ -309,4 +309,3 @@ C:\Users\willi\SALT\Personal_Project\Global_Event_Tracker\Event_Tracker_App\Even
 C:\Users\willi\SALT\Personal_Project\Global_Event_Tracker\Event_Tracker_App\Event.Tracker.API\obj\Debug\net8.0\Event.Tracker.API.pdb
 C:\Users\willi\SALT\Personal_Project\Global_Event_Tracker\Event_Tracker_App\Event.Tracker.API\obj\Debug\net8.0\Event.Tracker.API.genruntimeconfig.cache
 C:\Users\willi\SALT\Personal_Project\Global_Event_Tracker\Event_Tracker_App\Event.Tracker.API\obj\Debug\net8.0\ref\Event.Tracker.API.dll
-c:\Users\willi\SALT\Personal_Project\Global_Event_Tracker\Event_Tracker_App\Event.Tracker.API\bin\Debug\net8.0\Data\jsonapiresponse.json
