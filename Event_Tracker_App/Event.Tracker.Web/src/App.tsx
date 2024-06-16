@@ -1,5 +1,5 @@
 import './App.css'
-import { QueryClient, QueryClientProvider, useMutation, useQuery } from "react-query";
+import { useMutation, useQuery } from "react-query";
 import { useEffect, useState } from "react";
 import { NavbarTop } from "./nav/NavbarTop";
 import { NavBarBottom } from "./nav/NavBarBottom";
@@ -8,32 +8,28 @@ import { Account } from "./pages/Account";
 import { ListEvents } from "./pages/ListEvents";
 import { SavedEvents } from "./pages/SavedEvents";
 import { CreateEvent } from "./pages/CreateEvent";
-import { fetchEvents, fetchEventsFromCoordinates, postEvent } from './util/http';
-import { BoundingBox, Coordinates, EventModel, EventModelRequestDto } from './types/types';
+import { fetchEventsFromCoordinates, postEvent } from './util/http';
+import { BoundingBox, Coordinates, EventModel } from './types/types';
 import { CircularProgress } from '@mui/material';
 import { calculateLongitudeLatitudeBoundingBox } from './util/mapcalculation';
 import { Explore } from './pages/Explore';
 
-
+const initialCoordinates: Coordinates = {
+  lat: 59.324894,
+  lng: 18.0656708
+}
 
 function App() {
   const [page, setPage] = useState('Explore');
   const [startDate, setStartDate] = useState<Date>();
   const [endDate, setEndDate] = useState<Date>();
   const [filter, setFilter] = useState(" ");
-  const [mapCenter, setMapCenter] = useState<Coordinates>({
-    lat: 59.3369170,
-    lng: 18.0119609
-  });
+  const [mapCenter, setMapCenter] = useState<Coordinates>(initialCoordinates);
   const [maxAllowedMarkerRenders, setMaxAllowedMarkerRenders] = useState<number>(50);
-  // const [lastFourthDecimal, setLastFourthDecimal] = useState<number>(Math.floor(mapCenter.lat * 10000) % 10);
-  // const [lastThirdDecimal, setLastThirdDecimal] = useState<number>(Math.floor(mapCenter.lat * 1000) % 10);
-  // const [latLastSecondDecimal, setLatLastSecondDecimal] = useState<number>(Math.floor(mapCenter.lat * 100) % 10);
-  // const [lngLastSecondDecimal, setLngLastSecondDecimal] = useState<number>(Math.floor(mapCenter.lng * 100) % 10);
-  const [latlastFirstDecimal, setLatLastFirstDecimal] = useState<number>(Math.floor(mapCenter.lat * 10) % 10);
-  const [lnglastFirstDecimal, setLngLastFirstDecimal] = useState<number>(Math.floor(mapCenter.lng * 10) % 10);
+  const [latUpdateCycle, setLatUpdateCycle] = useState<number>(Math.floor(mapCenter.lat * 10) % 10);
+  const [lngUpdateCycle, setLngUpdateCycle] = useState<number>(Math.floor(mapCenter.lng * 10) % 10);
 
-  const [boundingbox, setBoundingBox] = useState<BoundingBox>(calculateLongitudeLatitudeBoundingBox(59.3369170, 18.0119609, 75));
+  const [boundingbox, setBoundingBox] = useState<BoundingBox>(calculateLongitudeLatitudeBoundingBox(initialCoordinates.lat, initialCoordinates.lng, 3.5));
 
 
   const getFilteredEventsHandler = (startDate?: Date, endDate?: Date) => {
@@ -49,12 +45,11 @@ function App() {
     const currentLatSecondDecimal = Math.floor(mapCenter.lat * 100) % 10;
     const currentLngSecondDecimal = Math.floor(mapCenter.lng * 100) % 10;
 
-    if (latlastFirstDecimal !== currentLatSecondDecimal || lnglastFirstDecimal !== currentLngSecondDecimal) {
-        setLatLastFirstDecimal(currentLatSecondDecimal);
-        setLngLastFirstDecimal(currentLngSecondDecimal);
-        setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 56))
-        // refetch();
-        // console.log(data);
+    if (latUpdateCycle !== currentLatSecondDecimal || lngUpdateCycle !== currentLngSecondDecimal) {
+        setLatUpdateCycle(currentLatSecondDecimal);
+        setLngUpdateCycle(currentLngSecondDecimal);
+        refetch();
+        console.log(data);
     }
     
   }, [mapCenter])
@@ -98,6 +93,7 @@ function App() {
             { page != 'CreateEvent' && 
               <Explore 
                 className={"explore__container"}
+                initialCoordinates={initialCoordinates}
                 data={data}
                 setPage={(page: string) => setPage(page)}
                 page={page}
@@ -106,6 +102,8 @@ function App() {
                 mapCenter={mapCenter}
                 setMaxAllowedMarkerRenders={(maxMarkers: number) => setMaxAllowedMarkerRenders(maxMarkers)}
                 maxAllowedMarkerRenders={maxAllowedMarkerRenders}
+                setBoundingBox={setBoundingBox}
+                boundingbox={boundingbox}
               />
             }
             <ListEvents 

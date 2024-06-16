@@ -10,22 +10,23 @@ import { useEffect, useState } from 'react';
 
 type Props = {
   className: string,
+  initialCoordinates: Coordinates,
   data: Array<EventModel>,
   setPage: (page: string) => void,
   page: string,
   filter: string,
   setMapCenter: (mapCenter: Coordinates) => void
   mapCenter: Coordinates,
+  setBoundingBox: (boundingbox: BoundingBox) => void,
+  boundingbox: BoundingBox,
   setMaxAllowedMarkerRenders: (quantity: number) => void,
   maxAllowedMarkerRenders: number
 }
 
-export const Explore = ({className, data, setPage, page, filter, mapCenter, setMapCenter, setMaxAllowedMarkerRenders, maxAllowedMarkerRenders}: Props) => {
+export const Explore = ({className, initialCoordinates, data, setPage, page, filter, mapCenter, setMapCenter, setMaxAllowedMarkerRenders, maxAllowedMarkerRenders, setBoundingBox, boundingbox}: Props) => {
     const [showMarkerDetails, setShowMarkerDetails] = useState<string>('');
     const [showEventDetails, setShowEventDetails] = useState<string>('');
     const [currentEventInfo, setCurrentEventInfo] = useState<EventModel>();
-    
-    const [boundingbox, setBoundingBox] = useState<BoundingBox>(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 9));
     const [zoomLevel, setZoomLevel] = useState<number>(13);
 
     useEffect(() => {
@@ -54,15 +55,7 @@ export const Explore = ({className, data, setPage, page, filter, mapCenter, setM
         const map = useMapEvent('move', () => {
           const newCenter = map.getCenter();
           setMapCenter({lat: newCenter.lat, lng: newCenter.lng});
-
-          zoomLevel == 7 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
-          zoomLevel == 8 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
-          zoomLevel == 9 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
-          zoomLevel == 10 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
-          zoomLevel == 11 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
-          zoomLevel == 12 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
-          zoomLevel == 13 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 5));
-          zoomLevel == 14 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 3.5));
+          updateRendersAndBoundingBox();
         });
         return null;
       };
@@ -70,17 +63,33 @@ export const Explore = ({className, data, setPage, page, filter, mapCenter, setM
       const UpdateMarkerRenders = () => {
         const map = useMapEvent('zoom', () => {
           setZoomLevel(getCurrentZoomLevel(map));
-
-          zoomLevel == 8 && setMaxAllowedMarkerRenders(0)
-          zoomLevel == 9 && setMaxAllowedMarkerRenders(0)
-          zoomLevel == 10 && setMaxAllowedMarkerRenders(50)
-          zoomLevel == 11 && setMaxAllowedMarkerRenders(50)
-          zoomLevel == 12 && setMaxAllowedMarkerRenders(50)
-          zoomLevel == 13 && setMaxAllowedMarkerRenders(50)
-          // console.log(zoomLevel);
+          updateRendersAndBoundingBox();
         });
         return null;
       };
+
+      const updateRendersAndBoundingBox = () => {
+        // Allowed Marker Renders
+        zoomLevel == 10 && setMaxAllowedMarkerRenders(20) // ~ 30km
+        zoomLevel == 11 && setMaxAllowedMarkerRenders(30) // ~ 12km
+        zoomLevel == 12 && setMaxAllowedMarkerRenders(40) // ~ 6km
+        zoomLevel == 13 && setMaxAllowedMarkerRenders(250) // ~ 4km
+        zoomLevel == 14 && setMaxAllowedMarkerRenders(250) // ~ 2km
+        zoomLevel == 15 && setMaxAllowedMarkerRenders(250) // ~ 1km
+        zoomLevel == 16 && setMaxAllowedMarkerRenders(250) // ~ 200 meters
+        zoomLevel == 17 && setMaxAllowedMarkerRenders(250) // ~ 100 meters
+
+        // Fetch Radius
+        zoomLevel == 10 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 30));  // ~ 30km
+        zoomLevel == 11 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 20));  // ~ 12km
+        zoomLevel == 12 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 10));  // ~ 6km
+        zoomLevel == 13 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 3.5)); // ~ 4km
+        zoomLevel == 14 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 2.5)); // ~ 2km 
+        zoomLevel == 15 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, 1.5)); // ~ 1km
+        zoomLevel == 16 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, .5));  // ~ 200 meters
+        zoomLevel == 17 && setBoundingBox(calculateLongitudeLatitudeBoundingBox(mapCenter.lat, mapCenter.lng, .2));  // ~ 100 meters
+      }
+
 
     const getCurrentZoomLevel = (map: any) => {
         if (map) {
@@ -94,8 +103,8 @@ export const Explore = ({className, data, setPage, page, filter, mapCenter, setM
         <section className={className}>
             <MapContainer 
                 className='leaflet_map' 
-                center={[59.3369170, 18.0119609]} 
-                zoom={13}
+                center={[initialCoordinates.lat, initialCoordinates.lng]} 
+                zoom={14}
                 scrollWheelZoom={true}>
                 <TileLayer 
                     attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -105,7 +114,7 @@ export const Explore = ({className, data, setPage, page, filter, mapCenter, setM
                 {boundingbox && data.slice(0, maxAllowedMarkerRenders).map((event) => {
                         if(
                           isCoordinateWithinBoundingBox({latitude: event.location.lat, longitude: event.location.lng}, boundingbox) 
-                          && zoomLevel >= 7
+                          && zoomLevel >= 10
                           && (event.name.toLowerCase().includes(filter) 
                           || event.description.toLowerCase().includes(filter.toLowerCase()))
                           || event.keywords && event.keywords.some(keyword => keyword.toLowerCase() === filter)
