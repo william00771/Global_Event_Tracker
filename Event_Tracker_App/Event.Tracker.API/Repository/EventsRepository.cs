@@ -114,7 +114,12 @@ namespace Event.Tracker.API.Repository
 
         public async Task<EventModel> PostFullEventAsync(EventModel eventModel)
         {
-            if (await _eventContext.Events.AnyAsync(e => e.Id == eventModel.Id))
+            bool exists = await _eventContext.Events.AnyAsync(e =>
+                e.Name == eventModel.Name &&
+                e.Location.Lat == eventModel.Location.Lat &&
+                e.Location.Lng == eventModel.Location.Lng);
+
+            if (exists)
             {
                 return null;
             }
