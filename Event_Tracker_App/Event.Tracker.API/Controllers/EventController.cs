@@ -1,10 +1,8 @@
 using Event.Tracker.API.Contracts;
-using Event.Tracker.API.Data;
 using Event.Tracker.API.Dtos;
 using Event.Tracker.API.Models;
 using Event.Tracker.API.Models.Utility;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace Event.Tracker.API.Controllers;
 

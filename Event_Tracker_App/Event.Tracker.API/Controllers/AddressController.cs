@@ -1,10 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Event.Tracker.API.Contracts;
 using Event.Tracker.API.Models;
-using Event.Tracker.API.Models.GeocoderAPI;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Event.Tracker.API.Controllers

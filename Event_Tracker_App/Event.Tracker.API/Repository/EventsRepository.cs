@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Diagnostics.Eventing.Reader;
-using System.Linq;
-using System.Threading.Tasks;
 using Event.Tracker.API.Contracts;
 using Event.Tracker.API.Data;
 using Event.Tracker.API.Dtos;
