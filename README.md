@@ -1,5 +1,3 @@
-# Personal Hack Week Project at &lt;/salt&gt;
-
 ## Demo
 [Higher Resolution](https://youtu.be/kVjsq3asS20)
 
@@ -7,7 +5,7 @@ https://github.com/william00771/Global_Event_Tracker/assets/117780994/7ca9cd4b-0
 
 ## Timeline
 
-2 days of planning. 4 days of coding. 
+1-2 days of planning. 5 days of coding. 
 
 ## A solution that bundles all types of events into an interactive map.
 
@@ -18,6 +16,17 @@ So no more sifting through endless listings or missing out on events.
 
 ## Tech Stack
 ![slide2](https://github.com/william00771/Global_Event_Tracker/assets/117780994/d563806b-fbee-4899-92f6-ea7e5397e430)
+
+## Current state of the app
+<img width="296" alt="image" src="https://github.com/william00771/Global_Event_Tracker/assets/117780994/2b62b039-762b-4ae6-9efe-87145c7010fe">
+<img width="293" alt="image" src="https://github.com/william00771/Global_Event_Tracker/assets/117780994/202d9d6f-bf16-46f9-bb23-1ec66da7096c">
+<img width="296" alt="image" src="https://github.com/william00771/Global_Event_Tracker/assets/117780994/76c539ba-cfe0-406d-876b-aed130e3dbf0">
+<img width="295" alt="image" src="https://github.com/william00771/Global_Event_Tracker/assets/117780994/4cb3d1c6-970d-4c62-8402-b0880116ef22">
+<img width="289" alt="image" src="https://github.com/william00771/Global_Event_Tracker/assets/117780994/6e391397-d15e-4a6e-8c53-6fc3cd25fb7e">
+<img width="293" alt="image" src="https://github.com/william00771/Global_Event_Tracker/assets/117780994/89f28560-a8f2-46b6-a502-0785a160ed4b">
+
+
+
 
 ### Basic Prototyping
 ![image](https://github.com/william00771/Global_Event_Tracker/assets/117780994/0b5470eb-1456-4ca1-9b7a-b1f6c2553ed8)
